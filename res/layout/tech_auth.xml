@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:paddingTop="50dip"
+    >
+    <TableLayout android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:layout_width="fill_parent">
+    	<TableRow  android:gravity="center_horizontal">
+    		<TextView android:text="@string/username" android:padding="10dip" android:layout_column="1"></TextView>
+    		<EditText android:text="tech" android:id="@+id/techUsername" android:layout_width="150dip" android:editable="false" android:focusable="false"></EditText>
+    	</TableRow>
+    	<TableRow  android:gravity="center_horizontal">
+    		<TextView android:text="@string/password" android:padding="10dip" android:layout_column="1"></TextView>
+    		<EditText android:text="" android:id="@+id/techPassword" android:password="true" android:layout_height="wrap_content" android:layout_width="150dip"></EditText>
+    	</TableRow>
+    </TableLayout>
+    <Button android:text="@string/login" android:id="@+id/techAuthBtn" android:layout_height="wrap_content" android:layout_width="150dip" android:gravity="center_horizontal|center_vertical" android:layout_marginTop="50dip"></Button>
+
+</LinearLayout>

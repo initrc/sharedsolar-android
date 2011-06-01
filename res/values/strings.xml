@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, SharedSolar!</string>
+    <string name="app_name">SharedSolar</string>
+    <string name="vendorLoginBtn">Vendor Login</string>
+    <string name="techLogin">Tech Login</string>
+    <string name="addCredit">Add Credit</string>
+    <string name="syncDevice">Sync Device</string>
+    <string name="vendorLabel1">Vendor\'s Available Credit:</string>
+    <string name="denomination">Denomination</string>
+    <string name="total">Total</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="creditSummary">Credit Summary</string>
+    <string name="accountList">Account List</string>
+    <string name="syncURL">http://192.168.1.101:9191/fieldtech/device/sync</string>
+    <string name="validateURL">http://192.168.1.101:9191/vendor/validate</string>
+</resources>
