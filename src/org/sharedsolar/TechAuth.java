@@ -3,6 +3,8 @@ package org.sharedsolar;
 import org.sharedsolar.db.DatabaseAdapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +29,17 @@ public class TechAuth extends Activity {
 				{
 					Intent intent = new Intent(v.getContext(), TechHome.class);
 	                startActivity(intent);
+				}
+				else
+				{
+					AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+		            builder.setMessage(getString(R.string.wrongPassword));
+		            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+		                public void onClick(DialogInterface dialog, int id) {
+		                    dialog.cancel();
+		                }
+		            });
+		            builder.show();
 				}
 				dbAdapter.close();
 			}

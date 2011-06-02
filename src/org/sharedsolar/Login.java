@@ -1,11 +1,15 @@
 package org.sharedsolar;
 
-import org.sharedsolar.tool.Validator;
+import org.sharedsolar.tool.Connector;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +19,9 @@ import android.widget.Button;
 
 public class Login extends Activity {
 	
+	private boolean status;
+	private View view;
+	private ProgressDialog progressDialog;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,20 +29,39 @@ public class Login extends Activity {
         ((Button)findViewById(R.id.vendorLoginBtn)).setOnClickListener(new OnClickListener()
         {
 			public void onClick(View v) {
-				boolean status = Validator.validate(getString(R.string.validateURL), v.getContext());
-				Log.d("d", String.valueOf(status));
-				if (status == true)
-				{
-					Intent intent = new Intent(v.getContext(), VendorHome.class);
-	                startActivity(intent);
-				}
-				else
-				{
-					
-				}
+				view = v;
+				progressDialog = ProgressDialog.show(v.getContext(), "", getString(R.string.loading));
+				new Thread() {
+					public void run() {
+						status = Connector.sendVendorToken(getString(R.string.validateUrl), view.getContext());
+						handler.sendEmptyMessage(0);
+					}
+				}.start();
 			}
         });
     }
+    
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+        	progressDialog.dismiss();
+			if (status == true)
+			{
+				Intent intent = new Intent(view.getContext(), VendorHome.class);
+                startActivity(intent);
+			}
+			else
+			{
+				AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+	            builder.setMessage(getString(R.string.vendorLoginError));
+	            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+	                public void onClick(DialogInterface dialog, int id) {
+	                    dialog.cancel();
+	                }
+	            });
+	            builder.show();
+			}
+        }
+    };
     
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

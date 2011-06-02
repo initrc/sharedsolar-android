@@ -53,20 +53,30 @@ public final class R {
     }
     public static final class string {
         public static final int accountList=0x7f04000d;
+        public static final int accountListUrl=0x7f040010;
         public static final int addCredit=0x7f040004;
         public static final int app_name=0x7f040001;
         public static final int creditSummary=0x7f04000c;
         public static final int denomination=0x7f040007;
         public static final int hello=0x7f040000;
+        public static final int loading=0x7f040015;
+        public static final int loadingAccountListError=0x7f040019;
         public static final int login=0x7f04000b;
+        public static final int loginError=0x7f040018;
+        public static final int ok=0x7f040017;
         public static final int password=0x7f04000a;
+        public static final int syncCompleted=0x7f040012;
         public static final int syncDevice=0x7f040005;
-        public static final int syncURL=0x7f04000e;
+        public static final int syncError=0x7f040013;
+        public static final int syncUrl=0x7f04000e;
+        public static final int synchronizing=0x7f040016;
         public static final int techLogin=0x7f040003;
         public static final int total=0x7f040008;
         public static final int username=0x7f040009;
-        public static final int validateURL=0x7f04000f;
+        public static final int validateUrl=0x7f04000f;
         public static final int vendorLabel1=0x7f040006;
         public static final int vendorLoginBtn=0x7f040002;
+        public static final int vendorLoginError=0x7f040014;
+        public static final int wrongPassword=0x7f040011;
     }
 }
