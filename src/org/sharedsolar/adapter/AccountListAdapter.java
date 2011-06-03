@@ -49,12 +49,12 @@ public class AccountListAdapter extends ArrayAdapter<AccountListModel> {
 			holder = (ViewHolder)convertView.getTag();
 		}
 		
-		AccountListModel item = modelList.get(position);
-		if (item != null) {
+		AccountListModel model = modelList.get(position);
+		if (model != null) {
 			holder.idText.setText(String.valueOf(position + 1));
-			holder.aidText.setText(item.getAid());
-			DecimalFormat df = new DecimalFormat("#.##");
-			holder.crText.setText(df.format(item.getCr()/100.0));
+			holder.aidText.setText(model.getAid());
+			DecimalFormat df = new DecimalFormat("#0.00");
+			holder.crText.setText(df.format(model.getCr()/100.00));
 		}
 		return convertView;
 	}

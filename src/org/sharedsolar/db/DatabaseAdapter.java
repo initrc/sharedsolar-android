@@ -1,6 +1,9 @@
 package org.sharedsolar.db;
 
+import java.util.ArrayList;
+
 import org.sharedsolar.R;
+import org.sharedsolar.model.CreditSummaryModel;
 import org.sharedsolar.tool.RandomToken;
 
 import android.content.ContentValues;
@@ -95,5 +98,18 @@ public class DatabaseAdapter {
 			return token;					
 		}
 		return null;
+	}
+	
+	public ArrayList<CreditSummaryModel> getCreditSummaryModelList() {
+		Cursor cursor = database.query(true, CREDIT_TABLE, 
+				new String[] {"denomination", "count"}, null, null, null, null, null, null);
+		if (cursor == null)
+			return null;
+		ArrayList<CreditSummaryModel> modelList = new ArrayList<CreditSummaryModel>();
+		while (cursor.moveToNext()) {
+			CreditSummaryModel model = new CreditSummaryModel(cursor.getInt(0), cursor.getInt(1));
+			modelList.add(model);
+		}
+		return modelList;
 	}
 }

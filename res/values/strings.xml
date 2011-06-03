@@ -6,7 +6,7 @@
     <string name="techLogin">Tech Login</string>
     <string name="addCredit">Add Credit</string>
     <string name="syncDevice">Sync Device</string>
-    <string name="vendorLabel1">Vendor\'s Available Credit:</string>
+    <string name="availableCreditLabel">Available Credit:</string>
     <string name="denomination">Denomination</string>
     <string name="total">Total</string>
     <string name="username">Username</string>

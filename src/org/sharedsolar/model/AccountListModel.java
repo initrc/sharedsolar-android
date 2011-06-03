@@ -2,9 +2,9 @@ package org.sharedsolar.model;
 
 public class AccountListModel {
 	private String aid;
-	private double cr;
+	private int cr;
 	
-	public AccountListModel(String aid, double cr) {
+	public AccountListModel(String aid, int cr) {
 		this.aid = aid;
 		this.cr = cr;
 	}
@@ -18,7 +18,7 @@ public class AccountListModel {
 	public double getCr() {
 		return cr;
 	}
-	public void setCr(double credit) {
+	public void setCr(int credit) {
 		this.cr = credit;
 	}
 }

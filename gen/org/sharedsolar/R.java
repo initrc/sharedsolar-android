@@ -15,38 +15,33 @@ public final class R {
     }
     public static final class id {
         public static final int accountListAid=0x7f060001;
-        public static final int accountListBtn=0x7f060016;
+        public static final int accountListBtn=0x7f060010;
         public static final int accountListCr=0x7f060002;
         public static final int accountListNo=0x7f060000;
-        public static final int addCreditBtn=0x7f060013;
-        public static final int creditSummaryBtn=0x7f060015;
-        public static final int listView1=0x7f06000f;
-        public static final int relativeLayout1=0x7f060003;
-        public static final int syncDeviceBtn=0x7f060014;
-        public static final int tableLayout1=0x7f060006;
-        public static final int techAuthBtn=0x7f060012;
-        public static final int techLoginMenuItem=0x7f060017;
-        public static final int techPassword=0x7f060011;
-        public static final int techUsername=0x7f060010;
-        public static final int textView4=0x7f060007;
-        public static final int vendorAvailableCredit=0x7f060005;
-        public static final int vendorHome1000Count=0x7f06000a;
-        public static final int vendorHome1000Total=0x7f06000b;
-        public static final int vendorHome2000Count=0x7f06000c;
-        public static final int vendorHome2000Total=0x7f06000d;
-        public static final int vendorHome500Count=0x7f060008;
-        public static final int vendorHome500Total=0x7f060009;
-        public static final int vendorLabel1=0x7f060004;
-        public static final int vendorLoginBtn=0x7f06000e;
+        public static final int addCreditBtn=0x7f06000d;
+        public static final int availableCredit=0x7f060003;
+        public static final int creditSummaryBtn=0x7f06000f;
+        public static final int creditSummaryCount=0x7f060005;
+        public static final int creditSummaryDenomination=0x7f060004;
+        public static final int creditSummaryTotal=0x7f060006;
+        public static final int listView1=0x7f060008;
+        public static final int syncDeviceBtn=0x7f06000e;
+        public static final int tableLayout1=0x7f060009;
+        public static final int techAuthBtn=0x7f06000c;
+        public static final int techLoginMenuItem=0x7f060011;
+        public static final int techPassword=0x7f06000b;
+        public static final int techUsername=0x7f06000a;
+        public static final int vendorLoginBtn=0x7f060007;
     }
     public static final class layout {
         public static final int account_list=0x7f030000;
         public static final int account_list_item=0x7f030001;
         public static final int credit_summary=0x7f030002;
-        public static final int login=0x7f030003;
-        public static final int tech_auth=0x7f030004;
-        public static final int tech_home=0x7f030005;
-        public static final int vendor_home=0x7f030006;
+        public static final int credit_summary_item=0x7f030003;
+        public static final int login=0x7f030004;
+        public static final int tech_auth=0x7f030005;
+        public static final int tech_home=0x7f030006;
+        public static final int vendor_home=0x7f030007;
     }
     public static final class menu {
         public static final int login_menu=0x7f050000;
@@ -57,6 +52,7 @@ public final class R {
         public static final int accountListUrl=0x7f040010;
         public static final int addCredit=0x7f040004;
         public static final int app_name=0x7f040001;
+        public static final int availableCreditLabel=0x7f040006;
         public static final int credit=0x7f04001c;
         public static final int creditSummary=0x7f04000c;
         public static final int denomination=0x7f040007;
@@ -78,7 +74,6 @@ public final class R {
         public static final int total=0x7f040008;
         public static final int username=0x7f040009;
         public static final int validateUrl=0x7f04000f;
-        public static final int vendorLabel1=0x7f040006;
         public static final int vendorLoginBtn=0x7f040002;
         public static final int vendorLoginError=0x7f040014;
         public static final int wrongPassword=0x7f040011;

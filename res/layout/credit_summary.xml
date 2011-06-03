@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:orientation="vertical">
-    <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout1" android:layout_height="wrap_content">
-        <TextView android:layout_width="wrap_content" android:text="@string/vendorLabel1" android:id="@+id/vendorLabel1" android:layout_alignParentLeft="true" android:layout_height="wrap_content" android:padding="10dip"></TextView>
-        <TextView android:layout_width="wrap_content" android:text="0" android:id="@+id/vendorAvailableCredit" android:layout_toRightOf="@+id/vendorLabel1" android:layout_height="wrap_content" android:layout_alignTop="@+id/vendorLabel1" android:layout_alignBottom="@+id/vendorLabel1" android:padding="10dip"></TextView>
-    </RelativeLayout>
-    <TableLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/tableLayout1">
-    	<TableRow>
-    		<TextView android:text="@string/denomination" android:padding="10dip" android:layout_column="1"></TextView>
-    		<TextView android:text="#" android:gravity="right" android:padding="10dip"></TextView>
-    		<TextView android:text="@string/total" android:gravity="right" android:padding="10dip"></TextView>
-    	</TableRow>
-        <TableRow>
-    		<TextView android:text="500" android:id="@+id/textView4" android:padding="10dip" android:layout_column="1"></TextView>
-    		<TextView android:text="0" android:id="@+id/vendorHome500Count" android:gravity="right" android:padding="10dip"></TextView>
-    		<TextView android:text="0" android:id="@+id/vendorHome500Total" android:gravity="right" android:padding="10dip"></TextView>
-    	</TableRow>
-    	<TableRow>
-    		<TextView android:text="1000" android:id="@+id/textView4" android:padding="10dip" android:layout_column="1"></TextView>
-    		<TextView android:text="0" android:id="@+id/vendorHome1000Count" android:gravity="right" android:padding="10dip"></TextView>
-    		<TextView android:text="0" android:id="@+id/vendorHome1000Total" android:gravity="right" android:padding="10dip"></TextView>
-    	</TableRow>
-    	<TableRow>
-    		<TextView android:text="2000" android:id="@+id/textView4" android:padding="10dip" android:layout_column="1"></TextView>
-    		<TextView android:text="0" android:id="@+id/vendorHome2000Count" android:gravity="right" android:padding="10dip"></TextView>
-    		<TextView android:text="0" android:id="@+id/vendorHome2000Total" android:gravity="right" android:padding="10dip"></TextView>
-    	</TableRow>
-    </TableLayout>
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<TextView android:text="@string/denomination"
+			android:layout_width="100dip" android:layout_height="wrap_content" />
+		<TextView android:text="#" android:layout_width="100dip"
+			android:layout_height="wrap_content" android:gravity="right" />
+		<TextView android:text="@string/total" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:gravity="right" />
+	</LinearLayout>
+	<View android:layout_width="fill_parent" android:layout_height="1dip"
+		android:background="@android:color/background_light" />
+
+	<ListView android:id="@+id/android:list"
+		android:layout_height="wrap_content" android:layout_width="fill_parent">
+	</ListView>
+
+	<LinearLayout android:orientation="horizontal" android:gravity="right"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<TextView android:text="@string/availableCreditLabel"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:gravity="right" android:layout_marginRight="20dip"/>
+		<TextView android:id="@+id/availableCredit"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:gravity="right" />
+	</LinearLayout>
 </LinearLayout>
 
