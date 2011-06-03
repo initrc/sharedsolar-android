@@ -9,8 +9,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class TechAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
@@ -56,8 +58,33 @@ public class TechAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 			holder.denominationText.setText(String.valueOf(model.getDenomination()));
 			holder.countText.setText(String.valueOf(model.getCount()));
 			holder.addedCountText.setText("0");
-			holder.minusBtn.setTag(position);
-			holder.plusBtn.setTag(position);
+			holder.minusBtn.setEnabled(false);
+			holder.minusBtn.setOnClickListener(new OnClickListener()
+	        {
+				public void onClick(View v) {
+					LinearLayout row = (LinearLayout)v.getParent().getParent();
+					TextView addedCountText = (TextView)row.getChildAt(2);
+					int addedCount = Integer.parseInt(addedCountText.getText().toString());
+					addedCount--;
+					addedCountText.setText(String.valueOf(addedCount));
+					// disable minusBtn
+					if (addedCount <= 0) v.setEnabled(false);
+				}
+	        });
+			holder.plusBtn.setOnClickListener(new OnClickListener()
+	        {
+				public void onClick(View v) {
+					LinearLayout row = (LinearLayout)v.getParent().getParent();
+					TextView addedCountText = (TextView)row.getChildAt(2);
+					int addedCount = Integer.parseInt(addedCountText.getText().toString());
+					// enable minusBtn
+					Button minusBtn = (Button)(((LinearLayout)v.getParent()).getChildAt(0));
+					if (addedCount == 0) minusBtn.setEnabled(true);
+					
+					addedCount++;
+					addedCountText.setText(String.valueOf(addedCount));
+				}
+	        });
 		}
 		return convertView;
 	}
