@@ -26,4 +26,6 @@
     <string name="ok">OK</string>
     <string name="loginError">Login Error</string>
     <string name="loadingAccountListError">Failed to load account list!</string>
+    <string name="account">Account</string>
+    <string name="credit">Credit</string>
 </resources>

@@ -6,6 +6,7 @@ import org.sharedsolar.model.AccountListModel;
 import org.sharedsolar.R;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -13,25 +14,49 @@ import android.widget.TextView;
 
 public class AccountListAdapter extends ArrayAdapter<AccountListModel> {
 
-	private ArrayList<AccountListModel> items;
+	private LayoutInflater mInflater;
+	private ArrayList<AccountListModel> modelList;
 	
-	public AccountListAdapter(Context context, int textViewResourceId) {
+	public AccountListAdapter(Context context, int textViewResourceId, ArrayList<AccountListModel> modelList) {
 		super(context, textViewResourceId);
+		mInflater = LayoutInflater.from(context);
+		this.modelList = modelList;
 	}
 	
-	public void setItems(ArrayList<AccountListModel> items)
-	{
-		this.items = items;
+	public int getCount() {
+		return modelList.size();
 	}
 	
-	@Override
-	public View getView(int pos, View convertView, ViewGroup parent) {
-		View view = convertView;
-		AccountListModel item = items.get(pos);
-		if (item != null) {
-			((TextView)view.findViewById(R.id.accountListAid)).setText(item.getAid());
-			((TextView)view.findViewById(R.id.accountListCredit)).setText(String.valueOf(item.getCr()));
+	public AccountListModel getItem(int position) {
+		return modelList.get(position);
+	}
+	
+	public long getItemId(int position) {
+		return position;
+	}
+	
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
+		if (convertView == null) {
+			convertView = mInflater.inflate(R.layout.account_list_item, null);
+			holder = new ViewHolder();
+			holder.aidText = (TextView)convertView.findViewById(R.id.accountListAid);
+			holder.crText = (TextView)convertView.findViewById(R.id.accountListCr);
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder)convertView.getTag();
 		}
-		return view;
+		
+		AccountListModel item = modelList.get(position);
+		if (item != null) {
+			holder.aidText.setText(item.getAid());
+			holder.crText.setText(String.valueOf(item.getCr()));
+		}
+		return convertView;
+	}
+	
+	static class ViewHolder {
+		TextView aidText;
+		TextView crText;
 	}
 }
