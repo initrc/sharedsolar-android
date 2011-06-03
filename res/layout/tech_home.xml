@@ -8,6 +8,6 @@
 		android:layout_height="wrap_content" android:layout_width="150dip"></Button>
 	<Button android:text="@string/logout" android:id="@+id/logoutBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"
-		android:layout_marginTop="200dip"></Button>
+		android:layout_marginTop="100dip"></Button>
 
 </LinearLayout>

@@ -25,6 +25,7 @@ public class TechAuth extends Activity {
         	public void onClick(View v) {
 				String username = ((EditText)findViewById(R.id.techUsername)).getText().toString();
 				String password = ((EditText)findViewById(R.id.techPassword)).getText().toString();
+				((EditText)findViewById(R.id.techPassword)).setText("");
 				dbAdapter.open(); 
 				if (dbAdapter.userAuth(username, password))
 				{
