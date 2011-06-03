@@ -3,7 +3,7 @@ package org.sharedsolar;
 import java.util.ArrayList;
 
 import org.sharedsolar.R;
-import org.sharedsolar.adapter.CreditSummaryAdapter;
+import org.sharedsolar.adapter.TechAddCreditAdapter;
 import org.sharedsolar.db.DatabaseAdapter;
 import org.sharedsolar.model.CreditSummaryModel;
 
@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class TechAddCredit extends ListActivity {
 	
 	private ArrayList<CreditSummaryModel> modelList;
-	private CreditSummaryAdapter creditSummaryAdapter;
+	private TechAddCreditAdapter techAddCreditAdapter;
 	private DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public class TechAddCredit extends ListActivity {
         dbAdapter.close();
         
         // list adapter
-      	creditSummaryAdapter = new CreditSummaryAdapter(this, R.layout.credit_summary_item, modelList);			
-		setListAdapter(creditSummaryAdapter);
+        techAddCreditAdapter = new TechAddCreditAdapter(this, R.layout.tech_add_credit_item, modelList);			
+		setListAdapter(techAddCreditAdapter);
 		
 		// calculate sum
 		int sum=0;

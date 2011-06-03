@@ -39,11 +39,13 @@ public class TechAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.credit_summary_item, null);
+			convertView = mInflater.inflate(R.layout.tech_add_credit_item, null);
 			holder = new ViewHolder();
-			holder.denominationText = (TextView)convertView.findViewById(R.id.creditSummaryDenomination);
-			holder.countText = (TextView)convertView.findViewById(R.id.creditSummaryCount);
-			holder.addText = (TextView)convertView.findViewById(R.id.creditSummaryTotal);
+			holder.denominationText = (TextView)convertView.findViewById(R.id.techAddCreditDenomination);
+			holder.countText = (TextView)convertView.findViewById(R.id.techAddCreditCount);
+			holder.addedCountText = (TextView)convertView.findViewById(R.id.techAddCreditAddedCount);
+			holder.minusBtn = (Button)convertView.findViewById(R.id.techAddCreditMinusBtn);
+			holder.plusBtn = (Button)convertView.findViewById(R.id.techAddCreditPlusBtn);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder)convertView.getTag();
@@ -53,7 +55,9 @@ public class TechAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 		if (model != null) {
 			holder.denominationText.setText(String.valueOf(model.getDenomination()));
 			holder.countText.setText(String.valueOf(model.getCount()));
-			holder.addText.setText(String.valueOf(model.getDenomination() * model.getCount()));
+			holder.addedCountText.setText("0");
+			holder.minusBtn.setTag(position);
+			holder.plusBtn.setTag(position);
 		}
 		return convertView;
 	}
@@ -61,8 +65,8 @@ public class TechAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 	static class ViewHolder {
 		TextView denominationText;
 		TextView countText;
-		TextView addText;
-		Button plusBtn;
+		TextView addedCountText;
 		Button minusBtn;
+		Button plusBtn;
 	}
 }
