@@ -1,5 +1,7 @@
 package org.sharedsolar;
 
+import org.sharedsolar.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 

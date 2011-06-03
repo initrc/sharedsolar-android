@@ -1,5 +1,6 @@
 package org.sharedsolar;
 
+import org.sharedsolar.R;
 import org.sharedsolar.tool.Connector;
 
 import android.app.Activity;
