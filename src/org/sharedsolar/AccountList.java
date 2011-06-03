@@ -35,7 +35,7 @@ public class AccountList extends ListActivity {
 				for (int i=0; i<jsonArray.length(); i++) {
 					JSONObject jsonObject = (JSONObject)jsonArray.get(i);
 					AccountListModel model = new AccountListModel(jsonObject.getString("aid"), 
-							jsonObject.getDouble("cr"));
+							jsonObject.getDouble("cr")*100);
 					modelList.add(model);
 				}
 			} catch (JSONException e) {

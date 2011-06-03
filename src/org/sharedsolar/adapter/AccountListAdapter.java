@@ -1,5 +1,6 @@
 package org.sharedsolar.adapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import org.sharedsolar.model.AccountListModel;
@@ -40,6 +41,7 @@ public class AccountListAdapter extends ArrayAdapter<AccountListModel> {
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.account_list_item, null);
 			holder = new ViewHolder();
+			holder.idText = (TextView)convertView.findViewById(R.id.accountListNo);
 			holder.aidText = (TextView)convertView.findViewById(R.id.accountListAid);
 			holder.crText = (TextView)convertView.findViewById(R.id.accountListCr);
 			convertView.setTag(holder);
@@ -49,13 +51,16 @@ public class AccountListAdapter extends ArrayAdapter<AccountListModel> {
 		
 		AccountListModel item = modelList.get(position);
 		if (item != null) {
+			holder.idText.setText(String.valueOf(position + 1));
 			holder.aidText.setText(item.getAid());
-			holder.crText.setText(String.valueOf(item.getCr()));
+			DecimalFormat df = new DecimalFormat("#.##");
+			holder.crText.setText(df.format(item.getCr()/100.0));
 		}
 		return convertView;
 	}
 	
 	static class ViewHolder {
+		TextView idText;
 		TextView aidText;
 		TextView crText;
 	}
