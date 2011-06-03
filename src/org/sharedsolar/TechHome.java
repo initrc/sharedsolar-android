@@ -37,6 +37,13 @@ public class TechHome extends Activity {
         		}.start();
 			}
         });
+        ((Button)findViewById(R.id.techAddCreditBtn)).setOnClickListener(new OnClickListener()
+        {
+        	public void onClick(View v) {
+        		Intent intent = new Intent(v.getContext(), TechAddCredit.class);
+                startActivity(intent);
+			}
+        });
         ((Button)findViewById(R.id.logoutBtn)).setOnClickListener(new OnClickListener()
         {
         	public void onClick(View v) {

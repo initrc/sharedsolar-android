@@ -2,18 +2,17 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingRight="10dip"
     >
-    <TextView android:id="@+id/accountListNo"
-         android:layout_width="50dip"
+    <TextView android:id="@+id/techAddCreditDenomination"
+         android:layout_width="100dip"
          android:layout_height="50dip"
          android:gravity="center_vertical" />
-	<TextView android:id="@+id/accountListAid"
-         android:layout_width="150dip"
+	<TextView android:id="@+id/techAddCreditCount"
+         android:layout_width="60dip"
          android:layout_height="50dip"
-         android:gravity="center_vertical" />
-	<TextView android:id="@+id/accountListCr"
-         android:layout_width="fill_parent"
+         android:gravity="center_vertical|right" />
+	<TextView android:id="@+id/techAddCreditAddedCount"
+         android:layout_width="60dip"
          android:layout_height="50dip"
          android:gravity="center_vertical|right" />
          
