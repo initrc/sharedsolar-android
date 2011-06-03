@@ -80,4 +80,9 @@ public class Login extends Activity {
             return super.onOptionsItemSelected(item);
         }
     }
+    
+    @Override
+    public void onBackPressed() {
+        // do nothing. back to tech logout page not allowed.
+    }
 }

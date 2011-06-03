@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center_horizontal|center_vertical"
-    >
-    <Button android:text="@string/addCredit" android:id="@+id/addCreditBtn" android:layout_height="wrap_content" android:layout_width="150dip"></Button>
-    <Button android:text="@string/syncDevice" android:id="@+id/syncDeviceBtn" android:layout_height="wrap_content" android:layout_width="150dip"></Button>
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:gravity="center_horizontal|center_vertical">
+	<Button android:text="@string/addCredit" android:id="@+id/addCreditBtn"
+		android:layout_height="wrap_content" android:layout_width="150dip"></Button>
+	<Button android:text="@string/syncDevice" android:id="@+id/syncDeviceBtn"
+		android:layout_height="wrap_content" android:layout_width="150dip"></Button>
+	<Button android:text="@string/logout" android:id="@+id/logoutBtn"
+		android:layout_height="wrap_content" android:layout_width="150dip"
+		android:layout_marginTop="200dip"></Button>
 
 </LinearLayout>
