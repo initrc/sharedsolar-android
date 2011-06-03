@@ -29,4 +29,5 @@
     <string name="no">No</string>
     <string name="account">Account</string>
     <string name="credit">Credit</string>
+    <string name="denominationValues">500,1000,2000</string>
 </resources>

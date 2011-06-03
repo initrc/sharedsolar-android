@@ -1,5 +1,6 @@
 package org.sharedsolar.db;
 
+import org.sharedsolar.R;
 import org.sharedsolar.tool.RandomToken;
 
 import android.content.ContentValues;
@@ -14,8 +15,9 @@ public class DatabaseAdapter {
 	private SQLiteDatabase database;
 	private DatabaseHelper databaseHelper;
 	
-	private static final String DATABASE_TABLE = "user";
-
+	private static final String USER_TABLE = "user";
+	private static final String CREDIT_TABLE = "credit";
+	
 	public DatabaseAdapter(Context context) {
 		this.context = context;
 	}
@@ -31,31 +33,45 @@ public class DatabaseAdapter {
 		databaseHelper.close();
 	}
 	
-	private ContentValues createContentValues(String username, String password) {
+	private ContentValues createUser(String username, String password) {
 		ContentValues values = new ContentValues();
 		values.put("username", username);
 		values.put("password", password);
 		return values;
 	}
 	
+	private ContentValues createCredit(int denomination, int count) {
+		ContentValues values = new ContentValues();
+		values.put("denomination", denomination);
+		values.put("count", count);
+		return values;
+	}
+	
 	public void init() {
 		if (isEmpty()) {
-			ContentValues values = createContentValues("tech", "tech");
-			database.insert(DATABASE_TABLE, null, values);
-			values = createContentValues("vendor", RandomToken.generate());
-			database.insert(DATABASE_TABLE, null, values);
+			// insert USER
+			ContentValues values = createUser("tech", "tech");
+			database.insert(USER_TABLE, null, values);
+			values = createUser("vendor", RandomToken.generate());
+			database.insert(USER_TABLE, null, values);
+			// insert CREDIT
+			String[] denominationValues = context.getString(R.string.denominationValues).split(",");
+			for (String v : denominationValues) {
+				values = createCredit(Integer.parseInt(v), 0);
+				database.insert(CREDIT_TABLE, null, values);
+			}
 		}		
 	}
 	
 	public boolean isEmpty() throws SQLException {
-		Cursor cursor = database.query(DATABASE_TABLE, new String[] {"password"}, 
+		Cursor cursor = database.query(USER_TABLE, new String[] {"password"}, 
 				null, null, null, null, null);
 		if (cursor == null || cursor.getCount() == 0) return true;
 		return false;
 	}
 	
 	public boolean userAuth(String username, String password) throws SQLException {
-		Cursor cursor = database.query(true, DATABASE_TABLE, new String[] {"password"}, 
+		Cursor cursor = database.query(true, USER_TABLE, new String[] {"password"}, 
 				"username = '" + username +"'", null, null, null, null, null);
 		if (cursor != null) {
 			cursor.moveToFirst();
@@ -66,12 +82,12 @@ public class DatabaseAdapter {
 	}
 	
 	public boolean delete(String username) {
-		return database.delete(DATABASE_TABLE, "username = '" + username + "'", null) > 0;
+		return database.delete(USER_TABLE, "username = '" + username + "'", null) > 0;
 	}
 	
 	public String getVendorToken()
 	{
-		Cursor cursor = database.query(true, DATABASE_TABLE, new String[] {"password"}, 
+		Cursor cursor = database.query(true, USER_TABLE, new String[] {"password"}, 
 				"username = 'vendor'", null, null, null, null, null);
 		if (cursor != null) {
 			cursor.moveToFirst();

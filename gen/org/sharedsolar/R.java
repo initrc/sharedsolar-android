@@ -60,6 +60,7 @@ public final class R {
         public static final int credit=0x7f04001c;
         public static final int creditSummary=0x7f04000c;
         public static final int denomination=0x7f040007;
+        public static final int denominationValues=0x7f04001d;
         public static final int hello=0x7f040000;
         public static final int loading=0x7f040015;
         public static final int loadingAccountListError=0x7f040019;
