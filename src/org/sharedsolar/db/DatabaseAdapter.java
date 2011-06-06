@@ -112,4 +112,12 @@ public class DatabaseAdapter {
 		}
 		return modelList;
 	}
+	
+	public void updateVendorCredit(ArrayList<CreditSummaryModel> modelList) {
+		ContentValues values = new ContentValues();
+		for (int i=0; i<modelList.size(); i++) {
+			values.put("count", modelList.get(i).getCount());
+			database.update(CREDIT_TABLE, values, "denomination = " + modelList.get(i).getDenomination(), null);
+		}
+	}
 }

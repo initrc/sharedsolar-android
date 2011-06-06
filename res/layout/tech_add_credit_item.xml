@@ -1,23 +1,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="horizontal" android:layout_width="fill_parent"
 	android:layout_height="wrap_content">
-	<TextView android:id="@+id/techAddCreditDenomination"
-		android:layout_width="90dip" android:layout_height="50dip"
-		android:gravity="center_vertical" />
-	<TextView android:id="@+id/techAddCreditCount"
-		android:layout_width="70dip" android:layout_height="50dip"
-		android:gravity="center_vertical|right" />
-	<TextView android:id="@+id/techAddCreditAddedCount"
-		android:layout_width="70dip" android:layout_height="50dip"
-		android:gravity="center_vertical|right" />
 	<LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:gravity="right" android:layout_gravity="center_vertical" android:padding="5dip">
-		<Button android:text="-" android:id="@+id/techAddCreditMinusBtn"
-			android:layout_width="40dip" android:layout_height="40dip"
-			android:gravity="center" android:layout_gravity="center_vertical" />
+		android:layout_width="90dip" android:layout_height="50dip"
+		android:layout_gravity="center_vertical">
 		<Button android:text="+" android:id="@+id/techAddCreditPlusBtn"
 			android:layout_width="40dip" android:layout_height="40dip"
 			android:gravity="center" android:layout_gravity="center_vertical" />
+		<Button android:text="-" android:id="@+id/techAddCreditMinusBtn"
+			android:layout_width="40dip" android:layout_height="40dip"
+			android:gravity="center" android:layout_gravity="center_vertical" />
 	</LinearLayout>
+	<TextView android:id="@+id/techAddCreditDenomination"
+		android:layout_width="90dip" android:layout_height="50dip"
+		android:gravity="center_vertical"/>
+	<TextView android:id="@+id/techAddCreditAddedCount"
+		android:layout_width="60dip" android:layout_height="50dip"
+		android:gravity="center_vertical|right" />
+	<TextView android:id="@+id/techAddCreditOwnCount"
+		android:layout_width="fill_parent" android:layout_height="50dip"
+		android:gravity="center_vertical|right" />
 </LinearLayout>
