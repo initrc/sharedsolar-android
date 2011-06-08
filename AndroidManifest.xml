@@ -19,6 +19,7 @@
         <activity android:name="TechAuth" android:label="@string/app_name" />
         <activity android:name="TechHome" android:label="@string/app_name" />
         <activity android:name="TechAddCredit" android:label="@string/app_name" />
+        <activity android:name="TechAddCreditReceipt" android:label="@string/app_name" />
         <activity android:name="VendorHome" android:label="@string/app_name" />
         <activity android:name="CreditSummary" android:label="@string/app_name" />
         <activity android:name="AccountList" android:label="@string/app_name" />

@@ -27,6 +27,7 @@
     <string name="loginError">Login Error</string>
     <string name="loadingAccountListError">Failed to load account list!</string>
     <string name="no">No</string>
+    <string name="yes">Yes</string>
     <string name="account">Account</string>
     <string name="credit">Credit</string>
     <string name="denominationValues">500,1000,2000</string>
@@ -35,4 +36,5 @@
     <string name="own">Own</string>
     <string name="creditAdded">Credit Added:</string>
     <string name="submit">Submit</string>
+    <string name="techAddCreditConfirm">Continue?</string>
 </resources>
