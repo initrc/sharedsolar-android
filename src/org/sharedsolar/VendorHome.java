@@ -57,6 +57,7 @@ public class VendorHome extends Activity {
         	else {
         		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
  				builder.setMessage(getString(R.string.loadingAccountListError));
+ 				builder.setTitle(getString(R.string.accountList));
         		builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();

@@ -36,6 +36,7 @@ public class TechAuth extends Activity {
 				{
 					AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 		            builder.setMessage(getString(R.string.wrongPassword));
+		            builder.setTitle(getString(R.string.loginError));
 		            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 		                public void onClick(DialogInterface dialog, int id) {
 		                    dialog.cancel();

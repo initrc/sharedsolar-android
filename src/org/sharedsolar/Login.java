@@ -20,7 +20,7 @@ import android.widget.Button;
 
 public class Login extends Activity {
 	
-	private boolean status;
+	private int status;
 	private View view;
 	private ProgressDialog progressDialog;
 	
@@ -45,15 +45,20 @@ public class Login extends Activity {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
         	progressDialog.dismiss();
-			if (status == true)
-			{
+			if (status == 1) {
 				Intent intent = new Intent(view.getContext(), VendorHome.class);
                 startActivity(intent);
-			}
-			else
+			} else
 			{
 				AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-	            builder.setMessage(getString(R.string.vendorLoginError));
+				builder.setTitle(getString(R.string.loginError));
+				// timeout
+				if (status == -1) {
+					builder.setMessage(getString(R.string.vendorLoginTimeoutMsg));
+				} else {
+					builder.setMessage(getString(R.string.vendorLoginErrorMsg));
+				}
+					
 	            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 	                public void onClick(DialogInterface dialog, int id) {
 	                    dialog.cancel();

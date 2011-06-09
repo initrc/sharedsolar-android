@@ -71,6 +71,7 @@ public class TechAddCredit extends ListActivity {
 			// dialog
 			AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 	        builder.setMessage(info + "\n\n" + getString(R.string.techAddCreditConfirm));
+	        builder.setTitle(getString(R.string.addCredit));
 	        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int id) {
 	            	dbAdapter.open();

@@ -17,7 +17,7 @@ import android.widget.Button;
 
 public class TechHome extends Activity {
 	
-	private boolean status;
+	private int status;
 	private View view;
 	private ProgressDialog progressDialog;
 	
@@ -57,15 +57,17 @@ public class TechHome extends Activity {
         public void handleMessage(Message msg) {
         	progressDialog.dismiss();
         	AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        	builder.setTitle(getString(R.string.sync));
             builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
             });
-			if (status)	{
+			if (status == 1) {
 				builder.setMessage(getString(R.string.syncCompleted));
-			}
-			else {
+			} else if (status == -1) {
+				builder.setMessage(getString(R.string.syncTimeout));
+			} else {
 				builder.setMessage(getString(R.string.syncError));
 			}
 			builder.show();
