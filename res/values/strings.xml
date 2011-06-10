@@ -14,9 +14,10 @@
     <string name="login">Login</string>
     <string name="creditSummary">Credit Summary</string>
     <string name="accountList">Account List</string>
-    <string name="syncUrl">http://192.168.1.101:9191/fieldtech/device/sync</string>
-    <string name="validateUrl">http://192.168.1.101:9191/vendor/validate</string>
-    <string name="accountListUrl">http://192.168.11.101:9191/vendor/accounts/list</string>
+    <string name="syncUrl">http://192.168.10.101:9191/fieldtech/device/sync</string>
+    <string name="validateUrl">http://192.168.10.101:9191/vendor/validate</string>
+    <string name="accountListUrl">http://192.168.10.101:9191/vendor/accounts/list</string>
+    <string name="timeoutValue">10000</string>
     <string name="wrongPassword">Wrong Password!</string>
     <string name="sync">Sync</string>
     <string name="syncCompleted">Sync Completed!</string>

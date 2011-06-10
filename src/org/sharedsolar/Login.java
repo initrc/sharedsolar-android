@@ -34,7 +34,8 @@ public class Login extends Activity {
 				progressDialog = ProgressDialog.show(v.getContext(), "", getString(R.string.loading));
 				new Thread() {
 					public void run() {
-						status = Connector.sendVendorToken(getString(R.string.validateUrl), view.getContext());
+						status = new Connector(view.getContext()).sendVendorToken(getString(R.string.validateUrl), 
+								view.getContext());
 						handler.sendEmptyMessage(0);
 					}
 				}.start();

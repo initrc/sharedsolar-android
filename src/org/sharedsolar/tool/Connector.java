@@ -19,6 +19,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.sharedsolar.R;
 import org.sharedsolar.db.DatabaseAdapter;
 
 import android.content.Context;
@@ -28,10 +29,16 @@ public class Connector {
 	public final static int CONNECTION_SUCCESS = 1;
 	public final static int CONNECTION_FAILURE = 0;
 	public final static int CONNECTION_TIMEOUT = -1;
-	public final static int TIMEOUT = 10000;
-	public final static int SOCKET_TIMEOUT = 10000;
 	
-	public static int validate(String url, List<NameValuePair> entity) {
+	private final int TIMEOUT;
+	private final int SOCKET_TIMEOUT;
+	
+	public Connector(Context context) {
+		TIMEOUT = Integer.parseInt(context.getString(R.string.timeoutValue).toString());
+		SOCKET_TIMEOUT = TIMEOUT; 
+	}
+	
+	public int validate(String url, List<NameValuePair> entity) {
 		// set timeout
 		HttpParams httpParams = new BasicHttpParams();
 		HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT);
@@ -64,7 +71,7 @@ public class Connector {
 		return 0;
 	}
 	
-	public static String requestForString(String url, List<NameValuePair> entity) {
+	public String requestForString(String url, List<NameValuePair> entity) {
 		// set timeout
 		HttpParams httpParams = new BasicHttpParams();
 		HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT);
@@ -99,15 +106,15 @@ public class Connector {
 		return null;
 	}
 	
-	public static String requestAccountList(String url, Context context) {
+	public String requestAccountList(String url, Context context) {
 		return requestForString(url, getVendorEntity(context));
 	}
 
-	public static int sendVendorToken(String url, Context context) {
+	public int sendVendorToken(String url, Context context) {
 		return validate(url, getVendorEntity(context));
 	}
 
-	public static List<NameValuePair> getVendorEntity(Context context) {
+	public List<NameValuePair> getVendorEntity(Context context) {
 		DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 		dbAdapter.open();

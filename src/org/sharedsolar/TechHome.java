@@ -31,7 +31,8 @@ public class TechHome extends Activity {
         		progressDialog = ProgressDialog.show(v.getContext(), "", getString(R.string.synchronizing));
         		new Thread() {
         			public void run() {
-        				status = Connector.sendVendorToken(getString(R.string.syncUrl), view.getContext());
+        				status = new Connector(view.getContext()).sendVendorToken(getString(R.string.syncUrl), 
+        						view.getContext());
         				handler.sendEmptyMessage(0);
         			}
         		}.start();

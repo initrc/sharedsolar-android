@@ -38,7 +38,8 @@ public class VendorHome extends Activity {
 				progressDialog = ProgressDialog.show(v.getContext(), "", getString(R.string.loading));
 				new Thread() {
         			public void run() {
-        				jsonString = Connector.requestAccountList(getString(R.string.accountListUrl), view.getContext());
+        				jsonString = new Connector(view.getContext()).requestAccountList(getString(R.string.accountListUrl), 
+        						view.getContext());
         				handler.sendEmptyMessage(0);
         			}
         		}.start();
