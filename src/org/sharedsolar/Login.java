@@ -45,7 +45,7 @@ public class Login extends Activity {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
         	progressDialog.dismiss();
-			if (status == 1) {
+			if (status == Connector.CONNECTION_SUCCESS) {
 				Intent intent = new Intent(view.getContext(), VendorHome.class);
                 startActivity(intent);
 			} else
@@ -53,7 +53,7 @@ public class Login extends Activity {
 				AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 				builder.setTitle(getString(R.string.loginError));
 				// timeout
-				if (status == -1) {
+				if (status == Connector.CONNECTION_TIMEOUT) {
 					builder.setMessage(getString(R.string.vendorLoginTimeoutMsg));
 				} else {
 					builder.setMessage(getString(R.string.vendorLoginErrorMsg));

@@ -16,13 +16,14 @@
     <string name="accountList">Account List</string>
     <string name="syncUrl">http://192.168.1.101:9191/fieldtech/device/sync</string>
     <string name="validateUrl">http://192.168.1.101:9191/vendor/validate</string>
-    <string name="accountListUrl">http://192.168.1.101:9191/vendor/accounts/list</string>
+    <string name="accountListUrl">http://192.168.11.101:9191/vendor/accounts/list</string>
     <string name="wrongPassword">Wrong Password!</string>
     <string name="sync">Sync</string>
     <string name="syncCompleted">Sync Completed!</string>
     <string name="syncTimeout">Sync Timeout!</string>
     <string name="syncError">Sync Error!</string>
-    <string name="vendorLoginTimeoutMsg">Login Timeout! Please check wifi connection.</string>
+    <string name="accountListTimeoutMsg">Get account list timeout!</string>
+    <string name="vendorLoginTimeoutMsg">Login timeout! Please check wifi connection.</string>
     <string name="vendorLoginErrorMsg">Device needs to be synchronized by a field tech!</string>
     <string name="loading">Loading...</string>
     <string name="synchronizing">Synchronizing...</string>

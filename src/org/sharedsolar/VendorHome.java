@@ -50,9 +50,21 @@ public class VendorHome extends Activity {
         public void handleMessage(Message msg) {
         	progressDialog.dismiss();
         	if (jsonString != null) {
-				Intent intent = new Intent(view.getContext(), AccountList.class);
-				intent.putExtra("accountList", jsonString);
-	            startActivity(intent);
+        		if (jsonString.equals(String.valueOf(Connector.CONNECTION_TIMEOUT))) {
+        			AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                	builder.setTitle(getString(R.string.accountList));
+                	builder.setMessage(getString(R.string.accountListTimeoutMsg));
+                    builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+        		} else {
+        			Intent intent = new Intent(view.getContext(), AccountList.class);
+    				intent.putExtra("accountList", jsonString);
+    	            startActivity(intent);
+        		}
         	}
         	else {
         		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());

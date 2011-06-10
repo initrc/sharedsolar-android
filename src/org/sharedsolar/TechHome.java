@@ -63,9 +63,9 @@ public class TechHome extends Activity {
                     dialog.cancel();
                 }
             });
-			if (status == 1) {
+			if (status == Connector.CONNECTION_SUCCESS) {
 				builder.setMessage(getString(R.string.syncCompleted));
-			} else if (status == -1) {
+			} else if (status == Connector.CONNECTION_TIMEOUT) {
 				builder.setMessage(getString(R.string.syncTimeout));
 			} else {
 				builder.setMessage(getString(R.string.syncError));

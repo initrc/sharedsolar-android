@@ -25,13 +25,17 @@ import android.content.Context;
 
 public class Connector {
 	
+	public final static int CONNECTION_SUCCESS = 1;
+	public final static int CONNECTION_FAILURE = 0;
+	public final static int CONNECTION_TIMEOUT = -1;
+	public final static int TIMEOUT = 10000;
+	public final static int SOCKET_TIMEOUT = 10000;
+	
 	public static int validate(String url, List<NameValuePair> entity) {
 		// set timeout
 		HttpParams httpParams = new BasicHttpParams();
-		int timeoutConnection = 5000;
-		HttpConnectionParams.setConnectionTimeout(httpParams, timeoutConnection);
-		int timeoutSocket = 5000;
-		HttpConnectionParams.setSoTimeout(httpParams, timeoutSocket);
+		HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT);
+		HttpConnectionParams.setSoTimeout(httpParams, SOCKET_TIMEOUT);
 		// http post
 		HttpClient httpClient = new DefaultHttpClient(httpParams);
 		HttpPost httpPost = new HttpPost(url);
@@ -40,13 +44,13 @@ public class Connector {
 			HttpResponse response = httpClient.execute(httpPost);
 			String status = response.getStatusLine().toString();
 			if (status.equals("HTTP/1.1 200 OK")) {
-				return 1;
+				return CONNECTION_SUCCESS;
 			} else {
-				return 0;
+				return CONNECTION_FAILURE;
 				// HTTP/1.1 401 Internal Server Error
 			}
 		} catch (SocketTimeoutException e) {
-			return -1;
+			return CONNECTION_TIMEOUT;
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +65,12 @@ public class Connector {
 	}
 	
 	public static String requestForString(String url, List<NameValuePair> entity) {
-		HttpClient httpClient = new DefaultHttpClient();
+		// set timeout
+		HttpParams httpParams = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT);
+		HttpConnectionParams.setSoTimeout(httpParams, SOCKET_TIMEOUT);
+		// http post
+		HttpClient httpClient = new DefaultHttpClient(httpParams);
 		HttpPost httpPost = new HttpPost(url);
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(entity));
@@ -75,6 +84,8 @@ public class Connector {
 				return null;
 				// HTTP/1.1 401 Internal Server Error
 			}
+		} catch (SocketTimeoutException e) {
+			return String.valueOf(CONNECTION_TIMEOUT);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
