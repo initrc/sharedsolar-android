@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="syncUrl">http://192.168.1.101:9191/fieldtech/device/sync</string>
+    <string name="validateUrl">http://192.168.1.101:9191/vendor/validate</string>
+    <string name="accountListUrl">http://192.168.1.101:9191/vendor/accounts/list</string>
+    <string name="timeoutValue">10000</string>
+    <string-array name="denominationValues">
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+    </string-array>
+</resources>

@@ -58,7 +58,7 @@ public class DatabaseAdapter {
 			values = createUser("vendor", RandomToken.generate());
 			database.insert(USER_TABLE, null, values);
 			// insert CREDIT
-			String[] denominationValues = context.getString(R.string.denominationValues).split(",");
+			String[] denominationValues = context.getResources().getStringArray(R.array.denominationValues);
 			for (String v : denominationValues) {
 				values = createCredit(Integer.parseInt(v), 0);
 				database.insert(CREDIT_TABLE, null, values);
