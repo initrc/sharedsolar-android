@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="90dip" android:layout_height="50dip"
+		android:layout_gravity="center_vertical">
+		<Button android:text="+" android:id="@+id/vendorAddCreditPlusBtn"
+			android:layout_width="40dip" android:layout_height="40dip"
+			android:gravity="center" android:layout_gravity="center_vertical" />
+		<Button android:text="-" android:id="@+id/vendorAddCreditMinusBtn"
+			android:layout_width="40dip" android:layout_height="40dip"
+			android:gravity="center" android:layout_gravity="center_vertical" />
+	</LinearLayout>
+	<TextView android:id="@+id/vendorAddCreditDenomination"
+		android:layout_width="90dip" android:layout_height="50dip"
+		android:gravity="center_vertical"/>
+	<TextView android:id="@+id/vendorAddCreditAddedCount"
+		android:layout_width="60dip" android:layout_height="50dip"
+		android:gravity="center_vertical|right" />
+	<TextView android:id="@+id/vendorAddCreditRemainCount"
+		android:layout_width="fill_parent" android:layout_height="50dip"
+		android:gravity="center_vertical|right" />
+</LinearLayout>

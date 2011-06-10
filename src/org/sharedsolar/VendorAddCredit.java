@@ -3,9 +3,11 @@ package org.sharedsolar;
 import java.util.ArrayList;
 
 import org.sharedsolar.R;
-import org.sharedsolar.adapter.TechAddCreditAdapter;
+import org.sharedsolar.adapter.VendorAddCreditAdapter;
 import org.sharedsolar.db.DatabaseAdapter;
+import org.sharedsolar.model.AccountModel;
 import org.sharedsolar.model.CreditSummaryModel;
+import org.sharedsolar.tool.Connector;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -19,31 +21,39 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class TechAddCredit extends ListActivity {
+public class VendorAddCredit extends ListActivity {
 
 	private ArrayList<CreditSummaryModel> modelList;
 	private ArrayList<CreditSummaryModel> newModelList;
-	private TechAddCreditAdapter techAddCreditAdapter;
+	private AccountModel accountModel;
+	private VendorAddCreditAdapter vendorAddCreditAdapter;
 	private DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
 	private String info;
+	private int newCr;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tech_add_credit);
+		setContentView(R.layout.vendor_add_credit);
 
+		// get account model from extras
+		Bundle extras = getIntent().getExtras();
+		accountModel = new AccountModel(extras.getString("aid"),
+				extras.getString("cid"),
+				(int) (extras.getDouble("cr") * 100));
+		
 		// get model list from db
 		dbAdapter.open();
 		modelList = dbAdapter.getCreditSummaryModelList();
 		dbAdapter.close();
 
 		// list adapter
-		techAddCreditAdapter = new TechAddCreditAdapter(this,
-				R.layout.tech_add_credit_item, modelList,
-				(TextView) findViewById(R.id.techAddCreditAddedTV));
-		setListAdapter(techAddCreditAdapter);
+		vendorAddCreditAdapter = new VendorAddCreditAdapter(this,
+				R.layout.vendor_add_credit_item, modelList,
+				(TextView) findViewById(R.id.vendorAddCreditAddedTV));
+		setListAdapter(vendorAddCreditAdapter);
 		
 		// submit
-		((Button)findViewById(R.id.techAddCreditSubmitBtn)).setOnClickListener(submitBtnClickListener);
+		((Button)findViewById(R.id.vendorAddCreditSubmitBtn)).setOnClickListener(submitBtnClickListener);
 	}
 	
 	View.OnClickListener submitBtnClickListener = new OnClickListener() {
@@ -56,17 +66,18 @@ public class TechAddCredit extends ListActivity {
 	            LinearLayout row = (LinearLayout)list.getChildAt(i);
 	            TextView denominationTV = (TextView)row.getChildAt(1);
 				TextView addedCountTV = (TextView)row.getChildAt(2);
-				TextView ownCountTV = (TextView)row.getChildAt(3);
+				TextView remainCountTV = (TextView)row.getChildAt(3);
 				int denomination = Integer.parseInt(denominationTV.getText().toString());
 				int addedCount = Integer.parseInt(addedCountTV.getText().toString());
-				int ownCount = Integer.parseInt(ownCountTV.getText().toString());
+				int remainCount = Integer.parseInt(remainCountTV.getText().toString());
 				if (addedCount != 0) {
-					newModelList.add(new CreditSummaryModel(denomination, ownCount));
+					newModelList.add(new CreditSummaryModel(denomination, remainCount));
 					info += getString(R.string.denomination) + " " + denomination +": " + addedCount+" Added\n";
 				}
 			}			
 			// update info string
-			String creditAdded = ((TextView)TechAddCredit.this.findViewById(R.id.techAddCreditAddedTV)).getText().toString();
+			String creditAdded = ((TextView)VendorAddCredit.this.findViewById(R.id.vendorAddCreditAddedTV)).getText().toString();
+			newCr = Integer.parseInt(creditAdded);
 			info += "\n" + getString(R.string.creditAdded) + " " +creditAdded;
 			// dialog
 			AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -74,13 +85,38 @@ public class TechAddCredit extends ListActivity {
 	        builder.setTitle(getString(R.string.addCredit));
 	        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int id) {
+	            	dialog.cancel();
+	            	// update db
 	            	dbAdapter.open();
 	    			dbAdapter.updateVendorCredit(newModelList);
 	    			dbAdapter.close();
-	            	dialog.cancel();    	
-					Intent intent = new Intent(TechAddCredit.this, TechAddCreditReceipt.class);
-					intent.putExtra("info", info);
-	                startActivity(intent);
+	            	// http post
+	    			Connector connector = new Connector(VendorAddCredit.this);
+	    			int status = connector.vendorAddCredit(getString(R.string.addCreditUrl), 
+	    					accountModel.getAid(),
+	    					accountModel.getCid(),
+	    					newCr);
+	            	if (status == Connector.CONNECTION_SUCCESS) {
+	            		Intent intent = new Intent(VendorAddCredit.this, VendorAddCreditReceipt.class);
+						intent.putExtra("info", info);
+		                startActivity(intent);
+	            	} else {
+	            		AlertDialog.Builder builder = new AlertDialog.Builder(VendorAddCredit.this);
+	            		builder.setTitle(getString(R.string.addCredit));
+			            if (status == Connector.CONNECTION_TIMEOUT) {
+			            	builder.setMessage(getString(R.string.addCreditTimeout));
+			            }
+			            else {
+			            	builder.setMessage(getString(R.string.addCreditError));
+			            }
+			            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+			                public void onClick(DialogInterface dialog, int id) {
+			                    dialog.cancel();
+			                }
+			            });
+			            builder.show();
+	            	}
+					
 	            }
 	        });
 	        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {

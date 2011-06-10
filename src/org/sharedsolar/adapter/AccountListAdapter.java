@@ -3,7 +3,7 @@ package org.sharedsolar.adapter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import org.sharedsolar.model.AccountListModel;
+import org.sharedsolar.model.AccountModel;
 import org.sharedsolar.R;
 
 import android.content.Context;
@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class AccountListAdapter extends ArrayAdapter<AccountListModel> {
+public class AccountListAdapter extends ArrayAdapter<AccountModel> {
 
 	private LayoutInflater mInflater;
-	private ArrayList<AccountListModel> modelList;
+	private ArrayList<AccountModel> modelList;
 	
-	public AccountListAdapter(Context context, int textViewResourceId, ArrayList<AccountListModel> modelList) {
+	public AccountListAdapter(Context context, int textViewResourceId, ArrayList<AccountModel> modelList) {
 		super(context, textViewResourceId);
 		mInflater = LayoutInflater.from(context);
 		this.modelList = modelList;
@@ -28,7 +28,7 @@ public class AccountListAdapter extends ArrayAdapter<AccountListModel> {
 		return modelList.size();
 	}
 	
-	public AccountListModel getItem(int position) {
+	public AccountModel getItem(int position) {
 		return modelList.get(position);
 	}
 	
@@ -49,13 +49,14 @@ public class AccountListAdapter extends ArrayAdapter<AccountListModel> {
 			holder = (ViewHolder)convertView.getTag();
 		}
 		
-		AccountListModel model = modelList.get(position);
+		AccountModel model = modelList.get(position);
 		if (model != null) {
 			holder.idText.setText(String.valueOf(position + 1));
 			holder.aidText.setText(model.getAid());
 			DecimalFormat df = new DecimalFormat("#0.00");
 			holder.crText.setText(df.format(model.getCr()/100.00));
 		}
+		
 		return convertView;
 	}
 	

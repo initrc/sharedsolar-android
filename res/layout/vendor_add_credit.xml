@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<TextView android:text="@string/denomination"
+			android:layout_width="180dip" android:layout_height="wrap_content"
+			android:paddingLeft="90dip" />
+		<TextView android:text="@string/added" android:layout_width="60dip"
+			android:layout_height="wrap_content" android:gravity="right" />
+		<TextView android:text="@string/remain" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:gravity="right" />
+	</LinearLayout>
+	<View android:layout_width="fill_parent" android:layout_height="1dip"
+		android:background="@android:color/background_light" />
+
+	<ListView android:id="@+id/android:list"
+		android:layout_height="wrap_content" android:layout_width="fill_parent">
+	</ListView>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginTop="50dip" android:gravity="center">
+		<TextView android:text="@string/creditAdded"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_marginRight="20dip" android:layout_gravity="center_vertical" />
+		<TextView android:id="@+id/vendorAddCreditAddedTV" android:text="0"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical" />
+	</LinearLayout>
+	
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginTop="20dip" android:gravity="center">
+		<Button android:text="@string/submit" android:id="@+id/vendorAddCreditSubmitBtn"
+			android:layout_width="150dip" android:layout_height="wrap_content" />
+	</LinearLayout>
+	
+	
+</LinearLayout>
+
