@@ -15,7 +15,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -56,7 +55,7 @@ public class VendorAddCredit extends ListActivity {
 		((Button)findViewById(R.id.vendorAddCreditSubmitBtn)).setOnClickListener(submitBtnClickListener);
 	}
 	
-	View.OnClickListener submitBtnClickListener = new OnClickListener() {
+	View.OnClickListener submitBtnClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
 			info="";
 			// build new model list
@@ -83,42 +82,7 @@ public class VendorAddCredit extends ListActivity {
 			AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 	        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));
 	        builder.setTitle(getString(R.string.addCredit));
-	        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-	            public void onClick(DialogInterface dialog, int id) {
-	            	dialog.cancel();
-	            	// update db
-	            	dbAdapter.open();
-	    			dbAdapter.updateVendorCredit(newModelList);
-	    			dbAdapter.close();
-	            	// http post
-	    			Connector connector = new Connector(VendorAddCredit.this);
-	    			int status = connector.vendorAddCredit(getString(R.string.addCreditUrl), 
-	    					accountModel.getAid(),
-	    					accountModel.getCid(),
-	    					newCr);
-	            	if (status == Connector.CONNECTION_SUCCESS) {
-	            		Intent intent = new Intent(VendorAddCredit.this, VendorAddCreditReceipt.class);
-						intent.putExtra("info", info);
-		                startActivity(intent);
-	            	} else {
-	            		AlertDialog.Builder builder = new AlertDialog.Builder(VendorAddCredit.this);
-	            		builder.setTitle(getString(R.string.addCredit));
-			            if (status == Connector.CONNECTION_TIMEOUT) {
-			            	builder.setMessage(getString(R.string.addCreditTimeout));
-			            }
-			            else {
-			            	builder.setMessage(getString(R.string.addCreditError));
-			            }
-			            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-			                public void onClick(DialogInterface dialog, int id) {
-			                    dialog.cancel();
-			                }
-			            });
-			            builder.show();
-	            	}
-					
-	            }
-	        });
+	        builder.setPositiveButton(getString(R.string.yes), submitDialoguePositiveClickListener);
 	        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int id) {
 	                dialog.cancel();
@@ -126,5 +90,43 @@ public class VendorAddCredit extends ListActivity {
 	        });
 	        builder.show();
 		}
+	};
+	
+	DialogInterface.OnClickListener submitDialoguePositiveClickListener = new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int id) {
+        	dialog.cancel();
+        	// update db
+        	dbAdapter.open();
+			dbAdapter.updateVendorCredit(newModelList);
+			dbAdapter.close();
+        	// http post
+			Connector connector = new Connector(VendorAddCredit.this);
+			int status = connector.vendorAddCredit(getString(R.string.addCreditUrl), 
+					VendorAddCredit.this,
+					accountModel.getAid(),
+					accountModel.getCid(),
+					newCr);
+        	if (status == Connector.CONNECTION_SUCCESS) {
+        		Intent intent = new Intent(VendorAddCredit.this, VendorAddCreditReceipt.class);
+				intent.putExtra("info", info);
+                startActivity(intent);
+        	} else {
+        		AlertDialog.Builder builder = new AlertDialog.Builder(VendorAddCredit.this);
+        		builder.setTitle(getString(R.string.addCredit));
+	            if (status == Connector.CONNECTION_TIMEOUT) {
+	            	builder.setMessage(getString(R.string.addCreditTimeout));
+	            }
+	            else {
+	            	builder.setMessage(getString(R.string.addCreditError));
+	            }
+	            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+	                public void onClick(DialogInterface dialog, int id) {
+	                    dialog.cancel();
+	                }
+	            });
+	            builder.show();
+        	}
+			
+        }
 	};
 }

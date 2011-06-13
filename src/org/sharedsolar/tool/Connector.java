@@ -15,19 +15,15 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.sharedsolar.R;
 import org.sharedsolar.db.DatabaseAdapter;
 
 import android.content.Context;
-import android.util.Log;
 
 public class Connector {
 	
@@ -97,26 +93,28 @@ public class Connector {
 	}
 	
 	// vendor add credit
-	public ByteArrayEntity getAccountEntity(String aid, String cid, int cr) {
-		JSONObject jsonObject = new JSONObject();
+	// vendor token validation
+	public HttpEntity getAccountEntity(Context context, String aid, String cid, int cr) {
+		DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
+		dbAdapter.open();
+		nameValuePairs.add(new BasicNameValuePair("vendordevice_id", 
+				dbAdapter.getVendorToken()));
+		nameValuePairs.add(new BasicNameValuePair("aid", aid));
+		nameValuePairs.add(new BasicNameValuePair("cid", cid));
+		nameValuePairs.add(new BasicNameValuePair("cr", String.valueOf(cr)));
+		dbAdapter.close();
 		try {
-			jsonObject.accumulate("aid", aid);
-			jsonObject.accumulate("cid", cid);
-			jsonObject.accumulate("cr", cr);
-			Log.d("d", jsonObject.toString());
-			return new ByteArrayEntity(jsonObject.toString().getBytes("UTF8"));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return new UrlEncodedFormEntity(nameValuePairs);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;		
+		return null;
 	}
 	
-	public int vendorAddCredit(String url, String aid, String cid, int cr) {
-		return connect(url, getAccountEntity(aid, cid, cr));
+	public int vendorAddCredit(String url, Context context, String aid, String cid, int cr) {
+		return connect(url, getAccountEntity(context, aid, cid, cr));
 	}
 	
 	// http connection, return json string
