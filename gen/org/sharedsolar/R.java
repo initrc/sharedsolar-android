@@ -77,6 +77,7 @@ public final class R {
     }
     public static final class string {
         public static final int account=0x7f040021;
+        public static final int accountIdEmptyMsg=0x7f04002d;
         public static final int accountLabel=0x7f040022;
         public static final int accountList=0x7f040011;
         public static final int accountListTimeoutMsg=0x7f040017;

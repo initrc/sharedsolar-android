@@ -67,28 +67,31 @@ public class TechAddCredit extends ListActivity {
 			}			
 			// update info string
 			String creditAdded = ((TextView)TechAddCredit.this.findViewById(R.id.techAddCreditAddedTV)).getText().toString();
-			info += "\n" + getString(R.string.creditAdded) + " " +creditAdded;
-			// dialog
-			AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-	        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));
-	        builder.setTitle(getString(R.string.addCredit));
-	        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-	            public void onClick(DialogInterface dialog, int id) {
-	            	dbAdapter.open();
-	    			dbAdapter.updateVendorCredit(newModelList);
-	    			dbAdapter.close();
-	            	dialog.cancel();    	
-					Intent intent = new Intent(TechAddCredit.this, TechAddCreditReceipt.class);
-					intent.putExtra("info", info);
-	                startActivity(intent);
-	            }
-	        });
-	        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-	            public void onClick(DialogInterface dialog, int id) {
-	                dialog.cancel();
-	            }
-	        });
-	        builder.show();
+			int newCr = Integer.parseInt(creditAdded);
+			if (newCr > 0) {
+				info += "\n" + getString(R.string.creditAdded) + " " +creditAdded;
+				// dialog
+				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+		        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));
+		        builder.setTitle(getString(R.string.addCredit));
+		        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int id) {
+		            	dbAdapter.open();
+		    			dbAdapter.updateVendorCredit(newModelList);
+		    			dbAdapter.close();
+		            	dialog.cancel();    	
+						Intent intent = new Intent(TechAddCredit.this, TechAddCreditReceipt.class);
+						intent.putExtra("info", info);
+		                startActivity(intent);
+		            }
+		        });
+		        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int id) {
+		                dialog.cancel();
+		            }
+		        });
+		        builder.show();
+			}
 		}
 	};
 }

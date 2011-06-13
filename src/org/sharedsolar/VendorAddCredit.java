@@ -58,7 +58,7 @@ public class VendorAddCredit extends ListActivity {
 	
 	View.OnClickListener submitBtnClickListener = new View.OnClickListener() {
 		public void onClick(View v) {
-			info="";
+			info=getString(R.string.accountLabel) + " " + accountModel.getAid() + "\n\n";
 			// build new model list
         	ListView list = getListView();
         	newModelList = new ArrayList<CreditSummaryModel>();
@@ -78,18 +78,21 @@ public class VendorAddCredit extends ListActivity {
 			// update info string
 			String creditAdded = ((TextView)VendorAddCredit.this.findViewById(R.id.vendorAddCreditAddedTV)).getText().toString();
 			newCr = Integer.parseInt(creditAdded);
-			info += "\n" + getString(R.string.creditAdded) + " " +creditAdded;
-			// dialog
-			AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-	        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));
-	        builder.setTitle(getString(R.string.addCredit));
-	        builder.setPositiveButton(getString(R.string.yes), submitDialoguePositiveClickListener);
-	        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-	            public void onClick(DialogInterface dialog, int id) {
-	                dialog.cancel();
-	            }
-	        });
-	        builder.show();
+			if (newCr > 0)
+			{
+				info += "\n" + getString(R.string.creditAdded) + " " +creditAdded;
+				// dialog
+				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+		        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));
+		        builder.setTitle(getString(R.string.addCredit));
+		        builder.setPositiveButton(getString(R.string.yes), submitDialoguePositiveClickListener);
+		        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int id) {
+		                dialog.cancel();
+		            }
+		        });
+		        builder.show();
+			}
 		}
 	};
 	
