@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:orientation="vertical" android:gravity="center">
-	<TextView android:text="TextView" android:id="@+id/vendorAddCreditReceiptInfo"
+	<ImageView android:layout_width="wrap_content" android:src="@drawable/logo_l"
+		android:layout_height="wrap_content" android:layout_marginBottom="50dip" />
+
+	<TextView android:text="" android:id="@+id/vendorAddCreditReceiptInfo"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 
 	<Button android:text="@string/ok" android:id="@+id/vendorAddCreditReceiptOkBtn"

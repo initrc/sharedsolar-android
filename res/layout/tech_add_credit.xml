@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:orientation="vertical">
-
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content">
 		<TextView android:text="@string/denomination"
@@ -13,12 +12,12 @@
 		<TextView android:text="@string/own" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:gravity="right" />
 	</LinearLayout>
+
 	<View android:layout_width="fill_parent" android:layout_height="1dip"
 		android:background="@android:color/background_light" />
 
 	<ListView android:id="@+id/android:list"
-		android:layout_height="wrap_content" android:layout_width="fill_parent">
-	</ListView>
+		android:layout_height="wrap_content" android:layout_width="fill_parent" />
 
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
@@ -37,7 +36,5 @@
 		<Button android:text="@string/submit" android:id="@+id/techAddCreditSubmitBtn"
 			android:layout_width="150dip" android:layout_height="wrap_content" />
 	</LinearLayout>
-	
-	
 </LinearLayout>
 
