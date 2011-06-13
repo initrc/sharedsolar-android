@@ -39,6 +39,7 @@ public class VendorAddCredit extends ListActivity {
 		accountModel = new AccountModel(extras.getString("aid"),
 				extras.getString("cid"),
 				(int) (extras.getDouble("cr") * 100));
+		((TextView)findViewById(R.id.vendorAddCreditAid)).setText(accountModel.getAid());
 		
 		// get model list from db
 		dbAdapter.open();

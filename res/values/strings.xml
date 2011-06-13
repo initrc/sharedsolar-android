@@ -29,6 +29,7 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="account">Account</string>
+    <string name="accountLabel">Account:</string>
     <string name="credit">Credit</string>
     <string name="logout">Logout</string>
     <string name="added">Added</string>
