@@ -49,11 +49,14 @@ public class VendorAddCredit extends ListActivity {
 		// list adapter
 		vendorAddCreditAdapter = new VendorAddCreditAdapter(this,
 				R.layout.vendor_add_credit_item, modelList,
-				(TextView) findViewById(R.id.vendorAddCreditAddedTV));
+				(TextView) findViewById(R.id.vendorAddCreditAddedTV), 
+				(Button) findViewById(R.id.vendorAddCreditSubmitBtn));
 		setListAdapter(vendorAddCreditAdapter);
 		
 		// submit
-		((Button)findViewById(R.id.vendorAddCreditSubmitBtn)).setOnClickListener(submitBtnClickListener);
+		Button submitBtn = (Button)findViewById(R.id.vendorAddCreditSubmitBtn); 
+		submitBtn.setOnClickListener(submitBtnClickListener);
+		submitBtn.setEnabled(false);
 	}
 	
 	View.OnClickListener submitBtnClickListener = new View.OnClickListener() {

@@ -39,11 +39,14 @@ public class TechAddCredit extends ListActivity {
 		// list adapter
 		techAddCreditAdapter = new TechAddCreditAdapter(this,
 				R.layout.tech_add_credit_item, modelList,
-				(TextView) findViewById(R.id.techAddCreditAddedTV));
+				(TextView) findViewById(R.id.techAddCreditAddedTV),
+				(Button) findViewById(R.id.techAddCreditSubmitBtn));
 		setListAdapter(techAddCreditAdapter);
 		
 		// submit
-		((Button)findViewById(R.id.techAddCreditSubmitBtn)).setOnClickListener(submitBtnClickListener);
+		Button submitBtn = (Button)findViewById(R.id.techAddCreditSubmitBtn); 
+		submitBtn.setOnClickListener(submitBtnClickListener);
+		submitBtn.setEnabled(false);
 	}
 	
 	View.OnClickListener submitBtnClickListener = new OnClickListener() {

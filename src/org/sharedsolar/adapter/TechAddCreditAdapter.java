@@ -20,13 +20,16 @@ public class TechAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 	private LayoutInflater mInflater;
 	private ArrayList<CreditSummaryModel> modelList;
 	private TextView creditAddedTV;
+	private Button submitBtn;
 
 	public TechAddCreditAdapter(Context context, int textViewResourceId,
-			ArrayList<CreditSummaryModel> modelList, TextView creditAddedTV) {
+			ArrayList<CreditSummaryModel> modelList, TextView creditAddedTV,
+			Button submitBtn) {
 		super(context, textViewResourceId);
 		mInflater = LayoutInflater.from(context);
 		this.modelList = modelList;
 		this.creditAddedTV = creditAddedTV;
+		this.submitBtn = submitBtn;
 	}
 
 	public int getCount() {
@@ -82,13 +85,14 @@ public class TechAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 		}
 		return convertView;
 	}
-	
+
 	public void updateCredit(View v, int sign) {
 		LinearLayout row = (LinearLayout) v.getParent().getParent();
 		TextView denominationText = (TextView) row.getChildAt(1);
 		TextView addedCountText = (TextView) row.getChildAt(2);
 		TextView ownCountText = (TextView) row.getChildAt(3);
-		int denomination = Integer.parseInt(denominationText.getText().toString());
+		int denomination = Integer.parseInt(denominationText.getText()
+				.toString());
 		int addedCount = Integer.parseInt(addedCountText.getText().toString());
 		int ownCount = Integer.parseInt(ownCountText.getText().toString());
 		int ownCredit = Integer.parseInt(creditAddedTV.getText().toString());
@@ -102,9 +106,13 @@ public class TechAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 			v.setEnabled(false);
 		// enable minusBtn
 		if (sign == 1 && addedCount >= 1) {
-			Button minusBtn = (Button)(((LinearLayout)v.getParent()).getChildAt(1));
+			Button minusBtn = (Button) (((LinearLayout) v.getParent())
+					.getChildAt(1));
 			minusBtn.setEnabled(true);
 		}
+		// submitBtn
+		ownCredit = Integer.parseInt(creditAddedTV.getText().toString());
+		submitBtn.setEnabled(ownCredit > 0);
 	}
 
 	static class ViewHolder {

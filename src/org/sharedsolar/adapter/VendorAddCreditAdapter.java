@@ -20,13 +20,16 @@ public class VendorAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 	private LayoutInflater mInflater;
 	private ArrayList<CreditSummaryModel> modelList;
 	private TextView creditAddedTV;
+	private Button submitBtn;
 
 	public VendorAddCreditAdapter(Context context, int textViewResourceId,
-			ArrayList<CreditSummaryModel> modelList, TextView creditAddedTV) {
+			ArrayList<CreditSummaryModel> modelList, TextView creditAddedTV,
+			Button submitBtn) {
 		super(context, textViewResourceId);
 		mInflater = LayoutInflater.from(context);
 		this.modelList = modelList;
 		this.creditAddedTV = creditAddedTV;
+		this.submitBtn = submitBtn;
 	}
 
 	public int getCount() {
@@ -44,15 +47,15 @@ public class VendorAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			convertView = mInflater
-					.inflate(R.layout.vendor_add_credit_item, null);
+			convertView = mInflater.inflate(R.layout.vendor_add_credit_item,
+					null);
 			holder = new ViewHolder();
 			holder.denominationText = (TextView) convertView
 					.findViewById(R.id.vendorAddCreditDenomination);
 			holder.addedCountText = (TextView) convertView
 					.findViewById(R.id.vendorAddCreditAddedCount);
 			holder.remainCountText = (TextView) convertView
-				.findViewById(R.id.vendorAddCreditRemainCount);
+					.findViewById(R.id.vendorAddCreditRemainCount);
 			holder.minusBtn = (Button) convertView
 					.findViewById(R.id.vendorAddCreditMinusBtn);
 			holder.plusBtn = (Button) convertView
@@ -64,7 +67,8 @@ public class VendorAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 
 		CreditSummaryModel model = modelList.get(position);
 		if (model != null) {
-			holder.denominationText.setText(String.valueOf(model.getDenomination()));
+			holder.denominationText.setText(String.valueOf(model
+					.getDenomination()));
 			holder.addedCountText.setText("0");
 			holder.remainCountText.setText(String.valueOf(model.getCount()));
 			holder.minusBtn.setEnabled(false);
@@ -86,40 +90,49 @@ public class VendorAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 		}
 		return convertView;
 	}
-	
+
 	public void updateCredit(View v, int sign) {
 		LinearLayout row = (LinearLayout) v.getParent().getParent();
 		TextView denominationText = (TextView) row.getChildAt(1);
 		TextView addedCountText = (TextView) row.getChildAt(2);
 		TextView remainCountText = (TextView) row.getChildAt(3);
-		int denomination = Integer.parseInt(denominationText.getText().toString());
+		int denomination = Integer.parseInt(denominationText.getText()
+				.toString());
 		int addedCount = Integer.parseInt(addedCountText.getText().toString());
-		int remainCount = Integer.parseInt(remainCountText.getText().toString());
+		int remainCount = Integer
+				.parseInt(remainCountText.getText().toString());
 		int creditAdded = Integer.parseInt(creditAddedTV.getText().toString());
 		// update text
 		addedCount += sign;
 		addedCountText.setText(String.valueOf(addedCount));
 		remainCount -= sign;
 		remainCountText.setText(String.valueOf(remainCount));
-		creditAddedTV.setText(String.valueOf(creditAdded + sign * denomination));
+		creditAddedTV
+				.setText(String.valueOf(creditAdded + sign * denomination));
 		// minusBtn
 		if (sign == -1) {
 			if (addedCount <= 0) {
 				v.setEnabled(false);
 			}
 			if (remainCount >= 1) {
-				((Button)(((LinearLayout)v.getParent()).getChildAt(0))).setEnabled(true);
+				((Button) (((LinearLayout) v.getParent()).getChildAt(0)))
+						.setEnabled(true);
 			}
-		}			
+		}
 		// plusBtn
 		if (sign == 1) {
 			if (addedCount >= 1) {
-				((Button)(((LinearLayout)v.getParent()).getChildAt(1))).setEnabled(true);
+				((Button) (((LinearLayout) v.getParent()).getChildAt(1)))
+						.setEnabled(true);
 			}
 			if (remainCount <= 0) {
 				v.setEnabled(false);
 			}
 		}
+		// submitBtn
+		creditAdded = Integer.parseInt(creditAddedTV.getText().toString());
+		submitBtn.setEnabled(creditAdded > 0);
+		
 	}
 
 	static class ViewHolder {
