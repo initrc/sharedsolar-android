@@ -68,7 +68,11 @@ public class VendorAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 			holder.addedCountText.setText("0");
 			holder.remainCountText.setText(String.valueOf(model.getCount()));
 			holder.minusBtn.setEnabled(false);
-			if (model.getCount() == 0) holder.plusBtn.setEnabled(false);
+			if (model.getCount() >= 1) {
+				holder.plusBtn.setEnabled(true);
+			} else {
+				holder.plusBtn.setEnabled(false);
+			}
 			holder.plusBtn.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					updateCredit(v, 1);
