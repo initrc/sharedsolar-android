@@ -87,11 +87,4 @@ public class VendorHome extends Activity {
         	}
         }
     };
-    
-    @Override
-    public void onBackPressed() {
-        // back to login view
-    	Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
-    }
 }
