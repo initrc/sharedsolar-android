@@ -65,7 +65,8 @@ public class TechAddCredit extends ListActivity {
 				int ownCount = Integer.parseInt(ownCountTV.getText().toString());
 				if (addedCount != 0) {
 					newModelList.add(new CreditSummaryModel(denomination, ownCount));
-					info += getString(R.string.denomination) + " " + denomination +": " + addedCount+" Added\n";
+					info += getString(R.string.denomination) + " " + denomination + ": " 
+						+ addedCount + " " + getString(R.string.added) + "\n";
 				}
 			}			
 			// update info string

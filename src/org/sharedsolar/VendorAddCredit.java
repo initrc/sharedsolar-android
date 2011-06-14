@@ -75,7 +75,8 @@ public class VendorAddCredit extends ListActivity {
 				int remainCount = Integer.parseInt(remainCountTV.getText().toString());
 				if (addedCount != 0) {
 					newModelList.add(new CreditSummaryModel(denomination, remainCount));
-					info += getString(R.string.denomination) + " " + denomination +": " + addedCount+" Added\n";
+					info += getString(R.string.denomination) + " " + denomination + ": " 
+						+ addedCount + " " + getString(R.string.added) + "\n";
 				}
 			}			
 			// update info string
