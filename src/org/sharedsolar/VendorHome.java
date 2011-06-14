@@ -45,6 +45,13 @@ public class VendorHome extends Activity {
         		}.start();
 			}
         });
+        ((Button)findViewById(R.id.logoutBtn)).setOnClickListener(new OnClickListener()
+        {
+        	public void onClick(View v) {
+        		Intent intent = new Intent(v.getContext(), Login.class);
+                startActivity(intent);
+			}
+        });
     }
 	
 	private Handler handler = new Handler() {

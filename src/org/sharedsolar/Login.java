@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -82,6 +83,24 @@ public class Login extends Activity {
         	Intent intent = new Intent(this.getApplicationContext(), TechAuth.class);
             startActivity(intent);
             return true;
+        case R.id.aboutMenuItem:
+        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(getString(R.string.about));
+			String version = "";
+			try {
+				version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+			} catch (NameNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			builder.setMessage(getString(R.string.app_name) + "\n\n" 
+					+ getString(R.string.version) + " " + version);
+            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
         default:
             return super.onOptionsItemSelected(item);
         }

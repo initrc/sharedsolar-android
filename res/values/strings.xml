@@ -41,4 +41,6 @@
     <string name="addCreditTimeout">Add Credit Timeout!</string>
     <string name="addCreditError">Add Credit Error!</string>
     <string name="accountIdEmptyMsg">Please assign an account ID to circuit</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
 </resources>
