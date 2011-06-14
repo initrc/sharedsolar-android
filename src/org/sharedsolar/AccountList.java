@@ -23,7 +23,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class AccountList extends ListActivity {
@@ -40,7 +40,7 @@ public class AccountList extends ListActivity {
 
 		updateList();
 		
-		((ImageView)findViewById(R.id.accountRefreshImg)).setOnClickListener(new OnClickListener()
+		((LinearLayout)findViewById(R.id.accountRefreshLayout)).setOnClickListener(new OnClickListener()
         {
 			public void onClick(View v) {
 				view = v;
