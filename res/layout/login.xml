@@ -5,7 +5,7 @@
 	<ImageView android:layout_width="wrap_content" android:src="@drawable/logo_l"
 		android:layout_height="wrap_content" android:layout_marginBottom="50dip"/>
 
-	<Button android:text="@string/vendorLoginBtn" android:id="@+id/vendorLoginBtn"
+	<Button android:text="@string/vendorLogin" android:id="@+id/vendorLoginBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"></Button>
 
 	<ListView android:id="@+id/listView1" android:layout_height="wrap_content"

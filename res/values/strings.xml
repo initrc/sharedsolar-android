@@ -1,47 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SharedSolar</string>
-    <string name="vendorLoginBtn">Vendor Login</string>
+    
+    <!-- common words -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    
+    <!-- home -->
+    <string name="vendorLogin">Vendor Login</string>
     <string name="techLogin">Tech Login</string>
-    <string name="addCredit">Add Credit</string>
-    <string name="syncDevice">Sync Device</string>
-    <string name="availableCreditLabel">Available Credit:</string>
-    <string name="denomination">Denomination</string>
-    <string name="total">Total</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+    <string name="loading">Loading...</string>
+    <string name="loginError">Login Error</string>
+    <string name="vendorLoginTimeoutMsg">Login timeout! Please check wifi connection.</string>
+    <string name="vendorLoginErrorMsg">Device needs to be synchronized by a field tech!</string>
+    <string name="logout">Logout</string>
+    
+    <!-- tech -->
+    <!-- tech auth -->
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="creditSummary">Credit Summary</string>
-    <string name="accountList">Account List</string>
     <string name="wrongPassword">Wrong Password!</string>
-    <string name="sync">Sync</string>
-    <string name="syncCompleted">Sync Completed!</string>
-    <string name="syncTimeout">Sync Timeout!</string>
-    <string name="syncError">Sync Error!</string>
-    <string name="accountListTimeoutMsg">Get account list timeout!</string>
-    <string name="vendorLoginTimeoutMsg">Login timeout! Please check wifi connection.</string>
-    <string name="vendorLoginErrorMsg">Device needs to be synchronized by a field tech!</string>
-    <string name="loading">Loading...</string>
-    <string name="synchronizing">Synchronizing...</string>
-    <string name="ok">OK</string>
-    <string name="loginError">Login Error</string>
-    <string name="loadingAccountListError">Failed to load account list!</string>
-    <string name="no">No</string>
-    <string name="yes">Yes</string>
-    <string name="account">Account</string>
-    <string name="accountLabel">Account:</string>
-    <string name="credit">Credit</string>
-    <string name="logout">Logout</string>
+    <!-- tech add credit -->
+    <string name="addCredit">Add Credit</string>
+    <string name="denomination">Denomination</string>
     <string name="added">Added</string>
     <string name="own">Own</string>
     <string name="creditAdded">Credit Added:</string>
     <string name="submit">Submit</string>
     <string name="addCreditConfirm">Continue?</string>
-    <string name="remain">Remain</string>
+    <!-- tech sync device -->
+    <string name="syncDevice">Sync Device</string>
+    <string name="sync">Sync</string>
+    <string name="synchronizing">Synchronizing...</string>
+    <string name="syncCompleted">Sync Completed!</string>
+    <string name="syncTimeout">Sync Timeout!</string>
+    <string name="syncError">Sync Error!</string>
+    
+    <!-- vendor -->
+    <!-- vendor credit summary -->
+    <string name="creditSummary">Credit Summary</string>
+    <string name="total">Total</string>
+    <string name="availableCreditLabel">Available Credit:</string>
+    <!-- vendor account list -->
+    <string name="accountList">Account List</string>
+    <string name="accountListTimeoutMsg">Get account list timeout!</string>
+    <string name="loadingAccountListError">Failed to load account list!</string>
+    <string name="account">Account</string>
+    <string name="credit">Credit</string>
+    <string name="accountIdEmptyMsg">Please assign an account ID to the circuit.</string>
+    <!-- vendor add credit -->
+	<string name="accountLabel">Account:</string>
+	<string name="remain">Remain</string>
     <string name="addCreditTimeout">Add Credit Timeout!</string>
     <string name="addCreditError">Add Credit Error!</string>
-    <string name="accountIdEmptyMsg">Please assign an account ID to circuit</string>
-    <string name="about">About</string>
-    <string name="version">Version</string>
-    <string name="refresh">Refresh</string>
 </resources>
