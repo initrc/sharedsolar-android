@@ -68,7 +68,7 @@ public class Connector {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return CONNECTION_TIMEOUT;
 	}
 	
 	// vendor token validation
