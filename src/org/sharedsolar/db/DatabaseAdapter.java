@@ -53,7 +53,7 @@ public class DatabaseAdapter {
 	public void init() {
 		if (isEmpty()) {
 			// insert USER
-			ContentValues values = createUser("", "");
+			ContentValues values = createUser("tech", "");
 			database.insert(USER_TABLE, null, values);
 			values = createUser("vendor", RandomToken.generate());
 			database.insert(USER_TABLE, null, values);
