@@ -14,12 +14,13 @@ import android.provider.Settings.Secure;
 import android.provider.Settings.System;
 
 public class Device {
+
 	public static String getId(Context context) {
 		String androidId = System.getString(context.getContentResolver(), Secure.ANDROID_ID);
 		if (androidId == null)
-			//      1234567890123456
-			return "0000000000000000";
-		return androidId;
+			//      12345678
+			return "00000000";
+		return convert(androidId);
 	}
 	
 	public static NameValuePair getIdPair(Context context) {
@@ -40,5 +41,28 @@ public class Device {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static String convert(String s) {
+		char[] cs = new char[s.length() / 2];
+		for (int i = 0 ; i < cs.length; i++) {
+			int c = (int)(s.charAt(i * 2) + s.charAt(i * 2 +1 )) % 16;
+			char base = c < 10 ? '0' : 'a' - 10;
+			cs[i] = (char)(base + c);
+		}
+		return String.valueOf(cs);
+	}
+	
+	public static String generatePassword() {
+		char[] cs = new char[6];
+		for (int i = 0; i < cs.length; i++) {
+			int t;
+			if (i < cs.length / 2)
+				t = (int)(Math.random()*26 + 'a');
+			else
+				t = (int)(Math.random()*10 + '0');
+			cs[i] = (char)t;
+		}
+		return String.valueOf(cs);
 	}
 }

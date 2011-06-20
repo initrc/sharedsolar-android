@@ -88,7 +88,6 @@ public class Login extends Activity {
         	AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle(getString(R.string.about));
 			String version = "";
-			String androidId = Device.getId(this);
 			try {
 				version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 			} catch (NameNotFoundException e) {
@@ -96,8 +95,8 @@ public class Login extends Activity {
 				e.printStackTrace();
 			}
 			builder.setMessage(getString(R.string.app_name) + "\n\n" 
-					+ getString(R.string.version) + " " + version
-					+ "\n" + androidId);
+					+ getString(R.string.version) + " " + version + "\n"
+					+ getString(R.string.deviceId) + " " + Device.getId(this));
             builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
