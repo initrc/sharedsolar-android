@@ -3,58 +3,59 @@
     <string name="app_name">SharedSolar</string>
     
     <!-- common words -->
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="yes">Oui</string>
+    <string name="no">Aucun</string>
     <string name="ok">OK</string>
     
     <!-- home -->
-    <string name="vendorLogin">Vendor Login</string>
-    <string name="techLogin">Tech Login</string>
-    <string name="about">About</string>
-    <string name="version">Version</string>
-    <string name="loading">Loading...</string>
-    <string name="loginError">Login Error</string>
-    <string name="vendorLoginTimeoutMsg">Login timeout! Please check wifi connection.</string>
-    <string name="vendorLoginErrorMsg">Device needs to be synchronized by a field tech!</string>
-    <string name="logout">Logout</string>
+    <string name="vendorLogin">Identifiant vendeur</string>
+    <string name="techLogin">identifiant Technicien</string>
+    <string name="about">À propos</string>
+    <string name="versionLabel">Version:</string>
+    <string name="deviceLabel">Dispositif:</string>
+    <string name="loading">Chargement en cours ...</string>
+    <string name="loginError">Erreur de Connexion</string>
+    <string name="vendorLoginTimeoutMsg">Échec de Connexion! S\'il vous plaît vérifiez la connexion wifi.</string>
+    <string name="vendorLoginErrorMsg">Périphérique doit être synchronisé par un technicien!</string>
+    <string name="logout">Déconnexion</string>
     
     <!-- tech -->
     <!-- tech auth -->
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="wrongPassword">Wrong Password!</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Connectez-vous</string>
+    <string name="wrongPassword">Mot de passe incorrect!</string>
     <!-- tech add credit -->
-    <string name="addCredit">Add Credit</string>
-    <string name="denomination">Denomination</string>
-    <string name="added">Added</string>
-    <string name="own">Own</string>
-    <string name="creditAdded">Credit Added:</string>
-    <string name="submit">Submit</string>
-    <string name="addCreditConfirm">Continue?</string>
+    <string name="addCredit">Ajouter de crédit</string>
+    <string name="denomination">dénomination</string>
+    <string name="added">ajouté</string>
+    <string name="own">propriétaire</string>
+    <string name="creditAddedLabel">Crédit Ajouté:</string>
+    <string name="submit">Envoyer</string>
+    <string name="addCreditConfirm">Continuer?</string>
     <!-- tech sync device -->
-    <string name="syncDevice">Sync Device</string>
+    <string name="syncDevice">Dispositif de synchronisation</string>
     <string name="sync">Sync</string>
-    <string name="synchronizing">Synchronizing...</string>
-    <string name="syncCompleted">Sync Completed!</string>
-    <string name="syncTimeout">Sync Timeout!</string>
-    <string name="syncError">Sync Error!</string>
+    <string name="synchronizing">Synchronisation ...</string>
+    <string name="syncCompleted">Synchronisation Terminé!</string>
+    <string name="syncTimeout">Timeout de synchronisation!</string>
+    <string name="syncError">Error de Synchronisation!</string>
     
     <!-- vendor -->
     <!-- vendor credit summary -->
-    <string name="creditSummary">Credit Summary</string>
+    <string name="creditSummary">Sommaire de crédit</string>
     <string name="total">Total</string>
-    <string name="availableCreditLabel">Available Credit:</string>
+    <string name="availableCreditLabel">Crédit disponible:</string>
     <!-- vendor account list -->
-    <string name="accountList">Account List</string>
-    <string name="accountListTimeoutMsg">Get account list timeout!</string>
-    <string name="loadingAccountListError">Failed to load account list!</string>
-    <string name="account">Account</string>
-    <string name="credit">Credit</string>
-    <string name="accountIdEmptyMsg">Please assign an account ID to the circuit.</string>
+    <string name="accountList">Liste des comptes</string>
+    <string name="accountListTimeoutMsg">Obtenez la liste compte!</string>
+    <string name="loadingAccountListError">Impossible de charger la liste des comptes!</string>
+    <string name="account">compte</string>
+    <string name="credit">crédit</string>
+    <string name="accountIdEmptyMsg">S\'il vous plaît affecter un identifiant de compte sur le circuit.</string>
     <!-- vendor add credit -->
-	<string name="accountLabel">Account:</string>
-	<string name="remain">Remain</string>
-    <string name="addCreditTimeout">Add Credit Timeout!</string>
-    <string name="addCreditError">Add Credit Error!</string>
+	<string name="accountLabel">compte:</string>
+	<string name="remain">restent</string>
+    <string name="addCreditTimeout">Timeout. Pas possible d’ajouter de crédit!</string>
+    <string name="addCreditError">Erreur en ajouter de crédit!</string>
 </resources>

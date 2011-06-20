@@ -73,7 +73,7 @@ public class TechAddCredit extends ListActivity {
 			String creditAdded = ((TextView)TechAddCredit.this.findViewById(R.id.techAddCreditAddedTV)).getText().toString();
 			int newCr = Integer.parseInt(creditAdded);
 			if (newCr > 0) {
-				info += "\n" + getString(R.string.creditAdded) + " " +creditAdded;
+				info += "\n" + getString(R.string.creditAddedLabel) + " " +creditAdded;
 				// dialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 		        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));
