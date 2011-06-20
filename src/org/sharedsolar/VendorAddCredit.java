@@ -103,10 +103,6 @@ public class VendorAddCredit extends ListActivity {
 	DialogInterface.OnClickListener submitDialoguePositiveClickListener = new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int id) {
         	dialog.cancel();
-        	// update db
-        	dbAdapter.open();
-			dbAdapter.updateVendorCredit(newModelList);
-			dbAdapter.close();
         	// http post
 			Connector connector = new Connector(VendorAddCredit.this);
 			int status = connector.vendorAddCredit(getString(R.string.addCreditUrl), 
@@ -115,6 +111,10 @@ public class VendorAddCredit extends ListActivity {
 					accountModel.getCid(),
 					newCr);
         	if (status == Connector.CONNECTION_SUCCESS) {
+            	// update db
+            	dbAdapter.open();
+    			dbAdapter.updateVendorCredit(newModelList);
+    			dbAdapter.close();
         		Intent intent = new Intent(VendorAddCredit.this, VendorAddCreditReceipt.class);
 				intent.putExtra("info", info);
                 startActivity(intent);

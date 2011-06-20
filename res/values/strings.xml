@@ -11,7 +11,8 @@
     <string name="vendorLogin">Vendor Login</string>
     <string name="techLogin">Tech Login</string>
     <string name="about">About</string>
-    <string name="version">Version</string>
+    <string name="version">Version:</string>
+    <string name="deviceId">Device ID:</string>
     <string name="loading">Loading...</string>
     <string name="loginError">Login Error</string>
     <string name="vendorLoginTimeoutMsg">Login timeout! Please check wifi connection.</string>
