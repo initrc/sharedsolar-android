@@ -84,7 +84,7 @@ public class VendorAddCredit extends ListActivity {
 			newCr = Integer.parseInt(creditAdded);
 			if (newCr > 0)
 			{
-				info += "\n" + getString(R.string.creditAdded) + " " +creditAdded;
+				info += "\n" + getString(R.string.creditAddedLabel) + " " +creditAdded;
 				// dialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 		        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));

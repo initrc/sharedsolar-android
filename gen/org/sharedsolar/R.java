@@ -106,7 +106,7 @@ public final class R {
         public static final int app_name=0x7f040005;
         public static final int availableCreditLabel=0x7f040026;
         public static final int credit=0x7f04002b;
-        public static final int creditAdded=0x7f04001b;
+        public static final int creditAddedLabel=0x7f04001b;
         /**  vendor 
  vendor credit summary 
  vendor 
@@ -114,7 +114,7 @@ public final class R {
          */
         public static final int creditSummary=0x7f040024;
         public static final int denomination=0x7f040018;
-        public static final int deviceId=0x7f04000d;
+        public static final int deviceLabel=0x7f04000d;
         public static final int loading=0x7f04000e;
         public static final int loadingAccountListError=0x7f040029;
         public static final int login=0x7f040015;
@@ -152,7 +152,7 @@ public final class R {
         public static final int vendorLogin=0x7f040009;
         public static final int vendorLoginErrorMsg=0x7f040011;
         public static final int vendorLoginTimeoutMsg=0x7f040010;
-        public static final int version=0x7f04000c;
+        public static final int versionLabel=0x7f04000c;
         public static final int wrongPassword=0x7f040016;
         /**  common words 
  common words 

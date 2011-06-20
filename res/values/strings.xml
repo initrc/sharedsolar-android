@@ -11,8 +11,8 @@
     <string name="vendorLogin">Vendor Login</string>
     <string name="techLogin">Tech Login</string>
     <string name="about">About</string>
-    <string name="version">Version:</string>
-    <string name="deviceId">Device ID:</string>
+    <string name="versionLabel">Version:</string>
+    <string name="deviceLabel">Device:</string>
     <string name="loading">Loading...</string>
     <string name="loginError">Login Error</string>
     <string name="vendorLoginTimeoutMsg">Login timeout! Please check wifi connection.</string>
@@ -30,7 +30,7 @@
     <string name="denomination">Denomination</string>
     <string name="added">Added</string>
     <string name="own">Own</string>
-    <string name="creditAdded">Credit Added:</string>
+    <string name="creditAddedLabel">Credit Added:</string>
     <string name="submit">Submit</string>
     <string name="addCreditConfirm">Continue?</string>
     <!-- tech sync device -->
