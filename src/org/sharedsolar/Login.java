@@ -2,6 +2,7 @@ package org.sharedsolar;
 
 import org.sharedsolar.R;
 import org.sharedsolar.tool.Connector;
+import org.sharedsolar.tool.Device;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -87,6 +88,7 @@ public class Login extends Activity {
         	AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle(getString(R.string.about));
 			String version = "";
+			String androidId = Device.getId(this);
 			try {
 				version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 			} catch (NameNotFoundException e) {
@@ -94,7 +96,8 @@ public class Login extends Activity {
 				e.printStackTrace();
 			}
 			builder.setMessage(getString(R.string.app_name) + "\n\n" 
-					+ getString(R.string.version) + " " + version);
+					+ getString(R.string.version) + " " + version
+					+ "\n" + androidId);
             builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();

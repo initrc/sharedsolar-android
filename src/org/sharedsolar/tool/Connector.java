@@ -71,25 +71,8 @@ public class Connector {
 		return CONNECTION_TIMEOUT;
 	}
 	
-	// vendor token validation
-	public HttpEntity getVendorEntity(Context context) {
-		DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-		dbAdapter.open();
-		nameValuePairs.add(new BasicNameValuePair("vendordevice_id", dbAdapter
-				.getVendorToken()));
-		dbAdapter.close();
-		try {
-			return new UrlEncodedFormEntity(nameValuePairs);
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	public int sendVendorToken(String url, Context context) {
-		return connect(url, getVendorEntity(context));
+		return connect(url, Device.getIdHttpEntity(context));
 	}
 	
 	// vendor add credit
@@ -98,8 +81,7 @@ public class Connector {
 		DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 		dbAdapter.open();
-		nameValuePairs.add(new BasicNameValuePair("vendordevice_id", 
-				dbAdapter.getVendorToken()));
+		nameValuePairs.add(Device.getIdPair(context));
 		nameValuePairs.add(new BasicNameValuePair("aid", aid));
 		nameValuePairs.add(new BasicNameValuePair("cid", cid));
 		nameValuePairs.add(new BasicNameValuePair("cr", String.valueOf(cr)));
@@ -155,6 +137,6 @@ public class Connector {
 	
 	// get account list
 	public String requestAccountList(String url, Context context) {
-		return requestForString(url, getVendorEntity(context));
+		return requestForString(url, Device.getIdHttpEntity(context));
 	}
 }
