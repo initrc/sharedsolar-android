@@ -95,8 +95,8 @@ public class Login extends Activity {
 				e.printStackTrace();
 			}
 			builder.setMessage(getString(R.string.app_name) + "\n\n" 
-					+ getString(R.string.version) + " " + version + "\n"
-					+ getString(R.string.deviceId) + " " + Device.getId(this));
+					+ getString(R.string.versionLabel) + " " + version + "\n"
+					+ getString(R.string.deviceLabel) + " " + Device.getId(this));
             builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
