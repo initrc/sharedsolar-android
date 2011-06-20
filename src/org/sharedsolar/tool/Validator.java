@@ -2,7 +2,6 @@ package org.sharedsolar.tool;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -12,8 +11,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.sharedsolar.db.DatabaseAdapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -47,16 +44,6 @@ public class Validator {
 	}
 
 	public static boolean validate(String url, Context context) {
-		return validate(url, getVendorEntity(context));
-	}
-
-	public static List<NameValuePair> getVendorEntity(Context context) {
-		DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-		dbAdapter.open();
-		nameValuePairs.add(new BasicNameValuePair("vendordevice_id", dbAdapter
-				.getVendorToken()));
-		dbAdapter.close();
-		return nameValuePairs;
+		return validate(url, Device.getIdEntity(context));
 	}
 }
