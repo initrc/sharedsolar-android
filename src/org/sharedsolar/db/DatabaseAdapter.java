@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.sharedsolar.R;
 import org.sharedsolar.model.CreditSummaryModel;
-import org.sharedsolar.tool.RandomToken;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -55,8 +54,6 @@ public class DatabaseAdapter {
 			// insert USER
 			ContentValues values = createUser("tech", "");
 			database.insert(USER_TABLE, null, values);
-			values = createUser("vendor", RandomToken.generate());
-			database.insert(USER_TABLE, null, values);
 			// insert CREDIT
 			String[] denominationValues = context.getResources().getStringArray(R.array.denominationValues);
 			for (String v : denominationValues) {
@@ -86,18 +83,6 @@ public class DatabaseAdapter {
 	
 	public boolean delete(String username) {
 		return database.delete(USER_TABLE, "username = '" + username + "'", null) > 0;
-	}
-	
-	public String getVendorToken()
-	{
-		Cursor cursor = database.query(true, USER_TABLE, new String[] {"password"}, 
-				"username = 'vendor'", null, null, null, null, null);
-		if (cursor != null) {
-			cursor.moveToFirst();
-			String token=cursor.getString(0);
-			return token;					
-		}
-		return null;
 	}
 	
 	public ArrayList<CreditSummaryModel> getCreditSummaryModelList() {
