@@ -26,7 +26,7 @@ public class VendorAddCredit extends ListActivity {
 	private ArrayList<CreditSummaryModel> newModelList;
 	private AccountModel accountModel;
 	private VendorAddCreditAdapter vendorAddCreditAdapter;
-	private DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
+	private DatabaseAdapter dbAdapter;
 	private String info;
 	private int newCr;
 
@@ -42,6 +42,7 @@ public class VendorAddCredit extends ListActivity {
 		((TextView)findViewById(R.id.vendorAddCreditAid)).setText(accountModel.getAid());
 		
 		// get model list from db
+		dbAdapter = new DatabaseAdapter(this);
 		dbAdapter.open();
 		modelList = dbAdapter.getCreditSummaryModelList();
 		dbAdapter.close();

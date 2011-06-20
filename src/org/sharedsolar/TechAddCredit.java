@@ -2,10 +2,14 @@ package org.sharedsolar;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sharedsolar.R;
 import org.sharedsolar.adapter.TechAddCreditAdapter;
 import org.sharedsolar.db.DatabaseAdapter;
 import org.sharedsolar.model.CreditSummaryModel;
+import org.sharedsolar.tool.Connector;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -23,15 +27,17 @@ public class TechAddCredit extends ListActivity {
 
 	private ArrayList<CreditSummaryModel> modelList;
 	private ArrayList<CreditSummaryModel> newModelList;
+	private ArrayList<CreditSummaryModel> diffModelList;
 	private TechAddCreditAdapter techAddCreditAdapter;
-	private DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
+	private DatabaseAdapter dbAdapter;
 	private String info;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tech_add_credit);
-
+		
 		// get model list from db
+		dbAdapter = new DatabaseAdapter(this);
 		dbAdapter.open();
 		modelList = dbAdapter.getCreditSummaryModelList();
 		dbAdapter.close();
@@ -55,6 +61,7 @@ public class TechAddCredit extends ListActivity {
 			// build new model list
         	ListView list = getListView();
         	newModelList = new ArrayList<CreditSummaryModel>();
+        	diffModelList = new ArrayList<CreditSummaryModel>();
 			for (int i=0; i<list.getChildCount(); i++) {
 	            LinearLayout row = (LinearLayout)list.getChildAt(i);
 	            TextView denominationTV = (TextView)row.getChildAt(1);
@@ -65,6 +72,7 @@ public class TechAddCredit extends ListActivity {
 				int ownCount = Integer.parseInt(ownCountTV.getText().toString());
 				if (addedCount != 0) {
 					newModelList.add(new CreditSummaryModel(denomination, ownCount));
+					diffModelList.add(new CreditSummaryModel(denomination, addedCount));
 					info += getString(R.string.denomination) + " " + denomination + ": " 
 						+ addedCount + " " + getString(R.string.added) + "\n";
 				}
@@ -81,6 +89,30 @@ public class TechAddCredit extends ListActivity {
 		        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 		            public void onClick(DialogInterface dialog, int id) {
 		            	dbAdapter.open();
+		            	
+		            	/*
+		            	 * token
+		            	 */
+		            	Connector connector = new Connector(TechAddCredit.this);
+		            	String jsonString = connector.requestToken(getString(R.string.requestTokenUrl), 
+		            			TechAddCredit.this, diffModelList);
+		            	try {
+							JSONObject json = new JSONObject(jsonString);
+							JSONArray arr = json.getJSONArray("token");
+							for (int i = 0; i < arr.length(); i++) {
+								JSONObject ele = arr.getJSONObject(i);
+			            		dbAdapter.insertTokenAtVendor(ele.getInt("token_id"),
+			            				ele.getInt("denomination"));
+			            	}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		            	
+		            	/*
+		            	 * token
+		            	 */
+		            	
 		    			dbAdapter.updateVendorCredit(newModelList);
 		    			dbAdapter.close();
 		            	dialog.cancel();    	

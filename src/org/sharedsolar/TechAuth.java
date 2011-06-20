@@ -15,11 +15,13 @@ import android.widget.EditText;
 
 public class TechAuth extends Activity {
 	
-	private DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
+	private DatabaseAdapter dbAdapter;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tech_auth);
+        dbAdapter = new DatabaseAdapter(this);
+        
         ((Button)findViewById(R.id.techAuthBtn)).setOnClickListener(new OnClickListener()
         {
         	public void onClick(View v) {

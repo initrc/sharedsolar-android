@@ -23,7 +23,6 @@ import android.widget.Button;
 public class Login extends Activity {
 	
 	private int status;
-	private View view;
 	private ProgressDialog progressDialog;
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -31,13 +30,12 @@ public class Login extends Activity {
         setContentView(R.layout.login);
         ((Button)findViewById(R.id.vendorLoginBtn)).setOnClickListener(new OnClickListener()
         {
-			public void onClick(View v) {
-				view = v;
-				progressDialog = ProgressDialog.show(v.getContext(), "", getString(R.string.loading));
+			public void onClick(View view) {
+				progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.loading));
 				new Thread() {
 					public void run() {
-						status = new Connector(view.getContext()).sendVendorToken(getString(R.string.validateUrl), 
-								view.getContext());
+						status = new Connector(Login.this).sendDeviceId(getString(R.string.validateUrl), 
+								Login.this);
 						handler.sendEmptyMessage(0);
 					}
 				}.start();
@@ -49,11 +47,11 @@ public class Login extends Activity {
         public void handleMessage(Message msg) {
         	progressDialog.dismiss();
 			if (status == Connector.CONNECTION_SUCCESS) {
-				Intent intent = new Intent(view.getContext(), VendorHome.class);
+				Intent intent = new Intent(Login.this, VendorHome.class);
                 startActivity(intent);
 			} else
 			{
-				AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+				AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
 				builder.setTitle(getString(R.string.loginError));
 				// timeout
 				if (status == Connector.CONNECTION_TIMEOUT) {
@@ -81,7 +79,7 @@ public class Login extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.techLoginMenuItem:
-        	Intent intent = new Intent(this.getApplicationContext(), TechAuth.class);
+        	Intent intent = new Intent(this, TechAuth.class);
             startActivity(intent);
             return true;
         case R.id.aboutMenuItem:
