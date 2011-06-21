@@ -2,11 +2,10 @@ package org.sharedsolar;
 
 import org.sharedsolar.R;
 import org.sharedsolar.tool.Connector;
+import org.sharedsolar.tool.MyUI;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,15 +56,8 @@ public class VendorHome extends Activity {
         	progressDialog.dismiss();
         	if (jsonString != null) {
         		if (jsonString.equals(String.valueOf(Connector.CONNECTION_TIMEOUT))) {
-        			AlertDialog.Builder builder = new AlertDialog.Builder(VendorHome.this);
-                	builder.setTitle(getString(R.string.accountList));
-                	builder.setMessage(getString(R.string.accountListTimeoutMsg));
-                    builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-                    builder.show();
+                    MyUI.showNeutralDialog(VendorHome.this, R.string.accountList,
+                    		R.string.accountListTimeoutMsg, R.string.ok);
         		} else {
         			Intent intent = new Intent(VendorHome.this, AccountList.class);
     				intent.putExtra("accountList", jsonString);
@@ -73,15 +65,8 @@ public class VendorHome extends Activity {
         		}
         	}
         	else {
-        		AlertDialog.Builder builder = new AlertDialog.Builder(VendorHome.this);
- 				builder.setMessage(getString(R.string.loadingAccountListError));
- 				builder.setTitle(getString(R.string.accountList));
-        		builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        		builder.show();
+                MyUI.showNeutralDialog(VendorHome.this, R.string.accountList,
+                		R.string.loadingAccountListError, R.string.ok);
         	}
         }
     };

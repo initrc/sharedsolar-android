@@ -8,6 +8,7 @@ import org.sharedsolar.db.DatabaseAdapter;
 import org.sharedsolar.model.AccountModel;
 import org.sharedsolar.model.CreditSummaryModel;
 import org.sharedsolar.tool.Connector;
+import org.sharedsolar.tool.MyUI;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -86,17 +87,9 @@ public class VendorAddCredit extends ListActivity {
 			if (newCr > 0)
 			{
 				info += "\n" + getString(R.string.creditAddedLabel) + " " +creditAdded;
-				// dialog
-				AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-		        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));
-		        builder.setTitle(getString(R.string.addCredit));
-		        builder.setPositiveButton(getString(R.string.yes), submitDialoguePositiveClickListener);
-		        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-		            public void onClick(DialogInterface dialog, int id) {
-		                dialog.cancel();
-		            }
-		        });
-		        builder.show();
+				String message = info + "\n\n" + getString(R.string.addCreditConfirm);
+				MyUI.showlDialog(view.getContext(), R.string.addCredit, message, 
+		        		R.string.yes, R.string.no, submitDialoguePositiveClickListener);
 			}
 		}
 	};
