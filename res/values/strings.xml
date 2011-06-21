@@ -12,7 +12,7 @@
     <string name="techLogin">Tech Login</string>
     <string name="about">About</string>
     <string name="versionLabel">Version:</string>
-    <string name="deviceLabel">Device:</string>
+    
     <string name="loading">Loading...</string>
     <string name="loginError">Login Error</string>
     <string name="vendorLoginTimeoutMsg">Login timeout! Please check wifi connection.</string>
@@ -58,4 +58,13 @@
 	<string name="remain">Remain</string>
     <string name="addCreditTimeout">Add Credit Timeout!</string>
     <string name="addCreditError">Add Credit Error!</string>
+    
+    <!-- to be translated -->
+    <string name="deviceLabel">Device:</string> <!-- home -->
+    <string name="downloadingTokens">Downloading tokens from gateway...</string>
+    <string name="downloadError">Download Error</string>
+	<string name="downloadTokensErrorMsg">Failed to download tokens. Please make sure the device is connected to the Internet.</string>
+    <string name="invalidTokens">Invalid Tokens</string>
+    <string name="invalidTokensMsg">Tokens are in invalid format!</string>
+    
 </resources>

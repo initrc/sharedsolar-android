@@ -11,11 +11,10 @@ import org.sharedsolar.adapter.AccountListAdapter;
 import org.sharedsolar.model.AccountModel;
 import org.sharedsolar.model.AccountModelComparator;
 import org.sharedsolar.tool.Connector;
+import org.sharedsolar.tool.MyUI;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,22 +37,25 @@ public class AccountList extends ListActivity {
 		setContentView(R.layout.account_list);
 
 		updateList();
-		
-		((LinearLayout)findViewById(R.id.accountRefreshLayout)).setOnClickListener(new OnClickListener()
-        {
-			public void onClick(View view) {
-				progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.loading));
-				new Thread() {
-        			public void run() {
-        				jsonString = new Connector(AccountList.this).requestAccountList(getString(R.string.accountListUrl), 
-        						AccountList.this);
-        				handler.sendEmptyMessage(0);
-        			}
-        		}.start();
-			}
-        });
+
+		((LinearLayout) findViewById(R.id.accountRefreshLayout))
+				.setOnClickListener(new OnClickListener() {
+					public void onClick(View view) {
+						progressDialog = ProgressDialog.show(view.getContext(),
+								"", getString(R.string.loading));
+						new Thread() {
+							public void run() {
+								jsonString = new Connector(AccountList.this)
+										.requestAccountList(
+												getString(R.string.accountListUrl),
+												AccountList.this);
+								handler.sendEmptyMessage(0);
+							}
+						}.start();
+					}
+				});
 	}
-	
+
 	public void updateList() {
 		modelList = new ArrayList<AccountModel>();
 		Bundle extras = getIntent().getExtras();
@@ -81,62 +83,44 @@ public class AccountList extends ListActivity {
 			getListView().setOnItemClickListener(itemClickListener);
 		}
 	}
-	
+
 	OnItemClickListener itemClickListener = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			AccountModel model = (AccountModel)(getListView().getItemAtPosition(position));
+			AccountModel model = (AccountModel) (getListView()
+					.getItemAtPosition(position));
 			if (model.getAid().equals("")) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-	            builder.setMessage(getString(R.string.accountIdEmptyMsg) + " " + model.getCid());
-	            builder.setTitle(getString(R.string.accountList));
-	            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int id) {
-	                    dialog.cancel();
-	                }
-	            });
-	            builder.show();
+				MyUI.showNeutralDialog(view.getContext(), R.string.accountList,
+						getString(R.string.accountIdEmptyMsg) + " "	+ model.getCid(), 
+						R.string.ok);
 			} else {
-				Intent intent = new Intent(view.getContext(), VendorAddCredit.class);
+				Intent intent = new Intent(view.getContext(),
+						VendorAddCredit.class);
 				intent.putExtra("aid", model.getAid());
 				intent.putExtra("cid", model.getCid());
 				intent.putExtra("cr", model.getCr());
-	            startActivity(intent);
+				startActivity(intent);
 			}
-			
+
 		}
 	};
-	
+
 	private Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-        	progressDialog.dismiss();
-        	if (jsonString != null) {
-        		if (jsonString.equals(String.valueOf(Connector.CONNECTION_TIMEOUT))) {
-        			AlertDialog.Builder builder = new AlertDialog.Builder(AccountList.this);
-                	builder.setTitle(getString(R.string.accountList));
-                	builder.setMessage(getString(R.string.accountListTimeoutMsg));
-                    builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-                    builder.show();
-        		} else {
-        			getIntent().putExtra("accountList", jsonString);
-        			updateList();
-        		}
-        	}
-        	else {
-        		AlertDialog.Builder builder = new AlertDialog.Builder(AccountList.this);
- 				builder.setMessage(getString(R.string.loadingAccountListError));
- 				builder.setTitle(getString(R.string.accountList));
-        		builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        		builder.show();
-        	}
-        }
-    };
+		public void handleMessage(Message msg) {
+			progressDialog.dismiss();
+			if (jsonString != null) {
+				if (jsonString.equals(String
+						.valueOf(Connector.CONNECTION_TIMEOUT))) {
+					MyUI.showNeutralDialog(AccountList.this, R.string.accountList,
+							R.string.accountListTimeoutMsg, R.string.ok);
+				} else {
+					getIntent().putExtra("accountList", jsonString);
+					updateList();
+				}
+			} else {
+				MyUI.showNeutralDialog(AccountList.this, R.string.accountList,
+						R.string.loadingAccountListError, R.string.ok);
+			}
+		}
+	};
 }

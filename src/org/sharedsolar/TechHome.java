@@ -2,11 +2,10 @@ package org.sharedsolar;
 
 import org.sharedsolar.R;
 import org.sharedsolar.tool.Connector;
+import org.sharedsolar.tool.MyUI;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,21 +54,15 @@ public class TechHome extends Activity {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
         	progressDialog.dismiss();
-        	AlertDialog.Builder builder = new AlertDialog.Builder(TechHome.this);
-        	builder.setTitle(getString(R.string.sync));
-            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
+        	int message;
 			if (status == Connector.CONNECTION_SUCCESS) {
-				builder.setMessage(getString(R.string.syncCompleted));
+				message = R.string.syncCompleted;
 			} else if (status == Connector.CONNECTION_TIMEOUT) {
-				builder.setMessage(getString(R.string.syncTimeout));
+				message = R.string.syncTimeout;
 			} else {
-				builder.setMessage(getString(R.string.syncError));
+				message = R.string.syncError;
 			}
-			builder.show();
+			MyUI.showNeutralDialog(TechHome.this, R.string.sync, message, R.string.ok);
         }
     };
 }
