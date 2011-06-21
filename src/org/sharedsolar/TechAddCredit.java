@@ -137,7 +137,7 @@ public class TechAddCredit extends ListActivity {
 			Log.d("d", jsonString);
 
 			dbAdapter.open();
-			try {
+/*			try {
 				JSONObject json = new JSONObject(jsonString);
 				JSONArray arr = json.getJSONArray("token");
 
@@ -153,7 +153,7 @@ public class TechAddCredit extends ListActivity {
 				dbAdapter.close();
 				return;
 			}
-
+*/
 			dbAdapter.updateVendorCredit(newModelList);
 			dbAdapter.close();
 			Intent intent = new Intent(TechAddCredit.this,

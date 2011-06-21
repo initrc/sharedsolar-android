@@ -103,7 +103,6 @@ public class AccountList extends ListActivity {
 				intent.putExtra("cr", model.getCr());
 				startActivity(intent);
 			}
-
 		}
 	};
 

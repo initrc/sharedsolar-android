@@ -68,5 +68,6 @@
     <string name="invalidTokensMsg">Tokens are in invalid format!</string>
     <string name="invalidAccountList">Invalid Account List</string>
     <string name="invalidAccountListMsg">Account list is in invalid format!</string>
-    
+	<string name="balanceLabel">Balance:</string>
+	<string name="newBalanceLabel">New Balance:</string>
 </resources>
