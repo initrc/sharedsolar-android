@@ -2,6 +2,7 @@ package org.sharedsolar.adapter;
 
 import java.util.ArrayList;
 
+import org.sharedsolar.model.AccountModel;
 import org.sharedsolar.model.CreditSummaryModel;
 import org.sharedsolar.R;
 
@@ -19,17 +20,20 @@ public class VendorAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 
 	private LayoutInflater mInflater;
 	private ArrayList<CreditSummaryModel> modelList;
-	private TextView creditAddedTV;
+	private TextView creditAddedTV, newBalanceTV;
 	private Button submitBtn;
+	private int balance;
 
 	public VendorAddCreditAdapter(Context context, int textViewResourceId,
 			ArrayList<CreditSummaryModel> modelList, TextView creditAddedTV,
-			Button submitBtn) {
+			TextView newBalanceTV, Button submitBtn, int balance) {
 		super(context, textViewResourceId);
 		mInflater = LayoutInflater.from(context);
 		this.modelList = modelList;
 		this.creditAddedTV = creditAddedTV;
+		this.newBalanceTV = newBalanceTV;
 		this.submitBtn = submitBtn;
+		this.balance = balance;
 	}
 
 	public int getCount() {
@@ -101,14 +105,15 @@ public class VendorAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 		int addedCount = Integer.parseInt(addedCountText.getText().toString());
 		int remainCount = Integer
 				.parseInt(remainCountText.getText().toString());
-		int creditAdded = Integer.parseInt(creditAddedTV.getText().toString());
+		int creditAdded = (int)Double.parseDouble(creditAddedTV.getText().toString());
 		// update text
 		addedCount += sign;
 		addedCountText.setText(String.valueOf(addedCount));
 		remainCount -= sign;
 		remainCountText.setText(String.valueOf(remainCount));
-		creditAddedTV
-				.setText(String.valueOf(creditAdded + sign * denomination));
+		creditAdded += sign * denomination;
+		creditAddedTV.setText(AccountModel.crIntToString(creditAdded * 100));
+		newBalanceTV.setText(AccountModel.crIntToString(creditAdded * 100 + balance));
 		// minusBtn
 		if (sign == -1) {
 			if (addedCount <= 0) {
@@ -130,9 +135,8 @@ public class VendorAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 			}
 		}
 		// submitBtn
-		creditAdded = Integer.parseInt(creditAddedTV.getText().toString());
 		submitBtn.setEnabled(creditAdded > 0);
-		
+
 	}
 
 	static class ViewHolder {

@@ -1,5 +1,7 @@
 package org.sharedsolar.model;
 
+import java.text.DecimalFormat;
+
 public class AccountModel {
 	private String aid;
 	private String cid;
@@ -21,5 +23,15 @@ public class AccountModel {
 
 	public int getCr() {
 		return cr;
+	}
+	
+	public String getCrString() {
+		DecimalFormat df = new DecimalFormat("#0.00");
+		return df.format(cr/100.00);
+	}
+	
+	public static String crIntToString(int cr) {
+		DecimalFormat df = new DecimalFormat("#0.00");
+		return df.format(cr/100.00);
 	}
 }

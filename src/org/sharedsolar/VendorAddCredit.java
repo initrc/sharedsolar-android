@@ -38,10 +38,14 @@ public class VendorAddCredit extends ListActivity {
 		// get account model from extras
 		Bundle extras = getIntent().getExtras();
 		accountModel = new AccountModel(extras.getString("aid"),
-				extras.getString("cid"),
-				(int) (extras.getDouble("cr") * 100));
-		((TextView)findViewById(R.id.vendorAddCreditAid)).setText(accountModel.getAid());
-		
+				extras.getString("cid"), extras.getInt("cr"));
+		((TextView) findViewById(R.id.vendorAddCreditAid)).setText(accountModel
+				.getAid());
+		((TextView) findViewById(R.id.vendorAddCreditBalanceTV))
+				.setText(accountModel.getCrString());
+		((TextView) findViewById(R.id.vendorAddCreditNewBalanceTV))
+				.setText(accountModel.getCrString());
+
 		// get model list from db
 		dbAdapter = new DatabaseAdapter(this);
 		dbAdapter.open();
@@ -51,84 +55,99 @@ public class VendorAddCredit extends ListActivity {
 		// list adapter
 		vendorAddCreditAdapter = new VendorAddCreditAdapter(this,
 				R.layout.vendor_add_credit_item, modelList,
-				(TextView) findViewById(R.id.vendorAddCreditAddedTV), 
-				(Button) findViewById(R.id.vendorAddCreditSubmitBtn));
+				(TextView) findViewById(R.id.vendorAddCreditAddedTV),
+				(TextView) findViewById(R.id.vendorAddCreditNewBalanceTV),
+				(Button) findViewById(R.id.vendorAddCreditSubmitBtn),
+				accountModel.getCr());
 		setListAdapter(vendorAddCreditAdapter);
-		
+
 		// submit
-		Button submitBtn = (Button)findViewById(R.id.vendorAddCreditSubmitBtn); 
+		Button submitBtn = (Button) findViewById(R.id.vendorAddCreditSubmitBtn);
 		submitBtn.setOnClickListener(submitBtnClickListener);
 		submitBtn.setEnabled(false);
 	}
-	
+
 	View.OnClickListener submitBtnClickListener = new View.OnClickListener() {
 		public void onClick(View view) {
-			info=getString(R.string.accountLabel) + " " + accountModel.getAid() + "\n\n";
+			info = getString(R.string.accountLabel) + " "
+					+ accountModel.getAid() + "\n\n";
 			// build new model list
-        	ListView list = getListView();
-        	newModelList = new ArrayList<CreditSummaryModel>();
-			for (int i=0; i<list.getChildCount(); i++) {
-	            LinearLayout row = (LinearLayout)list.getChildAt(i);
-	            TextView denominationTV = (TextView)row.getChildAt(1);
-				TextView addedCountTV = (TextView)row.getChildAt(2);
-				TextView remainCountTV = (TextView)row.getChildAt(3);
-				int denomination = Integer.parseInt(denominationTV.getText().toString());
-				int addedCount = Integer.parseInt(addedCountTV.getText().toString());
-				int remainCount = Integer.parseInt(remainCountTV.getText().toString());
+			ListView list = getListView();
+			newModelList = new ArrayList<CreditSummaryModel>();
+			for (int i = 0; i < list.getChildCount(); i++) {
+				LinearLayout row = (LinearLayout) list.getChildAt(i);
+				TextView denominationTV = (TextView) row.getChildAt(1);
+				TextView addedCountTV = (TextView) row.getChildAt(2);
+				TextView remainCountTV = (TextView) row.getChildAt(3);
+				int denomination = Integer.parseInt(denominationTV.getText()
+						.toString());
+				int addedCount = Integer.parseInt(addedCountTV.getText()
+						.toString());
+				int remainCount = Integer.parseInt(remainCountTV.getText()
+						.toString());
 				if (addedCount != 0) {
-					newModelList.add(new CreditSummaryModel(denomination, remainCount));
-					info += getString(R.string.denomination) + " " + denomination + ": " 
-						+ addedCount + " " + getString(R.string.added) + "\n";
+					newModelList.add(new CreditSummaryModel(denomination,
+							remainCount));
+					info += getString(R.string.denomination) + " "
+							+ denomination + ": " + addedCount + " "
+							+ getString(R.string.added) + "\n";
 				}
-			}			
+			}
 			// update info string
-			String creditAdded = ((TextView)VendorAddCredit.this.findViewById(R.id.vendorAddCreditAddedTV)).getText().toString();
-			newCr = Integer.parseInt(creditAdded);
-			if (newCr > 0)
-			{
-				info += "\n" + getString(R.string.creditAddedLabel) + " " +creditAdded;
-				String message = info + "\n\n" + getString(R.string.addCreditConfirm);
-				MyUI.showlDialog(view.getContext(), R.string.addCredit, message, 
-		        		R.string.yes, R.string.no, submitDialoguePositiveClickListener);
+			String creditAdded = ((TextView) findViewById(R.id.vendorAddCreditAddedTV))
+					.getText().toString();
+			String newBalance = ((TextView) findViewById(R.id.vendorAddCreditNewBalanceTV))
+					.getText().toString();
+			newCr = (int) Double.parseDouble(creditAdded);
+			if (newCr > 0) {
+				info += "\n" + getString(R.string.creditAddedLabel) + " "
+						+ creditAdded + "\n"
+						+ getString(R.string.newBalanceLabel) + " "
+						+ newBalance;
+				String message = info + "\n\n"
+						+ getString(R.string.addCreditConfirm);
+				MyUI.showlDialog(view.getContext(), R.string.addCredit,
+						message, R.string.yes, R.string.no,
+						submitDialoguePositiveClickListener);
 			}
 		}
 	};
-	
+
 	DialogInterface.OnClickListener submitDialoguePositiveClickListener = new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int id) {
-        	dialog.cancel();
-        	// http post
+			dialog.cancel();
+			// http post
 			Connector connector = new Connector(VendorAddCredit.this);
-			int status = connector.vendorAddCredit(getString(R.string.addCreditUrl), 
-					VendorAddCredit.this,
-					accountModel.getAid(),
-					accountModel.getCid(),
-					newCr);
-        	if (status == Connector.CONNECTION_SUCCESS) {
-            	// update db
-            	dbAdapter.open();
-    			dbAdapter.updateVendorCredit(newModelList);
-    			dbAdapter.close();
-        		Intent intent = new Intent(VendorAddCredit.this, VendorAddCreditReceipt.class);
+			int status = connector.vendorAddCredit(
+					getString(R.string.addCreditUrl), VendorAddCredit.this,
+					accountModel.getAid(), accountModel.getCid(), newCr);
+			if (status == Connector.CONNECTION_SUCCESS) {
+				// update db
+				dbAdapter.open();
+				dbAdapter.updateVendorCredit(newModelList);
+				dbAdapter.close();
+				Intent intent = new Intent(VendorAddCredit.this,
+						VendorAddCreditReceipt.class);
 				intent.putExtra("info", info);
-                startActivity(intent);
-        	} else {
-        		AlertDialog.Builder builder = new AlertDialog.Builder(VendorAddCredit.this);
-        		builder.setTitle(getString(R.string.addCredit));
-	            if (status == Connector.CONNECTION_TIMEOUT) {
-	            	builder.setMessage(getString(R.string.addCreditTimeout));
-	            }
-	            else {
-	            	builder.setMessage(getString(R.string.addCreditError));
-	            }
-	            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int id) {
-	                    dialog.cancel();
-	                }
-	            });
-	            builder.show();
-        	}
-			
-        }
+				startActivity(intent);
+			} else {
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						VendorAddCredit.this);
+				builder.setTitle(getString(R.string.addCredit));
+				if (status == Connector.CONNECTION_TIMEOUT) {
+					builder.setMessage(getString(R.string.addCreditTimeout));
+				} else {
+					builder.setMessage(getString(R.string.addCreditError));
+				}
+				builder.setNeutralButton(getString(R.string.ok),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+							}
+						});
+				builder.show();
+			}
+
+		}
 	};
 }
