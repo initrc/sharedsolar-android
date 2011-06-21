@@ -122,6 +122,8 @@ public final class R {
         /**  home 
          */
         public static final int downloadingTokens=0x7f040034;
+        public static final int invalidAccountList=0x7f040039;
+        public static final int invalidAccountListMsg=0x7f04003a;
         public static final int invalidTokens=0x7f040037;
         public static final int invalidTokensMsg=0x7f040038;
         public static final int loading=0x7f040010;
