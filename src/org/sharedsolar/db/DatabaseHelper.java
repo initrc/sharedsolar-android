@@ -9,14 +9,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private static final String DATABASE_NAME = "sharedsolar";
 	private static final int DATABASE_VERSION = 1;
-	private static final String USER_TABLE = "user";
-	private static final String CREDIT_TABLE = "credit";
+	public static final String USER_TABLE = "user";
+	public static final String CREDIT_TABLE = "credit";
+	public static final String TOKEN_TABLE = "token";
+	
 	private static final String CREATE_USER = "create table " 
 		+ USER_TABLE + " (_id integer primary key autoincrement, "
 		+ "username text not null, password text not null);";
 	private static final String CREATE_CREDIT = "create table " 
 		+ CREDIT_TABLE + " (_id integer primary key autoincrement, "
 		+ "denomination integer not null, count integer not null);";
+	private static final String CREATE_TOKEN = "create table " 
+		+ TOKEN_TABLE + " (_id integer primary key autoincrement, "
+		+ "token_id integer not null, denomination integer not null, "
+		+ "state integer not null, meter_id text, "
+		+ "circuit_id text, timestamp timestamp default CURRENT_TIMESTAMP);";
 	
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_USER);
 		db.execSQL(CREATE_CREDIT);
+		db.execSQL(CREATE_TOKEN);
 	}
 
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

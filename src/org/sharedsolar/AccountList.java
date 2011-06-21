@@ -30,7 +30,6 @@ public class AccountList extends ListActivity {
 
 	private ArrayList<AccountModel> modelList;
 	private AccountListAdapter accountListAdapter;
-	private View view;
 	private ProgressDialog progressDialog;
 	private String jsonString;
 
@@ -42,13 +41,12 @@ public class AccountList extends ListActivity {
 		
 		((LinearLayout)findViewById(R.id.accountRefreshLayout)).setOnClickListener(new OnClickListener()
         {
-			public void onClick(View v) {
-				view = v;
-				progressDialog = ProgressDialog.show(v.getContext(), "", getString(R.string.loading));
+			public void onClick(View view) {
+				progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.loading));
 				new Thread() {
         			public void run() {
-        				jsonString = new Connector(view.getContext()).requestAccountList(getString(R.string.accountListUrl), 
-        						view.getContext());
+        				jsonString = new Connector(AccountList.this).requestAccountList(getString(R.string.accountListUrl), 
+        						AccountList.this);
         				handler.sendEmptyMessage(0);
         			}
         		}.start();
@@ -114,7 +112,7 @@ public class AccountList extends ListActivity {
         	progressDialog.dismiss();
         	if (jsonString != null) {
         		if (jsonString.equals(String.valueOf(Connector.CONNECTION_TIMEOUT))) {
-        			AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        			AlertDialog.Builder builder = new AlertDialog.Builder(AccountList.this);
                 	builder.setTitle(getString(R.string.accountList));
                 	builder.setMessage(getString(R.string.accountListTimeoutMsg));
                     builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -129,7 +127,7 @@ public class AccountList extends ListActivity {
         		}
         	}
         	else {
-        		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        		AlertDialog.Builder builder = new AlertDialog.Builder(AccountList.this);
  				builder.setMessage(getString(R.string.loadingAccountListError));
  				builder.setTitle(getString(R.string.accountList));
         		builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {

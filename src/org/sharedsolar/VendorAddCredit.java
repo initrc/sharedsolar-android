@@ -26,7 +26,7 @@ public class VendorAddCredit extends ListActivity {
 	private ArrayList<CreditSummaryModel> newModelList;
 	private AccountModel accountModel;
 	private VendorAddCreditAdapter vendorAddCreditAdapter;
-	private DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
+	private DatabaseAdapter dbAdapter;
 	private String info;
 	private int newCr;
 
@@ -42,6 +42,7 @@ public class VendorAddCredit extends ListActivity {
 		((TextView)findViewById(R.id.vendorAddCreditAid)).setText(accountModel.getAid());
 		
 		// get model list from db
+		dbAdapter = new DatabaseAdapter(this);
 		dbAdapter.open();
 		modelList = dbAdapter.getCreditSummaryModelList();
 		dbAdapter.close();
@@ -60,7 +61,7 @@ public class VendorAddCredit extends ListActivity {
 	}
 	
 	View.OnClickListener submitBtnClickListener = new View.OnClickListener() {
-		public void onClick(View v) {
+		public void onClick(View view) {
 			info=getString(R.string.accountLabel) + " " + accountModel.getAid() + "\n\n";
 			// build new model list
         	ListView list = getListView();
@@ -86,7 +87,7 @@ public class VendorAddCredit extends ListActivity {
 			{
 				info += "\n" + getString(R.string.creditAddedLabel) + " " +creditAdded;
 				// dialog
-				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+				AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 		        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));
 		        builder.setTitle(getString(R.string.addCredit));
 		        builder.setPositiveButton(getString(R.string.yes), submitDialoguePositiveClickListener);

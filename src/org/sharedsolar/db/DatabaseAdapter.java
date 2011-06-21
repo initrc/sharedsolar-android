@@ -17,11 +17,17 @@ public class DatabaseAdapter {
 	private SQLiteDatabase database;
 	private DatabaseHelper databaseHelper;
 	
-	private static final String USER_TABLE = "user";
-	private static final String CREDIT_TABLE = "credit";
+	private final String USER_TABLE = DatabaseHelper.USER_TABLE;
+	private final String CREDIT_TABLE = DatabaseHelper.CREDIT_TABLE;
+	private final String TOKEN_TABLE = DatabaseHelper.TOKEN_TABLE;
+	
+	private final int TOKEN_STATE_AT_VENDOR;
+	private final int TOKEN_STATE_AT_METER;
 	
 	public DatabaseAdapter(Context context) {
 		this.context = context;
+		TOKEN_STATE_AT_VENDOR = Integer.parseInt(context.getString(R.string.tokenStateAtVendor).toString());
+		TOKEN_STATE_AT_METER = Integer.parseInt(context.getString(R.string.tokenStateAtMeter).toString());
 	}
 	
 	public DatabaseAdapter open() throws SQLException {
@@ -46,6 +52,17 @@ public class DatabaseAdapter {
 		ContentValues values = new ContentValues();
 		values.put("denomination", denomination);
 		values.put("count", count);
+		return values;
+	}
+	
+	private ContentValues createToken(int tokenId, int denomination, 
+			int state, String meterId, String circuitId) {
+		ContentValues values = new ContentValues();
+		values.put("token_id", tokenId);
+		values.put("denomination", denomination);
+		values.put("state", state);
+		values.put("meter_id", meterId);
+		values.put("circuit_id", circuitId);
 		return values;
 	}
 	
@@ -104,5 +121,19 @@ public class DatabaseAdapter {
 			values.put("count", modelList.get(i).getCount());
 			database.update(CREDIT_TABLE, values, "denomination = " + modelList.get(i).getDenomination(), null);
 		}
+	}
+		
+	public void insertToken(int tokenId, int denomination, 
+			int state, String meterId, String circuitId) {
+		ContentValues values = createToken(tokenId, denomination, state, meterId, circuitId);
+		database.insert(TOKEN_TABLE, null, values);		
+	}
+
+	public void insertTokenAtVendor(int tokenId, int denomination) {
+		insertToken(tokenId, denomination, TOKEN_STATE_AT_VENDOR, null, null);
+	}
+	
+	public void insertTokenAtMeter(int tokenId, int denomination, String meterId, String circuitId) {
+		insertToken(tokenId, denomination, TOKEN_STATE_AT_METER, meterId, circuitId);
 	}
 }

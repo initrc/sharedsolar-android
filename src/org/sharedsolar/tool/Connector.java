@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,13 +16,17 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sharedsolar.R;
 import org.sharedsolar.db.DatabaseAdapter;
+import org.sharedsolar.model.CreditSummaryModel;
 
 import android.content.Context;
 
@@ -71,7 +76,7 @@ public class Connector {
 		return CONNECTION_TIMEOUT;
 	}
 	
-	public int sendVendorToken(String url, Context context) {
+	public int sendDeviceId(String url, Context context) {
 		return connect(url, Device.getIdHttpEntity(context));
 	}
 	
@@ -138,5 +143,28 @@ public class Connector {
 	// get account list
 	public String requestAccountList(String url, Context context) {
 		return requestForString(url, Device.getIdHttpEntity(context));
+	}
+	
+	// get tokens
+	public String requestToken(String url, Context context, ArrayList<CreditSummaryModel> modelList) {
+		JSONObject json = new JSONObject();
+		HttpEntity entity = null;
+		try {
+			json.put("device_id", Device.getId(context));
+			for (CreditSummaryModel model : modelList) {
+				HashMap<String, Integer> map = new HashMap<String, Integer>();
+				map.put("denominatioin", model.getDenomination());
+				map.put("count", model.getCount());
+				json.accumulate("token", map);
+				entity = new ByteArrayEntity(json.toString().getBytes("UTF8"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return requestForString(url, entity);
 	}
 }

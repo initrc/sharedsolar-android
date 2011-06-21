@@ -15,13 +15,14 @@ public class CreditSummary extends ListActivity {
 	
 	private ArrayList<CreditSummaryModel> modelList;
 	private CreditSummaryAdapter creditSummaryAdapter;
-	private DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
+	private DatabaseAdapter dbAdapter;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credit_summary);
         
         // get model list from db
+        dbAdapter = new DatabaseAdapter(this);
         dbAdapter.open();
         modelList = dbAdapter.getCreditSummaryModelList();
         dbAdapter.close();
