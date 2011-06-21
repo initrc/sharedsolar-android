@@ -72,8 +72,10 @@ public class AccountList extends ListActivity {
 					modelList.add(model);
 				}
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				MyUI.showNeutralDialog(this,
+						R.string.invalidAccountList, R.string.invalidAccountListMsg,
+						R.string.ok);
+				return;
 			}
 			// sort by aid
 			Collections.sort(modelList, new AccountModelComparator());

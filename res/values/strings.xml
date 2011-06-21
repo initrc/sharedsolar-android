@@ -66,5 +66,7 @@
 	<string name="downloadTokensErrorMsg">Failed to download tokens. Please make sure the device is connected to the Internet.</string>
     <string name="invalidTokens">Invalid Tokens</string>
     <string name="invalidTokensMsg">Tokens are in invalid format!</string>
+    <string name="invalidAccountList">Invalid Account List</string>
+    <string name="invalidAccountListMsg">Account list is in invalid format!</string>
     
 </resources>
