@@ -18,7 +18,6 @@ import android.widget.Button;
 public class VendorHome extends Activity {
 	
 	private String jsonString;
-	private View view;
 	private ProgressDialog progressDialog;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -26,20 +25,19 @@ public class VendorHome extends Activity {
         setContentView(R.layout.vendor_home);
         ((Button)findViewById(R.id.creditSummaryBtn)).setOnClickListener(new OnClickListener()
         {
-			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), CreditSummary.class);
+			public void onClick(View view) {
+				Intent intent = new Intent(view.getContext(), CreditSummary.class);
 	            startActivity(intent);
 			}
         });
         ((Button)findViewById(R.id.accountListBtn)).setOnClickListener(new OnClickListener()
         {
-			public void onClick(View v) {
-				view = v;
-				progressDialog = ProgressDialog.show(v.getContext(), "", getString(R.string.loading));
+			public void onClick(View view) {
+				progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.loading));
 				new Thread() {
         			public void run() {
-        				jsonString = new Connector(view.getContext()).requestAccountList(getString(R.string.accountListUrl), 
-        						view.getContext());
+        				jsonString = new Connector(VendorHome.this).requestAccountList(getString(R.string.accountListUrl), 
+        						VendorHome.this);
         				handler.sendEmptyMessage(0);
         			}
         		}.start();
@@ -59,7 +57,7 @@ public class VendorHome extends Activity {
         	progressDialog.dismiss();
         	if (jsonString != null) {
         		if (jsonString.equals(String.valueOf(Connector.CONNECTION_TIMEOUT))) {
-        			AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        			AlertDialog.Builder builder = new AlertDialog.Builder(VendorHome.this);
                 	builder.setTitle(getString(R.string.accountList));
                 	builder.setMessage(getString(R.string.accountListTimeoutMsg));
                     builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -69,13 +67,13 @@ public class VendorHome extends Activity {
                     });
                     builder.show();
         		} else {
-        			Intent intent = new Intent(view.getContext(), AccountList.class);
+        			Intent intent = new Intent(VendorHome.this, AccountList.class);
     				intent.putExtra("accountList", jsonString);
     	            startActivity(intent);
         		}
         	}
         	else {
-        		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        		AlertDialog.Builder builder = new AlertDialog.Builder(VendorHome.this);
  				builder.setMessage(getString(R.string.loadingAccountListError));
  				builder.setTitle(getString(R.string.accountList));
         		builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {

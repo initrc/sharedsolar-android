@@ -18,7 +18,6 @@ import android.widget.Button;
 public class TechHome extends Activity {
 	
 	private int status;
-	private View view;
 	private ProgressDialog progressDialog;
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -26,13 +25,12 @@ public class TechHome extends Activity {
         setContentView(R.layout.tech_home);
         ((Button)findViewById(R.id.syncDeviceBtn)).setOnClickListener(new OnClickListener()
         {
-        	public void onClick(View v) {
-        		view = v;
-        		progressDialog = ProgressDialog.show(v.getContext(), "", getString(R.string.synchronizing));
+        	public void onClick(View view) {
+        		progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.synchronizing));
         		new Thread() {
         			public void run() {
-        				status = new Connector(view.getContext()).sendDeviceId(getString(R.string.syncUrl), 
-        						view.getContext());
+        				status = new Connector(TechHome.this).sendDeviceId(getString(R.string.syncUrl), 
+        						TechHome.this);
         				handler.sendEmptyMessage(0);
         			}
         		}.start();
@@ -57,7 +55,7 @@ public class TechHome extends Activity {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
         	progressDialog.dismiss();
-        	AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        	AlertDialog.Builder builder = new AlertDialog.Builder(TechHome.this);
         	builder.setTitle(getString(R.string.sync));
             builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {

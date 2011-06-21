@@ -61,7 +61,7 @@ public class VendorAddCredit extends ListActivity {
 	}
 	
 	View.OnClickListener submitBtnClickListener = new View.OnClickListener() {
-		public void onClick(View v) {
+		public void onClick(View view) {
 			info=getString(R.string.accountLabel) + " " + accountModel.getAid() + "\n\n";
 			// build new model list
         	ListView list = getListView();
@@ -87,7 +87,7 @@ public class VendorAddCredit extends ListActivity {
 			{
 				info += "\n" + getString(R.string.creditAddedLabel) + " " +creditAdded;
 				// dialog
-				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+				AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 		        builder.setMessage(info + "\n\n" + getString(R.string.addCreditConfirm));
 		        builder.setTitle(getString(R.string.addCredit));
 		        builder.setPositiveButton(getString(R.string.yes), submitDialoguePositiveClickListener);

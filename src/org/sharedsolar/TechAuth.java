@@ -24,19 +24,19 @@ public class TechAuth extends Activity {
         
         ((Button)findViewById(R.id.techAuthBtn)).setOnClickListener(new OnClickListener()
         {
-        	public void onClick(View v) {
+        	public void onClick(View view) {
 				String username = ((EditText)findViewById(R.id.techUsername)).getText().toString();
 				String password = ((EditText)findViewById(R.id.techPassword)).getText().toString();
 				((EditText)findViewById(R.id.techPassword)).setText("");
 				dbAdapter.open(); 
 				if (dbAdapter.userAuth(username, password))
 				{
-					Intent intent = new Intent(v.getContext(), TechHome.class);
+					Intent intent = new Intent(view.getContext(), TechHome.class);
 	                startActivity(intent);
 				}
 				else
 				{
-					AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+					AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 		            builder.setMessage(getString(R.string.wrongPassword));
 		            builder.setTitle(getString(R.string.loginError));
 		            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
