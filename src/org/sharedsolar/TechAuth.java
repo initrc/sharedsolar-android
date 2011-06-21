@@ -2,10 +2,9 @@ package org.sharedsolar;
 
 import org.sharedsolar.R;
 import org.sharedsolar.db.DatabaseAdapter;
+import org.sharedsolar.tool.MyUI;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,15 +35,8 @@ public class TechAuth extends Activity {
 				}
 				else
 				{
-					AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-		            builder.setMessage(getString(R.string.wrongPassword));
-		            builder.setTitle(getString(R.string.loginError));
-		            builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-		                public void onClick(DialogInterface dialog, int id) {
-		                    dialog.cancel();
-		                }
-		            });
-		            builder.show();
+					MyUI.showNeutralDialog(view.getContext(), R.string.loginError, 
+							R.string.wrongPassword, R.string.ok);
 				}
 				dbAdapter.close();
 			}
