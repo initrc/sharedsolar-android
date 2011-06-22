@@ -24,7 +24,7 @@ import android.widget.TextView;
 public class VendorAddCredit extends ListActivity {
 
 	private ArrayList<CreditSummaryModel> modelList;
-	private ArrayList<CreditSummaryModel> newModelList;
+	private ArrayList<CreditSummaryModel> addedModelList;
 	private AccountModel accountModel;
 	private VendorAddCreditAdapter vendorAddCreditAdapter;
 	private DatabaseAdapter dbAdapter;
@@ -73,21 +73,18 @@ public class VendorAddCredit extends ListActivity {
 					+ accountModel.getAid() + "\n\n";
 			// build new model list
 			ListView list = getListView();
-			newModelList = new ArrayList<CreditSummaryModel>();
+			addedModelList = new ArrayList<CreditSummaryModel>();
 			for (int i = 0; i < list.getChildCount(); i++) {
 				LinearLayout row = (LinearLayout) list.getChildAt(i);
 				TextView denominationTV = (TextView) row.getChildAt(1);
 				TextView addedCountTV = (TextView) row.getChildAt(2);
-				TextView remainCountTV = (TextView) row.getChildAt(3);
 				int denomination = Integer.parseInt(denominationTV.getText()
 						.toString());
 				int addedCount = Integer.parseInt(addedCountTV.getText()
 						.toString());
-				int remainCount = Integer.parseInt(remainCountTV.getText()
-						.toString());
 				if (addedCount != 0) {
-					newModelList.add(new CreditSummaryModel(denomination,
-							remainCount));
+					addedModelList.add(new CreditSummaryModel(denomination,
+							addedCount));
 					info += getString(R.string.denomination) + " "
 							+ denomination + ": " + addedCount + " "
 							+ getString(R.string.added) + "\n";
@@ -124,7 +121,7 @@ public class VendorAddCredit extends ListActivity {
 			if (status == Connector.CONNECTION_SUCCESS) {
 				// update db
 				dbAdapter.open();
-				dbAdapter.updateVendorCredit(newModelList);
+				dbAdapter.sellToken(addedModelList);
 				dbAdapter.close();
 				Intent intent = new Intent(VendorAddCredit.this,
 						VendorAddCreditReceipt.class);

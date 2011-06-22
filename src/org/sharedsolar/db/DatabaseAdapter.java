@@ -1,15 +1,20 @@
 package org.sharedsolar.db;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sharedsolar.R;
 import org.sharedsolar.model.CreditSummaryModel;
+import org.sharedsolar.tool.Device;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class DatabaseAdapter {
 	
@@ -18,14 +23,15 @@ public class DatabaseAdapter {
 	private DatabaseHelper databaseHelper;
 	
 	private final String USER_TABLE = DatabaseHelper.USER_TABLE;
-	private final String CREDIT_TABLE = DatabaseHelper.CREDIT_TABLE;
 	private final String TOKEN_TABLE = DatabaseHelper.TOKEN_TABLE;
 	
+	private final int TOKEN_STATE_AT_GATEWAY;
 	private final int TOKEN_STATE_AT_VENDOR;
 	private final int TOKEN_STATE_AT_METER;
 	
 	public DatabaseAdapter(Context context) {
 		this.context = context;
+		TOKEN_STATE_AT_GATEWAY = Integer.parseInt(context.getString(R.string.tokenStateAtGateway).toString());
 		TOKEN_STATE_AT_VENDOR = Integer.parseInt(context.getString(R.string.tokenStateAtVendor).toString());
 		TOKEN_STATE_AT_METER = Integer.parseInt(context.getString(R.string.tokenStateAtMeter).toString());
 	}
@@ -47,22 +53,14 @@ public class DatabaseAdapter {
 		values.put("password", password);
 		return values;
 	}
-	
-	private ContentValues createCredit(int denomination, int count) {
-		ContentValues values = new ContentValues();
-		values.put("denomination", denomination);
-		values.put("count", count);
-		return values;
-	}
-	
+
 	private ContentValues createToken(int tokenId, int denomination, 
-			int state, String meterId, String circuitId) {
+			int state, String accountId) {
 		ContentValues values = new ContentValues();
 		values.put("token_id", tokenId);
 		values.put("denomination", denomination);
 		values.put("state", state);
-		values.put("meter_id", meterId);
-		values.put("circuit_id", circuitId);
+		values.put("account_id", accountId);
 		return values;
 	}
 	
@@ -71,12 +69,6 @@ public class DatabaseAdapter {
 			// insert USER
 			ContentValues values = createUser("tech", "");
 			database.insert(USER_TABLE, null, values);
-			// insert CREDIT
-			String[] denominationValues = context.getResources().getStringArray(R.array.denominationValues);
-			for (String v : denominationValues) {
-				values = createCredit(Integer.parseInt(v), 0);
-				database.insert(CREDIT_TABLE, null, values);
-			}
 		}		
 	}
 	
@@ -88,7 +80,7 @@ public class DatabaseAdapter {
 	}
 	
 	public boolean userAuth(String username, String password) throws SQLException {
-		Cursor cursor = database.query(true, USER_TABLE, new String[] {"password"}, 
+		Cursor cursor = database.query(USER_TABLE, new String[] {"password"}, 
 				"username = '" + username +"'", null, null, null, null, null);
 		if (cursor != null) {
 			cursor.moveToFirst();
@@ -103,37 +95,93 @@ public class DatabaseAdapter {
 	}
 	
 	public ArrayList<CreditSummaryModel> getCreditSummaryModelList() {
-		Cursor cursor = database.query(true, CREDIT_TABLE, 
-				new String[] {"denomination", "count"}, null, null, null, null, null, null);
-		if (cursor == null)
-			return null;
 		ArrayList<CreditSummaryModel> modelList = new ArrayList<CreditSummaryModel>();
-		while (cursor.moveToNext()) {
-			CreditSummaryModel model = new CreditSummaryModel(cursor.getInt(0), cursor.getInt(1));
+		String[] denominationValues = context.getResources().getStringArray(R.array.denominationValues);
+		for (String s : denominationValues) {
+			int denomination = Integer.parseInt(s);
+			CreditSummaryModel model = new CreditSummaryModel(denomination, 
+					getTokenCountAtVendor(denomination));
 			modelList.add(model);
 		}
 		return modelList;
 	}
-	
-	public void updateVendorCredit(ArrayList<CreditSummaryModel> modelList) {
-		ContentValues values = new ContentValues();
-		for (int i=0; i<modelList.size(); i++) {
-			values.put("count", modelList.get(i).getCount());
-			database.update(CREDIT_TABLE, values, "denomination = " + modelList.get(i).getDenomination(), null);
-		}
-	}
-		
+
+	// insert token
 	public void insertToken(int tokenId, int denomination, 
-			int state, String meterId, String circuitId) {
-		ContentValues values = createToken(tokenId, denomination, state, meterId, circuitId);
+			int state, String accountId) {
+		ContentValues values = createToken(tokenId, denomination, state, accountId);
 		database.insert(TOKEN_TABLE, null, values);		
 	}
 
 	public void insertTokenAtVendor(int tokenId, int denomination) {
-		insertToken(tokenId, denomination, TOKEN_STATE_AT_VENDOR, null, null);
+		insertToken(tokenId, denomination, TOKEN_STATE_AT_VENDOR, null);
 	}
 	
-	public void insertTokenAtMeter(int tokenId, int denomination, String meterId, String circuitId) {
-		insertToken(tokenId, denomination, TOKEN_STATE_AT_METER, meterId, circuitId);
+	public void insertTokenAtMeter(int tokenId, int denomination, String accountId) {
+		insertToken(tokenId, denomination, TOKEN_STATE_AT_METER, accountId);
+	}
+	
+	// get token count
+	public int getTokenCount(int state, int denomination) {
+		Cursor cursor = database.rawQuery("select count(*) from " + TOKEN_TABLE + " where state = "
+				+ state + " and denomination = " + denomination, null);
+		if (cursor == null) return 0;
+		cursor.moveToFirst();
+		return cursor.getInt(0);
+	}
+	
+	public int getTokenCountAtVendor(int denomination) {
+		return getTokenCount(TOKEN_STATE_AT_VENDOR, denomination);
+	}
+	
+	public int getTokenCountAtMeter(int denomination) {
+		return getTokenCount(TOKEN_STATE_AT_METER, denomination);
+	}
+	
+	// sell token
+	public void sellToken(ArrayList<CreditSummaryModel> modelList) {
+		for (CreditSummaryModel model : modelList) {
+			int denomination = model.getDenomination();
+			int count = model.getCount();
+			Log.d("d", String.valueOf(denomination) + " " + String.valueOf(count));
+			database.execSQL("update " + TOKEN_TABLE
+					+ " set state = " + TOKEN_STATE_AT_METER
+					+ ", timestamp = CURRENT_TIMESTAMP"
+					+ " where _id in ("
+					+ " select _id from " + TOKEN_TABLE
+					+ " where denomination = " + denomination
+					+ " and state = " + TOKEN_STATE_AT_VENDOR 
+					+ " limit " + count + " )");
+		}
+	}
+	
+	// get token at meter
+	public JSONObject getTokenAtMeter() {
+		Cursor cursor = database.query(TOKEN_TABLE, 
+				new String[]{"token_id", "account_id", "timestamp"}, 
+				"state = " + TOKEN_STATE_AT_METER, null, null, null, null);
+		if (cursor == null) return null;
+		JSONObject json = new JSONObject();
+		try {
+			json.put("device_id", Device.getId(context));
+			while (cursor.moveToNext()) {
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("token_id", String.valueOf(cursor.getInt(0)));
+				map.put("account_id", cursor.getString(1));
+				map.put("timestamp", cursor.getString(2));
+				json.accumulate("tokens", map);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return json;
+	}
+
+	public void syncTokenAtMeter() { 
+		database.execSQL("update " + TOKEN_TABLE
+				+ " set state = " + TOKEN_STATE_AT_GATEWAY
+				+ ", timestamp = CURRENT_TIMESTAMP"
+				+ " where state = " + TOKEN_STATE_AT_METER); 
 	}
 }
