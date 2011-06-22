@@ -22,7 +22,7 @@ public class TechHome extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tech_home);
-        ((Button)findViewById(R.id.syncDeviceBtn)).setOnClickListener(new OnClickListener()
+        ((Button)findViewById(R.id.syncWithMeterBtn)).setOnClickListener(new OnClickListener()
         {
         	public void onClick(View view) {
         		progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.synchronizing));

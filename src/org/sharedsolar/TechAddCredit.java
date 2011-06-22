@@ -35,16 +35,19 @@ public class TechAddCredit extends ListActivity {
 	private DatabaseAdapter dbAdapter;
 	private ProgressDialog progressDialog;
 	private String info;
-	private String jsonString;
+	private String requestTokenJson;
+	private JSONObject tokenAtMeterJson;
+	private int uploadTokenStatus;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tech_add_credit);
 
-		// get model list from db
+		// get model list and token at meter from db
 		dbAdapter = new DatabaseAdapter(this);
 		dbAdapter.open();
 		modelList = dbAdapter.getCreditSummaryModelList();
+		tokenAtMeterJson = dbAdapter.getTokenAtMeter();
 		dbAdapter.close();
 
 		// list adapter
@@ -58,6 +61,24 @@ public class TechAddCredit extends ListActivity {
 		Button submitBtn = (Button) findViewById(R.id.techAddCreditSubmitBtn);
 		submitBtn.setOnClickListener(submitBtnClickListener);
 		submitBtn.setEnabled(false);
+		
+		// upload tokens to gateway
+		try {
+			if (tokenAtMeterJson.getJSONArray("tokens").length() > 0)
+			{
+				progressDialog = ProgressDialog.show(this, "", getString(R.string.uploadingTokens));
+				new Thread() {
+					public void run() {
+						uploadTokenStatus = new Connector(TechAddCredit.this).uploadToken(
+										getString(R.string.uploadTokenUrl), tokenAtMeterJson);
+						uploadHandler.sendEmptyMessage(0);
+					}
+				}.start();
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	View.OnClickListener submitBtnClickListener = new OnClickListener() {
@@ -108,30 +129,49 @@ public class TechAddCredit extends ListActivity {
 			new Thread() {
 				public void run() {
 					Connector connector = new Connector(TechAddCredit.this);
-					jsonString = connector.requestToken(
+					requestTokenJson = connector.requestToken(
 							getString(R.string.requestTokenUrl),
 							TechAddCredit.this, addedModelList);
-					handler.sendEmptyMessage(0);
+					submitHandler.sendEmptyMessage(0);
 				}
 			}.start();
 		}
 	};
-
-	private Handler handler = new Handler() {
+	
+	private Handler uploadHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			progressDialog.dismiss();
-			jsonString = "{tokens: [{token_id: 100000, denomination: 500}]}";
-			if (jsonString == null) {
+			Log.d("d", "upload token status: " + uploadTokenStatus);
+			if (uploadTokenStatus != Connector.CONNECTION_SUCCESS) {
+				MyUI.showNeutralDialog(TechAddCredit.this,
+						R.string.uploadError,
+						R.string.uploadTokensErrorMsg, R.string.ok);
+				return;
+			}
+			dbAdapter.open();
+			dbAdapter.deleteTokenAtMeter();
+			dbAdapter.close();
+			MyUI.showNeutralDialog(TechAddCredit.this,
+					R.string.sync,
+					R.string.syncCompleted, R.string.ok);
+		}
+	};
+
+	private Handler submitHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			progressDialog.dismiss();
+			requestTokenJson = "{tokens: [{token_id: 100000, denomination: 500}]}";
+			if (requestTokenJson == null) {
 				MyUI.showNeutralDialog(TechAddCredit.this,
 						R.string.downloadError,
 						R.string.downloadTokensErrorMsg, R.string.ok);
 				return;
 			}
-			Log.d("d", "json: " + jsonString);
+			Log.d("d", requestTokenJson);
 
 			dbAdapter.open();
 			try {
-				JSONObject json = new JSONObject(jsonString);
+				JSONObject json = new JSONObject(requestTokenJson);
 				JSONArray arr = json.getJSONArray("tokens");
 
 				for (int i = 0; i < arr.length(); i++) {
