@@ -4,7 +4,7 @@
 	android:layout_height="fill_parent" android:gravity="center">
 	<Button android:text="@string/addCredit" android:id="@+id/techAddCreditBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"></Button>
-	<Button android:text="@string/syncDevice" android:id="@+id/syncDeviceBtn"
+	<Button android:text="@string/syncWithMeter" android:id="@+id/syncWithMeterBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"></Button>
 	<Button android:text="@string/logout" android:id="@+id/logoutBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"

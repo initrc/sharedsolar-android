@@ -25,13 +25,11 @@ public class DatabaseAdapter {
 	private final String USER_TABLE = DatabaseHelper.USER_TABLE;
 	private final String TOKEN_TABLE = DatabaseHelper.TOKEN_TABLE;
 	
-	private final int TOKEN_STATE_AT_GATEWAY;
 	private final int TOKEN_STATE_AT_VENDOR;
 	private final int TOKEN_STATE_AT_METER;
 	
 	public DatabaseAdapter(Context context) {
 		this.context = context;
-		TOKEN_STATE_AT_GATEWAY = Integer.parseInt(context.getString(R.string.tokenStateAtGateway).toString());
 		TOKEN_STATE_AT_VENDOR = Integer.parseInt(context.getString(R.string.tokenStateAtVendor).toString());
 		TOKEN_STATE_AT_METER = Integer.parseInt(context.getString(R.string.tokenStateAtMeter).toString());
 	}
@@ -178,10 +176,9 @@ public class DatabaseAdapter {
 		return json;
 	}
 
-	public void syncTokenAtMeter() { 
-		database.execSQL("update " + TOKEN_TABLE
-				+ " set state = " + TOKEN_STATE_AT_GATEWAY
-				+ ", timestamp = CURRENT_TIMESTAMP"
+	// delete token at meter
+	public void deleteTokenAtMeter() { 
+		database.execSQL("delete from " + TOKEN_TABLE
 				+ " where state = " + TOKEN_STATE_AT_METER); 
 	}
 }

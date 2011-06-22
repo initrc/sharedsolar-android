@@ -34,7 +34,6 @@
     <string name="submit">Envoyer</string>
     <string name="addCreditConfirm">Continuer?</string>
     <!-- tech sync device -->
-    <string name="syncDevice">Dispositif de synchronisation</string>
     <string name="sync">Sync</string>
     <string name="synchronizing">Synchronisation ...</string>
     <string name="syncCompleted">Synchronisation Terminé!</string>

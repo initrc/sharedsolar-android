@@ -168,5 +168,17 @@ public class Connector {
 		}
 		Log.d("d", json.toString());
 		return requestForString(url, entity);
-	} 
+	}
+	
+	// upload tokens
+	public int uploadToken(String url, JSONObject json) {
+		HttpEntity entity = null;
+		try {
+			entity = new ByteArrayEntity(json.toString().getBytes("UTF8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return connect(url, entity);
+	}
 }
