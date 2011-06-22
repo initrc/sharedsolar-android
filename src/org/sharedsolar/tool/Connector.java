@@ -29,6 +29,7 @@ import org.sharedsolar.db.DatabaseAdapter;
 import org.sharedsolar.model.CreditSummaryModel;
 
 import android.content.Context;
+import android.util.Log;
 
 public class Connector {
 	
@@ -155,9 +156,9 @@ public class Connector {
 				HashMap<String, Integer> map = new HashMap<String, Integer>();
 				map.put("denominatioin", model.getDenomination());
 				map.put("count", model.getCount());
-				json.accumulate("token", map);
-				entity = new ByteArrayEntity(json.toString().getBytes("UTF8"));
+				json.accumulate("tokens", map);
 			}
+			entity = new ByteArrayEntity(json.toString().getBytes("UTF8"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,6 +166,7 @@ public class Connector {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Log.d("d", json.toString());
 		return requestForString(url, entity);
-	}
+	} 
 }

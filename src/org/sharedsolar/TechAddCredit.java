@@ -30,8 +30,7 @@ import android.widget.TextView;
 public class TechAddCredit extends ListActivity {
 
 	private ArrayList<CreditSummaryModel> modelList;
-	private ArrayList<CreditSummaryModel> newModelList;
-	private ArrayList<CreditSummaryModel> diffModelList;
+	private ArrayList<CreditSummaryModel> addedModelList;
 	private TechAddCreditAdapter techAddCreditAdapter;
 	private DatabaseAdapter dbAdapter;
 	private ProgressDialog progressDialog;
@@ -66,23 +65,17 @@ public class TechAddCredit extends ListActivity {
 			info = "";
 			// build new model list
 			ListView list = getListView();
-			newModelList = new ArrayList<CreditSummaryModel>();
-			diffModelList = new ArrayList<CreditSummaryModel>();
+			addedModelList = new ArrayList<CreditSummaryModel>();
 			for (int i = 0; i < list.getChildCount(); i++) {
 				LinearLayout row = (LinearLayout) list.getChildAt(i);
 				TextView denominationTV = (TextView) row.getChildAt(1);
 				TextView addedCountTV = (TextView) row.getChildAt(2);
-				TextView ownCountTV = (TextView) row.getChildAt(3);
 				int denomination = Integer.parseInt(denominationTV.getText()
 						.toString());
 				int addedCount = Integer.parseInt(addedCountTV.getText()
 						.toString());
-				int ownCount = Integer
-						.parseInt(ownCountTV.getText().toString());
 				if (addedCount != 0) {
-					newModelList.add(new CreditSummaryModel(denomination,
-							ownCount));
-					diffModelList.add(new CreditSummaryModel(denomination,
+					addedModelList.add(new CreditSummaryModel(denomination,
 							addedCount));
 					info += getString(R.string.denomination) + " "
 							+ denomination + ": " + addedCount + " "
@@ -117,7 +110,7 @@ public class TechAddCredit extends ListActivity {
 					Connector connector = new Connector(TechAddCredit.this);
 					jsonString = connector.requestToken(
 							getString(R.string.requestTokenUrl),
-							TechAddCredit.this, diffModelList);
+							TechAddCredit.this, addedModelList);
 					handler.sendEmptyMessage(0);
 				}
 			}.start();
@@ -127,19 +120,19 @@ public class TechAddCredit extends ListActivity {
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			progressDialog.dismiss();
-			jsonString = "dd";
+			jsonString = "{tokens: [{token_id: 100000, denomination: 500}]}";
 			if (jsonString == null) {
 				MyUI.showNeutralDialog(TechAddCredit.this,
 						R.string.downloadError,
 						R.string.downloadTokensErrorMsg, R.string.ok);
 				return;
 			}
-			Log.d("d", jsonString);
+			Log.d("d", "json: " + jsonString);
 
 			dbAdapter.open();
-/*			try {
+			try {
 				JSONObject json = new JSONObject(jsonString);
-				JSONArray arr = json.getJSONArray("token");
+				JSONArray arr = json.getJSONArray("tokens");
 
 				for (int i = 0; i < arr.length(); i++) {
 					JSONObject ele = arr.getJSONObject(i);
@@ -151,10 +144,9 @@ public class TechAddCredit extends ListActivity {
 						R.string.invalidTokens, R.string.invalidTokensMsg,
 						R.string.ok);
 				dbAdapter.close();
+				e.printStackTrace();
 				return;
 			}
-*/
-			dbAdapter.updateVendorCredit(newModelList);
 			dbAdapter.close();
 			Intent intent = new Intent(TechAddCredit.this,
 					TechAddCreditReceipt.class);
