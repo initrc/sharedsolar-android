@@ -151,6 +151,8 @@ public final class R {
         public static final int syncWithMeter=0x7f040040;
         public static final int synchronizing=0x7f040022;
         public static final int techLogin=0x7f04000e;
+        /**  <string name="requestTokenUrl">http://192.168.1.130:8000/util/make_tokens/</string> 
+         */
         public static final int timeoutValue=0x7f040006;
         public static final int tokenStateAtMeter=0x7f040008;
         public static final int tokenStateAtVendor=0x7f040007;
