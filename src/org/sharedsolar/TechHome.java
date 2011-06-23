@@ -62,7 +62,7 @@ public class TechHome extends Activity {
 			} else {
 				message = R.string.syncError;
 			}
-			MyUI.showNeutralDialog(TechHome.this, R.string.sync, message, R.string.ok);
+			MyUI.showNeutralDialog(TechHome.this, R.string.syncWithMeter, message, R.string.ok);
         }
     };
 }

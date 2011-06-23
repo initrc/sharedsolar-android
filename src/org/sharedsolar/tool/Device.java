@@ -19,7 +19,7 @@ public class Device {
 		String androidId = System.getString(context.getContentResolver(), Secure.ANDROID_ID);
 		if (androidId == null)
 			//      12345678
-			return "00000000";
+			return "00000001";
 		return convert(androidId);
 	}
 	

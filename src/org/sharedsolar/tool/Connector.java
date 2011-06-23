@@ -29,7 +29,6 @@ import org.sharedsolar.db.DatabaseAdapter;
 import org.sharedsolar.model.CreditSummaryModel;
 
 import android.content.Context;
-import android.util.Log;
 
 public class Connector {
 	
@@ -59,7 +58,7 @@ public class Connector {
 			httpPost.setEntity(entity);
 			HttpResponse response = httpClient.execute(httpPost);
 			String status = response.getStatusLine().toString();
-			Log.d("d", status + " from " + url);
+			// Log.d("d", status + " from " + url);
 			if (status.equals("HTTP/1.1 200 OK")) {
 				return CONNECTION_SUCCESS;
 			} else {
@@ -119,7 +118,7 @@ public class Connector {
 			httpPost.setEntity(entity);
 			HttpResponse response = httpClient.execute(httpPost);
 			String status = response.getStatusLine().toString();
-			Log.d("d", status + " from " + url);
+			// Log.d("d", status + " from " + url);
 			if (status.equals("HTTP/1.1 200 OK")) {
 				InputStream is = response.getEntity().getContent();
 				String s = new Scanner(is).useDelimiter("\\A").next();
@@ -170,7 +169,6 @@ public class Connector {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.d("d", json.toString());
 		return requestForString(url, entity);
 	}
 	

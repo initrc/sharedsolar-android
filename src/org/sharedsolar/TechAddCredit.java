@@ -19,7 +19,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -151,7 +150,7 @@ public class TechAddCredit extends ListActivity {
 			dbAdapter.deleteTokenAtMeter();
 			dbAdapter.close();
 			MyUI.showNeutralDialog(TechAddCredit.this,
-					R.string.sync,
+					R.string.syncWithGateway,
 					R.string.syncCompleted, R.string.ok);
 		}
 	};
@@ -159,21 +158,23 @@ public class TechAddCredit extends ListActivity {
 	private Handler submitHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			progressDialog.dismiss();
-			//requestTokenJson = "{tokens: [{token_id: 100000, denomination: 500}]}";
 			if (requestTokenJson == null) {
 				MyUI.showNeutralDialog(TechAddCredit.this,
 						R.string.downloadError,
 						R.string.downloadTokensErrorMsg, R.string.ok);
 				return;
 			}
-			Log.d("d", requestTokenJson);
-
+			// check device validity
+			if (requestTokenJson.equals("\"Not a valid device\"")) {
+				MyUI.showNeutralDialog(TechAddCredit.this,
+						R.string.invalidDevice, R.string.invalidDeviceMsg,
+						R.string.ok);
+				return;
+			}
+			// insert tokens to db
 			dbAdapter.open();
 			try {
-				/*JSONObject json = new JSONObject(requestTokenJson);
-				JSONArray arr = json.getJSONArray("tokens");*/
 				JSONArray arr = new JSONArray(requestTokenJson);
-
 				for (int i = 0; i < arr.length(); i++) {
 					JSONObject ele = arr.getJSONObject(i);
 					dbAdapter.insertTokenAtVendor(ele.getLong("token_id"),
@@ -184,7 +185,6 @@ public class TechAddCredit extends ListActivity {
 						R.string.invalidTokens, R.string.invalidTokensMsg,
 						R.string.ok);
 				dbAdapter.close();
-				e.printStackTrace();
 				return;
 			}
 			dbAdapter.close();

@@ -125,6 +125,8 @@ public final class R {
         public static final int downloadingTokens=0x7f040037;
         public static final int invalidAccountList=0x7f04003c;
         public static final int invalidAccountListMsg=0x7f04003d;
+        public static final int invalidDevice=0x7f040042;
+        public static final int invalidDeviceMsg=0x7f040043;
         public static final int invalidTokens=0x7f04003a;
         public static final int invalidTokensMsg=0x7f04003b;
         public static final int loading=0x7f040011;
@@ -148,6 +150,7 @@ public final class R {
         public static final int syncError=0x7f040025;
         public static final int syncTimeout=0x7f040024;
         public static final int syncUrl=0x7f040000;
+        public static final int syncWithGateway=0x7f040041;
         public static final int syncWithMeter=0x7f040040;
         public static final int synchronizing=0x7f040022;
         public static final int techLogin=0x7f04000e;

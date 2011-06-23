@@ -127,11 +127,11 @@ public class VendorAddCredit extends ListActivity {
 				intent.putExtra("info", info);
 				startActivity(intent);
 			} else {
-				String message = null;
+				int message;
 				if (status == Connector.CONNECTION_TIMEOUT) {
-					message = getString(R.string.addCreditTimeout);
+					message = R.string.addCreditTimeout;
 				} else {
-					message = getString(R.string.addCreditError);
+					message = R.string.addCreditError;
 				}
 				MyUI.showNeutralDialog(VendorAddCredit.this,
 						R.string.addCredit, message, R.string.ok);
