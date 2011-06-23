@@ -1,8 +1,8 @@
 package org.sharedsolar.db;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sharedsolar.R;
@@ -52,7 +52,7 @@ public class DatabaseAdapter {
 		return values;
 	}
 
-	private ContentValues createToken(int tokenId, int denomination, 
+	private ContentValues createToken(long tokenId, int denomination, 
 			int state, String accountId) {
 		ContentValues values = new ContentValues();
 		values.put("token_id", tokenId);
@@ -105,18 +105,14 @@ public class DatabaseAdapter {
 	}
 
 	// insert token
-	public void insertToken(int tokenId, int denomination, 
+	public void insertToken(long tokenId, int denomination, 
 			int state, String accountId) {
 		ContentValues values = createToken(tokenId, denomination, state, accountId);
 		database.insert(TOKEN_TABLE, null, values);		
 	}
 
-	public void insertTokenAtVendor(int tokenId, int denomination) {
+	public void insertTokenAtVendor(long tokenId, int denomination) {
 		insertToken(tokenId, denomination, TOKEN_STATE_AT_VENDOR, null);
-	}
-	
-	public void insertTokenAtMeter(int tokenId, int denomination, String accountId) {
-		insertToken(tokenId, denomination, TOKEN_STATE_AT_METER, accountId);
 	}
 	
 	// get token count
@@ -137,13 +133,14 @@ public class DatabaseAdapter {
 	}
 	
 	// sell token
-	public void sellToken(ArrayList<CreditSummaryModel> modelList) {
+	public void sellToken(ArrayList<CreditSummaryModel> modelList, String accountId) {
 		for (CreditSummaryModel model : modelList) {
 			int denomination = model.getDenomination();
-			int count = model.getCount();
+			int count = model.getCount();			
 			Log.d("d", String.valueOf(denomination) + " " + String.valueOf(count));
 			database.execSQL("update " + TOKEN_TABLE
 					+ " set state = " + TOKEN_STATE_AT_METER
+					+ ", account_id = '" + accountId + "'"
 					+ ", timestamp = CURRENT_TIMESTAMP"
 					+ " where _id in ("
 					+ " select _id from " + TOKEN_TABLE
@@ -160,15 +157,18 @@ public class DatabaseAdapter {
 				"state = " + TOKEN_STATE_AT_METER, null, null, null, null);
 		if (cursor == null) return null;
 		JSONObject json = new JSONObject();
+		JSONArray tokenArray = new JSONArray();
 		try {
 			json.put("device_id", Device.getId(context));
 			while (cursor.moveToNext()) {
-				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("token_id", String.valueOf(cursor.getInt(0)));
-				map.put("account_id", cursor.getString(1));
-				map.put("timestamp", cursor.getString(2));
-				json.accumulate("tokens", map);
+				JSONObject tokenObject = new JSONObject();
+				tokenObject.put("token_id", String.valueOf(cursor.getLong(0)));
+				tokenObject.put("account_id", cursor.getString(1));
+				tokenObject.put("timestamp", cursor.getString(2));
+				tokenArray.put(tokenObject);
 			}
+			json.put("tokens", tokenArray);
+			Log.d("d", json.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

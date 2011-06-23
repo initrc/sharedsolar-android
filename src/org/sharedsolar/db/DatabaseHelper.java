@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		+ "username text not null, password text not null);";
 	private static final String CREATE_TOKEN = "create table " 
 		+ TOKEN_TABLE + " (_id integer primary key autoincrement, "
-		+ "token_id integer not null, denomination integer not null, "
+		+ "token_id long not null, denomination integer not null, "
 		+ "state integer not null, account_id text, "
 		+ "timestamp timestamp default CURRENT_TIMESTAMP);";
 	
