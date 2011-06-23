@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,6 +21,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sharedsolar.R;
@@ -59,6 +59,7 @@ public class Connector {
 			httpPost.setEntity(entity);
 			HttpResponse response = httpClient.execute(httpPost);
 			String status = response.getStatusLine().toString();
+			Log.d("d", status + " from " + url);
 			if (status.equals("HTTP/1.1 200 OK")) {
 				return CONNECTION_SUCCESS;
 			} else {
@@ -118,6 +119,7 @@ public class Connector {
 			httpPost.setEntity(entity);
 			HttpResponse response = httpClient.execute(httpPost);
 			String status = response.getStatusLine().toString();
+			Log.d("d", status + " from " + url);
 			if (status.equals("HTTP/1.1 200 OK")) {
 				InputStream is = response.getEntity().getContent();
 				String s = new Scanner(is).useDelimiter("\\A").next();
@@ -152,12 +154,14 @@ public class Connector {
 		HttpEntity entity = null;
 		try {
 			json.put("device_id", Device.getId(context));
+			JSONArray tokenArray = new JSONArray();
 			for (CreditSummaryModel model : modelList) {
-				HashMap<String, Integer> map = new HashMap<String, Integer>();
-				map.put("denominatioin", model.getDenomination());
-				map.put("count", model.getCount());
-				json.accumulate("tokens", map);
+				JSONObject tokenObject = new JSONObject();
+				tokenObject.put("denomination", model.getDenomination());
+				tokenObject.put("count", model.getCount());
+				tokenArray.put(tokenObject);
 			}
+			json.put("tokens", tokenArray);
 			entity = new ByteArrayEntity(json.toString().getBytes("UTF8"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

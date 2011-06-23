@@ -10,7 +10,6 @@ import org.sharedsolar.model.CreditSummaryModel;
 import org.sharedsolar.tool.Connector;
 import org.sharedsolar.tool.MyUI;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -121,28 +120,21 @@ public class VendorAddCredit extends ListActivity {
 			if (status == Connector.CONNECTION_SUCCESS) {
 				// update db
 				dbAdapter.open();
-				dbAdapter.sellToken(addedModelList);
+				dbAdapter.sellToken(addedModelList, accountModel.getAid());
 				dbAdapter.close();
 				Intent intent = new Intent(VendorAddCredit.this,
 						VendorAddCreditReceipt.class);
 				intent.putExtra("info", info);
 				startActivity(intent);
 			} else {
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						VendorAddCredit.this);
-				builder.setTitle(getString(R.string.addCredit));
+				String message = null;
 				if (status == Connector.CONNECTION_TIMEOUT) {
-					builder.setMessage(getString(R.string.addCreditTimeout));
+					message = getString(R.string.addCreditTimeout);
 				} else {
-					builder.setMessage(getString(R.string.addCreditError));
+					message = getString(R.string.addCreditError);
 				}
-				builder.setNeutralButton(getString(R.string.ok),
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
-				builder.show();
+				MyUI.showNeutralDialog(VendorAddCredit.this,
+						R.string.addCredit, message, R.string.ok);
 			}
 
 		}

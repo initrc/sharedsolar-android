@@ -141,7 +141,6 @@ public class TechAddCredit extends ListActivity {
 	private Handler uploadHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			progressDialog.dismiss();
-			Log.d("d", "upload token status: " + uploadTokenStatus);
 			if (uploadTokenStatus != Connector.CONNECTION_SUCCESS) {
 				MyUI.showNeutralDialog(TechAddCredit.this,
 						R.string.uploadError,
@@ -160,7 +159,7 @@ public class TechAddCredit extends ListActivity {
 	private Handler submitHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			progressDialog.dismiss();
-			requestTokenJson = "{tokens: [{token_id: 100000, denomination: 500}]}";
+			//requestTokenJson = "{tokens: [{token_id: 100000, denomination: 500}]}";
 			if (requestTokenJson == null) {
 				MyUI.showNeutralDialog(TechAddCredit.this,
 						R.string.downloadError,
@@ -171,12 +170,13 @@ public class TechAddCredit extends ListActivity {
 
 			dbAdapter.open();
 			try {
-				JSONObject json = new JSONObject(requestTokenJson);
-				JSONArray arr = json.getJSONArray("tokens");
+				/*JSONObject json = new JSONObject(requestTokenJson);
+				JSONArray arr = json.getJSONArray("tokens");*/
+				JSONArray arr = new JSONArray(requestTokenJson);
 
 				for (int i = 0; i < arr.length(); i++) {
 					JSONObject ele = arr.getJSONObject(i);
-					dbAdapter.insertTokenAtVendor(ele.getInt("token_id"),
+					dbAdapter.insertTokenAtVendor(ele.getLong("token_id"),
 							ele.getInt("denomination"));
 				}
 			} catch (JSONException e) {
