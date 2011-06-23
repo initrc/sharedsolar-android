@@ -149,18 +149,20 @@ public final class R {
         public static final int syncCompleted=0x7f040023;
         public static final int syncError=0x7f040025;
         public static final int syncTimeout=0x7f040024;
+        /**  meter url 
+         */
         public static final int syncUrl=0x7f040000;
         public static final int syncWithGateway=0x7f040041;
         public static final int syncWithMeter=0x7f040040;
         public static final int synchronizing=0x7f040022;
         public static final int techLogin=0x7f04000e;
-        /**  <string name="requestTokenUrl">http://192.168.1.130:8000/util/make_tokens/</string> 
-         */
         public static final int timeoutValue=0x7f040006;
         public static final int tokenStateAtMeter=0x7f040008;
         public static final int tokenStateAtVendor=0x7f040007;
         public static final int total=0x7f040027;
         public static final int uploadError=0x7f040035;
+        /**  gateway url 
+         */
         public static final int uploadTokenUrl=0x7f040004;
         public static final int uploadTokensErrorMsg=0x7f040036;
         /**  home 

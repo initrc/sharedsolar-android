@@ -12,7 +12,7 @@
     <string name="techLogin">identifiant Technicien</string>
     <string name="about">À propos</string>
     <string name="versionLabel">Version:</string>
-    <string name="deviceLabel">Dispositif:</string>
+
     <string name="loading">Chargement en cours ...</string>
     <string name="loginError">Erreur de Connexion</string>
     <string name="vendorLoginTimeoutMsg">Échec de Connexion! S\'il vous plaît vérifiez la connexion wifi.</string>
