@@ -74,4 +74,7 @@
 	<string name="balanceLabel">Balance:</string>
 	<string name="newBalanceLabel">New Balance:</string>
 	<string name="syncWithMeter">Sync with Meter</string>
+	<string name="syncWithGateway">Sync with Gateway</string>
+	<string name="invalidDevice">Invalid Device</string>
+	<string name="invalidDeviceMsg">Please register the device on the gateway first!</string>
 </resources>

@@ -14,7 +14,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class DatabaseAdapter {
 	
@@ -137,7 +136,6 @@ public class DatabaseAdapter {
 		for (CreditSummaryModel model : modelList) {
 			int denomination = model.getDenomination();
 			int count = model.getCount();			
-			Log.d("d", String.valueOf(denomination) + " " + String.valueOf(count));
 			database.execSQL("update " + TOKEN_TABLE
 					+ " set state = " + TOKEN_STATE_AT_METER
 					+ ", account_id = '" + accountId + "'"
@@ -168,7 +166,6 @@ public class DatabaseAdapter {
 				tokenArray.put(tokenObject);
 			}
 			json.put("tokens", tokenArray);
-			Log.d("d", json.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
