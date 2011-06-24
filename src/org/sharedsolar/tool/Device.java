@@ -17,7 +17,7 @@ public class Device {
 	public static String getId(Context context) {
 		WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE); 
 		String mac = manager.getConnectionInfo().getMacAddress();
-		if (mac == null) return "000000";
+		if (mac == null) return "emulator";
 		return convertMac(mac);
 	}
 	
