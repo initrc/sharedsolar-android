@@ -10,17 +10,15 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
-import android.provider.Settings.Secure;
-import android.provider.Settings.System;
+import android.net.wifi.WifiManager;
 
 public class Device {
 
 	public static String getId(Context context) {
-		String androidId = System.getString(context.getContentResolver(), Secure.ANDROID_ID);
-		if (androidId == null)
-			//      12345678
-			return "00000001";
-		return convert(androidId);
+		WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE); 
+		String mac = manager.getConnectionInfo().getMacAddress();
+		if (mac == null) return "000000";
+		return convertMac(mac);
 	}
 	
 	public static NameValuePair getIdPair(Context context) {
@@ -43,7 +41,8 @@ public class Device {
 		return null;
 	}
 	
-	public static String convert(String s) {
+	// convert 16-bit hex to 8-bit hex
+	public static String convert16to8(String s) {
 		char[] cs = new char[s.length() / 2];
 		for (int i = 0 ; i < cs.length; i++) {
 			int c = (int)(s.charAt(i * 2) + s.charAt(i * 2 +1 )) % 16;
@@ -51,6 +50,21 @@ public class Device {
 			cs[i] = (char)(base + c);
 		}
 		return String.valueOf(cs);
+	}
+	
+	public static String convertMac(String s) {
+		String[] arr = s.split("\\.");
+		StringBuffer id = new StringBuffer(arr.length);
+		for (String ele : arr) {
+			int sum = 0;
+			for (int i = 0; i < ele.length(); i++) {
+				char c = ele.charAt(i);
+				int dec = c >= 'A' ? c - 'A' + 10 : c - '0';
+				sum += dec;
+			}
+			id.append((char)('a' + sum % 26));
+		}
+		return id.toString();
 	}
 	
 	public static String generatePassword() {
