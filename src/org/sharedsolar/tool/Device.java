@@ -54,15 +54,18 @@ public class Device {
 	
 	public static String convertMac(String s) {
 		String[] arr = s.split("\\.");
-		StringBuffer id = new StringBuffer(arr.length);
+		int[] dec = new int[arr.length  * 2];
+		int decIdx = 0;
+		StringBuffer id = new StringBuffer(dec.length + 2);
 		for (String ele : arr) {
-			int sum = 0;
 			for (int i = 0; i < ele.length(); i++) {
 				char c = ele.charAt(i);
-				int dec = c >= 'A' ? c - 'A' + 10 : c - '0';
-				sum += dec;
+				dec[decIdx++] = c >= 'A' ? c - 'A' + 10 : c - '0';
 			}
-			id.append((char)('a' + sum % 26));
+		}
+		for (int i = 0; i < dec.length; i++) {
+			id.append((char)('a' + dec[i]));
+			if (i == 3 || i == 7) id.append('-');
 		}
 		return id.toString();
 	}
