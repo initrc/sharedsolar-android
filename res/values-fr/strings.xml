@@ -12,7 +12,7 @@
     <string name="techLogin">identifiant Technicien</string>
     <string name="about">À propos</string>
     <string name="versionLabel">Version:</string>
-
+	<string name="deviceLabel">Périphérique:</string>
     <string name="loading">Chargement en cours ...</string>
     <string name="loginError">Erreur de Connexion</string>
     <string name="vendorLoginTimeoutMsg">Échec de Connexion! S\'il vous plaît vérifiez la connexion wifi.</string>
@@ -33,12 +33,25 @@
     <string name="creditAddedLabel">Crédit Ajouté:</string>
     <string name="submit">Envoyer</string>
     <string name="addCreditConfirm">Continuer?</string>
+    <string name="invalidDevice">Périphérique incorrect</string>
+	<string name="invalidDeviceMsg">S\'il vous plaît enregistrer d\'abord le périphérique dans le Gateway!</string>
     <!-- tech sync device -->
     <string name="sync">Sync</string>
+    <string name="syncWithMeter">Synchronisation avec compteur</string>
+	<string name="syncWithGateway">Synchroniser avec Gateway</string>
     <string name="synchronizing">Synchronisation ...</string>
     <string name="syncCompleted">Synchronisation Terminé!</string>
     <string name="syncTimeout">Timeout de synchronisation!</string>
     <string name="syncError">Error de Synchronisation!</string>
+    <!-- tech token -->
+    <string name="uploadingTokens">Envoi des tokens vers gateway...</string>
+    <string name="uploadError">Error d\'envoi</string>
+	<string name="uploadTokensErrorMsg">Impossible d\'envoyer des jetons. S\'il vous plaît assurez-vous que le périphérique est connecté à Internet.</string>
+    <string name="downloadingTokens">Téléchargement des jetons du gateway...</string>
+    <string name="downloadError">Erreur de téléchargement</string>
+	<string name="downloadTokensErrorMsg">Impossible de recevoir des jetons. S\'il vous plaît assurez-vous que le périphérique est connecté à Internet.</string>
+    <string name="invalidTokens">Jetons invalides</string>
+    <string name="invalidTokensMsg">Les jetons sont au format valide!</string>
     
     <!-- vendor -->
     <!-- vendor credit summary -->
@@ -52,9 +65,13 @@
     <string name="account">compte</string>
     <string name="credit">crédit</string>
     <string name="accountIdEmptyMsg">S\'il vous plaît affecter un identifiant de compte sur le circuit.</string>
+    <string name="invalidAccountList">Liste des comptes est invalide</string>
+    <string name="invalidAccountListMsg">Liste des comptes est au format valide!</string>
     <!-- vendor add credit -->
-	<string name="accountLabel">compte:</string>
+	<string name="accountLabel">Compte:</string>
 	<string name="remain">restent</string>
     <string name="addCreditTimeout">Timeout. Pas possible d’ajouter de crédit!</string>
     <string name="addCreditError">Erreur en ajouter de crédit!</string>
+    <string name="balanceLabel">Solde:</string>
+	<string name="newBalanceLabel">Nouveau Balance:</string>
 </resources>

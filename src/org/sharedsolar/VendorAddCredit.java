@@ -94,7 +94,7 @@ public class VendorAddCredit extends ListActivity {
 					.getText().toString();
 			String newBalance = ((TextView) findViewById(R.id.vendorAddCreditNewBalanceTV))
 					.getText().toString();
-			newCr = (int) Double.parseDouble(creditAdded);
+			newCr = (int) Double.parseDouble(creditAdded.replace(",", "."));
 			if (newCr > 0) {
 				info += "\n" + getString(R.string.creditAddedLabel) + " "
 						+ creditAdded + "\n"
