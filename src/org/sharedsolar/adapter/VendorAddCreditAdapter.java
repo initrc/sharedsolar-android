@@ -105,7 +105,7 @@ public class VendorAddCreditAdapter extends ArrayAdapter<CreditSummaryModel> {
 		int addedCount = Integer.parseInt(addedCountText.getText().toString());
 		int remainCount = Integer
 				.parseInt(remainCountText.getText().toString());
-		int creditAdded = (int)Double.parseDouble(creditAddedTV.getText().toString());
+		int creditAdded = (int)Double.parseDouble(creditAddedTV.getText().toString().replace(",", "."));
 		// update text
 		addedCount += sign;
 		addedCountText.setText(String.valueOf(addedCount));

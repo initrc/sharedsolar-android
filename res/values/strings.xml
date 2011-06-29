@@ -12,7 +12,7 @@
     <string name="techLogin">Tech Login</string>
     <string name="about">About</string>
     <string name="versionLabel">Version:</string>
-    
+	<string name="deviceLabel">Device:</string>    
     <string name="loading">Loading...</string>
     <string name="loginError">Login Error</string>
     <string name="vendorLoginTimeoutMsg">Login timeout! Please check wifi connection.</string>
@@ -33,12 +33,25 @@
     <string name="creditAddedLabel">Credit Added:</string>
     <string name="submit">Submit</string>
     <string name="addCreditConfirm">Continue?</string>
+    <string name="invalidDevice">Invalid Device</string>
+	<string name="invalidDeviceMsg">Please register the device on the gateway first!</string>
     <!-- tech sync device -->
     <string name="sync">Sync</string>
+    <string name="syncWithMeter">Sync with Meter</string>
+	<string name="syncWithGateway">Sync with Gateway</string>
     <string name="synchronizing">Synchronizing...</string>
     <string name="syncCompleted">Sync Completed!</string>
     <string name="syncTimeout">Sync Timeout!</string>
     <string name="syncError">Sync Error!</string>
+    <!-- tech token -->
+    <string name="uploadingTokens">Uploading tokens to gateway...</string>
+    <string name="uploadError">Upload Error</string>
+	<string name="uploadTokensErrorMsg">Failed to upload tokens. Please make sure the device is connected to the Internet.</string>
+    <string name="downloadingTokens">Downloading tokens from gateway...</string>
+    <string name="downloadError">Download Error</string>
+	<string name="downloadTokensErrorMsg">Failed to download tokens. Please make sure the device is connected to the Internet.</string>
+    <string name="invalidTokens">Invalid Tokens</string>
+    <string name="invalidTokensMsg">Tokens are in invalid format!</string>
     
     <!-- vendor -->
     <!-- vendor credit summary -->
@@ -52,28 +65,13 @@
     <string name="account">Account</string>
     <string name="credit">Credit</string>
     <string name="accountIdEmptyMsg">Please assign an account ID to the circuit.</string>
+    <string name="invalidAccountList">Invalid Account List</string>
+    <string name="invalidAccountListMsg">Account list is in invalid format!</string>
     <!-- vendor add credit -->
 	<string name="accountLabel">Account:</string>
 	<string name="remain">Remain</string>
     <string name="addCreditTimeout">Add Credit Timeout!</string>
     <string name="addCreditError">Add Credit Error!</string>
-    
-    <!-- to be translated -->
-    <string name="deviceLabel">Device:</string> <!-- home -->
-    <string name="uploadingTokens">Uploading tokens to gateway...</string>
-    <string name="uploadError">Upload Error</string>
-	<string name="uploadTokensErrorMsg">Failed to upload tokens. Please make sure the device is connected to the Internet.</string>
-    <string name="downloadingTokens">Downloading tokens from gateway...</string>
-    <string name="downloadError">Download Error</string>
-	<string name="downloadTokensErrorMsg">Failed to download tokens. Please make sure the device is connected to the Internet.</string>
-    <string name="invalidTokens">Invalid Tokens</string>
-    <string name="invalidTokensMsg">Tokens are in invalid format!</string>
-    <string name="invalidAccountList">Invalid Account List</string>
-    <string name="invalidAccountListMsg">Account list is in invalid format!</string>
-	<string name="balanceLabel">Balance:</string>
+    <string name="balanceLabel">Balance:</string>
 	<string name="newBalanceLabel">New Balance:</string>
-	<string name="syncWithMeter">Sync with Meter</string>
-	<string name="syncWithGateway">Sync with Gateway</string>
-	<string name="invalidDevice">Invalid Device</string>
-	<string name="invalidDeviceMsg">Please register the device on the gateway first!</string>
 </resources>
