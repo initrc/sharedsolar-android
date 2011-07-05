@@ -37,9 +37,25 @@ public class VendorHome extends Activity {
         			public void run() {
         				jsonString = new Connector(VendorHome.this).requestAccountList(getString(R.string.accountListUrl), 
         						VendorHome.this);
-        				handler.sendEmptyMessage(0);
+        				accountListHandler.sendEmptyMessage(0);
         			}
         		}.start();
+			}
+        });
+        ((Button)findViewById(R.id.chartBtn)).setOnClickListener(new OnClickListener()
+        {
+        	public void onClick(View view) {
+        		/*
+				progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.loading));
+				new Thread() {
+        			public void run() {
+        				jsonString = new Connector(VendorHome.this).requestAccountList(getString(R.string.circuitUsageUrl), 
+        						VendorHome.this);
+        				circuitUsageHandler.sendEmptyMessage(0);
+        			}
+        		}.start();*/
+        		Intent intent = new Intent(view.getContext(), Chart.class);
+	            startActivity(intent);
 			}
         });
         ((Button)findViewById(R.id.logoutBtn)).setOnClickListener(new OnClickListener()
@@ -51,7 +67,7 @@ public class VendorHome extends Activity {
         });
     }
 	
-	private Handler handler = new Handler() {
+	private Handler accountListHandler = new Handler() {
         public void handleMessage(Message msg) {
         	progressDialog.dismiss();
         	if (jsonString != null) {
@@ -67,6 +83,26 @@ public class VendorHome extends Activity {
         	else {
                 MyUI.showNeutralDialog(VendorHome.this, R.string.accountList,
                 		R.string.loadingAccountListError, R.string.ok);
+        	}
+        }
+    };
+    
+    private Handler circuitUsageHandler = new Handler() {
+        public void handleMessage(Message msg) {
+        	progressDialog.dismiss();
+        	if (jsonString != null) {
+        		if (jsonString.equals(String.valueOf(Connector.CONNECTION_TIMEOUT))) {
+                    MyUI.showNeutralDialog(VendorHome.this, R.string.chart,
+                    		R.string.circuitUsageTimeoutMsg, R.string.ok);
+        		} else {
+        			Intent intent = new Intent(VendorHome.this, Chart.class);
+    				intent.putExtra("circuitUsage", jsonString);
+    	            startActivity(intent);
+        		}
+        	}
+        	else {
+                MyUI.showNeutralDialog(VendorHome.this, R.string.chart,
+                		R.string.loadingCircuitUsageError, R.string.ok);
         	}
         }
     };
