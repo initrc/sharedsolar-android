@@ -66,7 +66,7 @@ public class EnergyChart extends AbstractDemoChart {
 			renderer.addTextLabel(i+1, "account" + (i+1));
 		
 		// settings
-		setChartSettings(renderer, "Energy - Today", "", "kWh",
+		setChartSettings(renderer, "Credit - Today", "", "kWh",
 				0.5, 21, 0, 105, Color.GRAY, Color.LTGRAY);
 		return ChartFactory.getBarChartIntent(context,
 				buildBarDataset(titles, values), renderer, Type.DEFAULT);
