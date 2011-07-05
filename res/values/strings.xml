@@ -60,7 +60,7 @@
     <string name="availableCreditLabel">Available Credit:</string>
     <!-- vendor account list -->
     <string name="accountList">Account List</string>
-    <string name="accountListTimeoutMsg">Get account list timeout!</string>
+    <string name="accountListTimeoutMsg">Loading account list timeout!</string>
     <string name="loadingAccountListError">Failed to load account list!</string>
     <string name="account">Account</string>
     <string name="credit">Credit</string>
@@ -74,4 +74,12 @@
     <string name="addCreditError">Add Credit Error!</string>
     <string name="balanceLabel">Balance:</string>
 	<string name="newBalanceLabel">New Balance:</string>
+	
+	<!-- to be translated -->
+	<string name="chart">Chart</string>
+	<string name="energy">Energy</string>
+	<string name="power">Power</string>
+	<string name="circuitUsageTimeoutMsg">Loading circuit usage timeout!</string>
+	<string name="loadingCircuitUsageError">Failed to load circuit usage!</string>
+	<string name="today">Today</string>
 </resources>
