@@ -147,6 +147,11 @@ public class Connector {
 		return requestForString(url, Device.getIdHttpEntity(context));
 	}
 	
+	// get circuit use
+	public String requestCircuitUse(String url, Context context) {
+		return requestForString(url, Device.getIdHttpEntity(context));
+	}
+	
 	// get tokens
 	public String requestToken(String url, Context context, ArrayList<CreditSummaryModel> modelList) {
 		JSONObject json = new JSONObject();
