@@ -42,7 +42,7 @@ public class PowerChart extends AbstractDemoChart {
 	public Intent execute(Context context) {
 		int num = 20;
 		// title
-		String[] titles = new String[] {context.getString(R.string.today)};
+		String[] titles = new String[] {context.getString(R.string.current)};
 		
 		// value
 		List<double[]> values = new ArrayList<double[]>();
@@ -63,11 +63,15 @@ public class PowerChart extends AbstractDemoChart {
 		renderer.setDisplayChartValues(true);
 		renderer.setTextTypeface("sans-serif", Typeface.NORMAL);
 		for (int i = 0; i < num; i++)
-			renderer.addTextLabel(i+1, "account" + (i+1));
+			renderer.addTextLabel(i+1, "acnt" + (i+1));
+		String chartTitleLabel = context.getString(R.string.power) + " - "
+			+ context.getString(R.string.current);
+		String chartYLabel = context.getString(R.string.power) + " ("
+			+ context.getString(R.string.kw) + ")";
 		
 		// settings
-		setChartSettings(renderer, "Energy - Today", "", "kWh",
-				0.5, 21, 0, 105, Color.GRAY, Color.LTGRAY);
+		setChartSettings(renderer, chartTitleLabel, "", chartYLabel,
+				0, 21, 0, 105, Color.GRAY, Color.LTGRAY);
 		return ChartFactory.getBarChartIntent(context,
 				buildBarDataset(titles, values), renderer, Type.DEFAULT);
 	}

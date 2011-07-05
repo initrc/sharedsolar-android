@@ -57,6 +57,7 @@
     <!-- vendor credit summary -->
     <string name="creditSummary">Sommaire de crédit</string>
     <string name="total">Total</string>
+    <string name="availableCredit">Crédit disponible</string>
     <string name="availableCreditLabel">Crédit disponible:</string>
     <!-- vendor account list -->
     <string name="accountList">Liste des comptes</string>
