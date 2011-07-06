@@ -15,7 +15,6 @@
  */
 package org.sharedsolar.chart;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.achartengine.ChartFactory;
@@ -32,6 +31,9 @@ import android.graphics.Paint.Align;
 
 public class CreditChart extends AbstractDemoChart {
 
+	private List<double[]> values;
+	private String[] labels;
+	
 	public String getName() {
 		return "Credit - Today";
 	}
@@ -39,18 +41,23 @@ public class CreditChart extends AbstractDemoChart {
 	public String getDesc() {
 		return "Credit Bar Chart for Today";
 	}
+	
+	public CreditChart(List<double[]> values, String[] labels) {
+		this.values = values;
+		this.labels = labels;
+	}
 
 	public Intent execute(Context context) {
-		int num = 20;
+		int num = values.get(0).length;
+		double max = 0;
+		double[] value = values.get(0);
+		for (int i = 0; i < value.length; i++) {
+			if (value[i] > max)
+				max = value[i];
+		}
+		
 		// title
 		String[] titles = new String[] {context.getString(R.string.current)};
-		
-		// value
-		List<double[]> values = new ArrayList<double[]>();
-		double[] dvalues = new double [num];
-		for (int i = 0; i < num; i++)
-			dvalues[i] = (int) (Math.random() * 100);
-		values.add(dvalues);
 		
 		// color
 		int[] colors = new int[] {Color.rgb(164, 198, 57)};
@@ -64,14 +71,14 @@ public class CreditChart extends AbstractDemoChart {
 		renderer.setDisplayChartValues(true);
 		renderer.setTextTypeface("sans-serif", Typeface.NORMAL);
 		for (int i = 0; i < num; i++)
-			renderer.addTextLabel(i+1, "" + (i+1));
+			renderer.addTextLabel(i+1, labels[i]);
 		String chartTitleLabel = context.getString(R.string.availableCredit);
 		String chartYLabel = context.getString(R.string.credit);
 		renderer.setXLabelsAlign(Align.CENTER);
 				
 		// settings
 		setChartSettings(renderer, chartTitleLabel, "", chartYLabel,
-				0, 21, 0, 105, Color.GRAY, Color.LTGRAY);
+				0, num + 1, 0, max * 1.1, Color.GRAY, Color.LTGRAY);
 		return ChartFactory.getBarChartIntent(context,
 				buildBarDataset(titles, values), renderer, Type.DEFAULT);
 	}

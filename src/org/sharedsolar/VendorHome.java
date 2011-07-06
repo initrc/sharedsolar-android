@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,7 +36,7 @@ public class VendorHome extends Activity {
 				progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.loading));
 				new Thread() {
         			public void run() {
-        				jsonString = new Connector(VendorHome.this).requestAccountList(getString(R.string.accountListUrl), 
+        				jsonString = new Connector(VendorHome.this).requestForString(getString(R.string.accountListUrl), 
         						VendorHome.this);
         				accountListHandler.sendEmptyMessage(0);
         			}
@@ -49,15 +50,12 @@ public class VendorHome extends Activity {
 				progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.loading));
 				new Thread() {
         			public void run() {
-        				/*
-        				jsonString = new Connector(VendorHome.this).requestAccountList(getString(R.string.circuitUsageUrl), 
-        						VendorHome.this);*/
-        				jsonString = "";        				
-        				circuitUsageHandler.sendEmptyMessage(0);
+    					jsonString = new Connector(VendorHome.this).requestForString(getString(R.string.circuitUsageUrl), 
+        						VendorHome.this);
+    					Log.d("d", "~~" + jsonString);
+    					circuitUsageHandler.sendEmptyMessage(0);
         			}
         		}.start();
-        		Intent intent = new Intent(view.getContext(), Chart.class);
-	            startActivity(intent);
 			}
         });
         ((Button)findViewById(R.id.logoutBtn)).setOnClickListener(new OnClickListener()
@@ -73,6 +71,7 @@ public class VendorHome extends Activity {
         public void handleMessage(Message msg) {
         	progressDialog.dismiss();
         	if (jsonString != null) {
+        		Log.d("d", "account: " + jsonString);
         		if (jsonString.equals(String.valueOf(Connector.CONNECTION_TIMEOUT))) {
                     MyUI.showNeutralDialog(VendorHome.this, R.string.accountList,
                     		R.string.accountListTimeoutMsg, R.string.ok);
