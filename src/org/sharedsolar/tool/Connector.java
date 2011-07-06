@@ -143,12 +143,7 @@ public class Connector {
 	}
 	
 	// get account list
-	public String requestAccountList(String url, Context context) {
-		return requestForString(url, Device.getIdHttpEntity(context));
-	}
-	
-	// get circuit use
-	public String requestCircuitUse(String url, Context context) {
+	public String requestForString(String url, Context context) {
 		return requestForString(url, Device.getIdHttpEntity(context));
 	}
 	

@@ -79,11 +79,13 @@
 	<!-- to be translated -->
 	<string name="chart">Chart</string>
 	<string name="energy">Energy</string>
-	<string name="kwh">kWh</string>
+	<string name="wh">Wh</string>
 	<string name="power">Power</string>
-	<string name="kw">kW</string>
+	<string name="watt">Watt</string>
 	<string name="circuitUsageTimeoutMsg">Loading circuit usage timeout!</string>
-	<string name="loadingCircuitUsageError">Failed to load circuit usage!</string>
+	<string name="invalidCircuitUsage">Invalid Circuit Usage</string>
+	<string name="invalidCircuitUsageMsg">Invalid Circuit Usage</string>
+	<string name="loadingCircuitUsageError">Circuit Usage is in invalid format!</string>
 	<string name="today">Today</string>
 	<string name="current">Current</string>
 </resources>
