@@ -9,8 +9,8 @@
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name"
 		android:theme="@android:style/Theme.Black.NoTitleBar">
-		<activity android:name="Chart"
-			android:screenOrientation="portrait">
+		<activity android:name="Chart">
+			<!-- android:screenOrientation="portrait"> -->
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
@@ -20,13 +20,13 @@
 		<activity android:name="TechHome" android:screenOrientation="portrait" />
 		<activity android:name="TechAddCredit" android:screenOrientation="portrait" />
 		<activity android:name="TechAddCreditReceipt" android:screenOrientation="portrait" />
-		<activity android:name="Login" android:screenOrientation="portrait" />
+		<activity android:name="VendorHome" android:screenOrientation="portrait" />
 		<activity android:name="VendorAddCredit" android:screenOrientation="portrait" />
 		<activity android:name="VendorAddCreditReceipt"	android:screenOrientation="portrait" />
 		<activity android:name="CreditSummary" android:screenOrientation="portrait" />
 		<activity android:name="AccountList" android:screenOrientation="portrait" />
-		<activity android:name="VendorHome" />
-		<activity android:name="org.achartengine.GraphicalActivity" />
+		<activity android:name="Login" />
+		<activity android:name="org.achartengine.GraphicalActivity"/>
 	</application>
 
 </manifest>

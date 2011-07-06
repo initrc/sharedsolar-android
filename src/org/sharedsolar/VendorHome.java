@@ -45,15 +45,17 @@ public class VendorHome extends Activity {
         ((Button)findViewById(R.id.chartBtn)).setOnClickListener(new OnClickListener()
         {
         	public void onClick(View view) {
-        		/*
+        		
 				progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.loading));
 				new Thread() {
         			public void run() {
+        				/*
         				jsonString = new Connector(VendorHome.this).requestAccountList(getString(R.string.circuitUsageUrl), 
-        						VendorHome.this);
+        						VendorHome.this);*/
+        				jsonString = "";        				
         				circuitUsageHandler.sendEmptyMessage(0);
         			}
-        		}.start();*/
+        		}.start();
         		Intent intent = new Intent(view.getContext(), Chart.class);
 	            startActivity(intent);
 			}
