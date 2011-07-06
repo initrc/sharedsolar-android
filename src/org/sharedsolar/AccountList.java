@@ -46,7 +46,7 @@ public class AccountList extends ListActivity {
 						new Thread() {
 							public void run() {
 								jsonString = new Connector(AccountList.this)
-										.requestAccountList(
+										.requestForString(
 												getString(R.string.accountListUrl),
 												AccountList.this);
 								handler.sendEmptyMessage(0);

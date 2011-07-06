@@ -125,7 +125,7 @@ public final class R {
  vendor credit summary 
          */
         public static final int creditSummary=0x7f040034;
-        public static final int current=0x7f04004e;
+        public static final int current=0x7f040050;
         public static final int denomination=0x7f04001d;
         public static final int deviceLabel=0x7f040012;
         public static final int downloadError=0x7f040030;
@@ -134,15 +134,15 @@ public final class R {
         public static final int energy=0x7f040047;
         public static final int invalidAccountList=0x7f04003e;
         public static final int invalidAccountListMsg=0x7f04003f;
+        public static final int invalidCircuitUsage=0x7f04004c;
+        public static final int invalidCircuitUsageMsg=0x7f04004d;
         public static final int invalidDevice=0x7f040023;
         public static final int invalidDeviceMsg=0x7f040024;
         public static final int invalidTokens=0x7f040032;
         public static final int invalidTokensMsg=0x7f040033;
-        public static final int kw=0x7f04004a;
-        public static final int kwh=0x7f040048;
         public static final int loading=0x7f040013;
         public static final int loadingAccountListError=0x7f04003a;
-        public static final int loadingCircuitUsageError=0x7f04004c;
+        public static final int loadingCircuitUsageError=0x7f04004e;
         public static final int login=0x7f04001a;
         public static final int loginError=0x7f040014;
         public static final int logout=0x7f040017;
@@ -170,7 +170,7 @@ public final class R {
         public static final int synchronizing=0x7f040028;
         public static final int techLogin=0x7f04000f;
         public static final int timeoutValue=0x7f040007;
-        public static final int today=0x7f04004d;
+        public static final int today=0x7f04004f;
         public static final int tokenStateAtMeter=0x7f040009;
         public static final int tokenStateAtVendor=0x7f040008;
         public static final int total=0x7f040035;
@@ -197,6 +197,8 @@ public final class R {
         public static final int vendorLoginErrorMsg=0x7f040016;
         public static final int vendorLoginTimeoutMsg=0x7f040015;
         public static final int versionLabel=0x7f040011;
+        public static final int watt=0x7f04004a;
+        public static final int wh=0x7f040048;
         public static final int wrongPassword=0x7f04001b;
         /**  common words 
  common words 
