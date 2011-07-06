@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.Paint.Align;
 
 public class EnergyChart extends AbstractDemoChart {
 
@@ -59,15 +60,16 @@ public class EnergyChart extends AbstractDemoChart {
 		renderer.setOrientation(Orientation.HORIZONTAL);
 		renderer.setXLabels(0);
 		renderer.setYLabels(4);
-		renderer.setXLabelsAngle(-60);
+		renderer.setXLabelsAngle(-45);
 		renderer.setDisplayChartValues(true);
 		renderer.setTextTypeface("sans-serif", Typeface.NORMAL);
 		for (int i = 0; i < num; i++)
-			renderer.addTextLabel(i+1, "acnt" + (i+1));		
+			renderer.addTextLabel(i+1, "" + (i+1));		
 		String chartTitleLabel = context.getString(R.string.energy) + " - "
 			+ context.getString(R.string.today);
 		String chartYLabel = context.getString(R.string.energy) + " ("
 			+ context.getString(R.string.kwh) + ")";
+		renderer.setXLabelsAlign(Align.CENTER);
 		
 		// settings
 		setChartSettings(renderer, chartTitleLabel, "", chartYLabel,

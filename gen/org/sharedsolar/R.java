@@ -28,6 +28,7 @@ public final class R {
         public static final int accountRefreshLayout=0x7f070000;
         public static final int availableCredit=0x7f070006;
         public static final int chartBtn=0x7f07002a;
+        public static final int chartLayout=0x7f070005;
         public static final int creditSummaryBtn=0x7f070028;
         public static final int creditSummaryCount=0x7f070008;
         public static final int creditSummaryDenomination=0x7f070007;
@@ -50,7 +51,6 @@ public final class R {
         public static final int techLoginMenuItem=0x7f07002b;
         public static final int techPassword=0x7f070017;
         public static final int techUsername=0x7f070016;
-        public static final int textView1=0x7f070005;
         public static final int vendorAddCreditAddedCount=0x7f070024;
         public static final int vendorAddCreditAddedTV=0x7f07001e;
         public static final int vendorAddCreditAid=0x7f07001c;
@@ -69,21 +69,18 @@ public final class R {
         public static final int account_list=0x7f030000;
         public static final int account_list_item=0x7f030001;
         public static final int chart=0x7f030002;
-        public static final int chart_credit=0x7f030003;
-        public static final int chart_energy=0x7f030004;
-        public static final int chart_power=0x7f030005;
-        public static final int credit_summary=0x7f030006;
-        public static final int credit_summary_item=0x7f030007;
-        public static final int login=0x7f030008;
-        public static final int tech_add_credit=0x7f030009;
-        public static final int tech_add_credit_item=0x7f03000a;
-        public static final int tech_add_credit_receipt=0x7f03000b;
-        public static final int tech_auth=0x7f03000c;
-        public static final int tech_home=0x7f03000d;
-        public static final int vendor_add_credit=0x7f03000e;
-        public static final int vendor_add_credit_item=0x7f03000f;
-        public static final int vendor_add_credit_receipt=0x7f030010;
-        public static final int vendor_home=0x7f030011;
+        public static final int credit_summary=0x7f030003;
+        public static final int credit_summary_item=0x7f030004;
+        public static final int login=0x7f030005;
+        public static final int tech_add_credit=0x7f030006;
+        public static final int tech_add_credit_item=0x7f030007;
+        public static final int tech_add_credit_receipt=0x7f030008;
+        public static final int tech_auth=0x7f030009;
+        public static final int tech_home=0x7f03000a;
+        public static final int vendor_add_credit=0x7f03000b;
+        public static final int vendor_add_credit_item=0x7f03000c;
+        public static final int vendor_add_credit_receipt=0x7f03000d;
+        public static final int vendor_home=0x7f03000e;
     }
     public static final class menu {
         public static final int login_menu=0x7f060000;
