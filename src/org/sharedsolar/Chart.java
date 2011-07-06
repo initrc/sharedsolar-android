@@ -14,7 +14,7 @@ public class Chart extends TabActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chart);
 		
-		// tab host and spec
+		// tab host & spec
 		TabHost tabHost = getTabHost();
 		TabHost.TabSpec spec;
 		Intent intent;
