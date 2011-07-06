@@ -16,7 +16,6 @@ import org.sharedsolar.tool.MyUI;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TabHost;
 
 public class Chart extends TabActivity {
@@ -32,7 +31,6 @@ public class Chart extends TabActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			String jsonString = extras.getString("circuitUsage");
-			Log.d("d", jsonString);
 			try {
 				JSONArray jsonArray = new JSONArray(jsonString);
 				for (int i = 0; i < jsonArray.length(); i++) {
