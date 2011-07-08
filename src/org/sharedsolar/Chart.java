@@ -15,7 +15,9 @@ import org.sharedsolar.tool.MyUI;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TabHost;
 
 public class Chart extends TabActivity {
@@ -33,6 +35,7 @@ public class Chart extends TabActivity {
 			String jsonString = extras.getString("circuitUsage");
 			try {
 				JSONArray jsonArray = new JSONArray(jsonString);
+				Log.d("d", jsonString);
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 					CircuitUsageModel model = new CircuitUsageModel(
@@ -46,7 +49,6 @@ public class Chart extends TabActivity {
 				MyUI.showNeutralDialog(this,
 						R.string.invalidCircuitUsage, R.string.invalidCircuitUsageMsg,
 						R.string.ok);
-				return;
 			}
 			// sort by cid
 			Collections.sort(modelList, new CircuitUsageModelComparator());
@@ -56,6 +58,7 @@ public class Chart extends TabActivity {
 		TabHost tabHost = getTabHost();
 		TabHost.TabSpec spec;
 		Intent intent;
+		Resources res = getResources();
 
 		// data
 		ArrayList<double[]> values;
@@ -72,7 +75,8 @@ public class Chart extends TabActivity {
 		values = new ArrayList<double[]>();
 		values.add(energy);
 		intent = new EnergyChart(values, labels).execute(this);
-		spec = tabHost.newTabSpec("energy").setIndicator(getString(R.string.energy)).setContent(intent);
+		spec = tabHost.newTabSpec("energy").setIndicator(getString(R.string.energy),
+				res.getDrawable(R.drawable.ic_tab_energy)).setContent(intent);
 		tabHost.addTab(spec);
 
 		// power
@@ -83,7 +87,8 @@ public class Chart extends TabActivity {
 		values = new ArrayList<double[]>();
 		values.add(power);
 		intent = new PowerChart(values, labels).execute(this);
-		spec = tabHost.newTabSpec("power").setIndicator(getString(R.string.power)).setContent(intent);
+		spec = tabHost.newTabSpec("power").setIndicator(getString(R.string.power),
+				res.getDrawable(R.drawable.ic_tab_power)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		// credit
@@ -94,7 +99,8 @@ public class Chart extends TabActivity {
 		values = new ArrayList<double[]>();
 		values.add(cr);
 		intent = new CreditChart(values, labels).execute(this);
-		spec = tabHost.newTabSpec("credit").setIndicator(getString(R.string.credit)).setContent(intent);
+		spec = tabHost.newTabSpec("credit").setIndicator(getString(R.string.credit),
+				res.getDrawable(R.drawable.ic_tab_credit)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		tabHost.setCurrentTab(0);
