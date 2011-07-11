@@ -8,15 +8,23 @@
 	<string name="circuitUsageUrl">http://192.168.1.101:9191/admin/circuits/use</string>
     
     <!-- gateway url -->
-    <string name="uploadTokenUrl">http://testing.sharedsolar.org/manage/update_tokens</string>
-    <string name="requestTokenUrl">http://testing.sharedsolar.org/manage/make_tokens</string>
+    <string name="uploadTokenUrl">http://gateway.sharedsolar.org/manage/update_tokens</string>
+    <string name="requestTokenUrl">http://gateway.sharedsolar.org/manage/make_tokens</string>
     
     <string name="timeoutValue">10000</string>
     <string name="tokenStateAtVendor">3</string>
     <string name="tokenStateAtMeter">4</string>
+    <!--  mali 
     <string-array name="denominationValues">
         <item>500</item>
         <item>1000</item>
         <item>2000</item>
+    </string-array>
+    -->
+    <!-- uganda -->
+    <string-array name="denominationValues">
+        <item>2000</item>
+        <item>5000</item>
+        <item>10000</item>
     </string-array>
 </resources>
