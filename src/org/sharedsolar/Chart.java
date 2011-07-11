@@ -17,7 +17,6 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TabHost;
 
 public class Chart extends TabActivity {
@@ -35,7 +34,6 @@ public class Chart extends TabActivity {
 			String jsonString = extras.getString("circuitUsage");
 			try {
 				JSONArray jsonArray = new JSONArray(jsonString);
-				Log.d("d", jsonString);
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 					CircuitUsageModel model = new CircuitUsageModel(

@@ -9,6 +9,15 @@ package org.sharedsolar;
 
 public final class R {
     public static final class array {
+        /**   mali 
+    <string-array name="denominationValues">
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+    </string-array>
+    
+ uganda 
+         */
         public static final int denominationValues=0x7f050000;
     }
     public static final class attr {
