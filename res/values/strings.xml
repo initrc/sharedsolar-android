@@ -46,9 +46,11 @@
     <!-- tech token -->
     <string name="uploadingTokens">Uploading tokens to gateway...</string>
     <string name="uploadError">Upload Error</string>
+    <string name="uploadTokensTimeoutMsg">Uploading tokens timeout!</string>
 	<string name="uploadTokensErrorMsg">Failed to upload tokens. Please make sure the device is connected to the Internet.</string>
     <string name="downloadingTokens">Downloading tokens from gateway...</string>
     <string name="downloadError">Download Error</string>
+    <string name="downloadTokensTimeoutMsg">Downloading tokens timeout!</string>
 	<string name="downloadTokensErrorMsg">Failed to download tokens. Please make sure the device is connected to the Internet.</string>
     <string name="invalidTokens">Invalid Tokens</string>
     <string name="invalidTokensMsg">Tokens are in invalid format!</string>
@@ -84,8 +86,8 @@
 	<string name="watt">Watt</string>
 	<string name="circuitUsageTimeoutMsg">Loading circuit usage timeout!</string>
 	<string name="invalidCircuitUsage">Invalid Circuit Usage</string>
-	<string name="invalidCircuitUsageMsg">Invalid Circuit Usage</string>
-	<string name="loadingCircuitUsageError">Circuit Usage is in invalid format!</string>
+	<string name="invalidCircuitUsageMsg">Circuit usage is in invalid format!</string>
+	<string name="loadingCircuitUsageError">Failed to load circuit usage!</string>
 	<string name="today">Today</string>
 	<string name="current">Current</string>
 </resources>
