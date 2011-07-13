@@ -27,7 +27,7 @@
     <string name="wrongPassword">Mot de passe incorrect!</string>
     <!-- tech add credit -->
     <string name="addCredit">Ajouter de crédit</string>
-    <string name="denomination">dénomination</string>
+    <string name="denomination">Dénomination</string>
     <string name="added">ajouté</string>
     <string name="own">propriétaire</string>
     <string name="creditAddedLabel">Crédit Ajouté:</string>
@@ -46,9 +46,11 @@
     <!-- tech token -->
     <string name="uploadingTokens">Envoi des tokens vers gateway...</string>
     <string name="uploadError">Error d\'envoi</string>
+	<string name="uploadTokensTimeoutMsg">Échec d\'envoi des jetons!</string>
 	<string name="uploadTokensErrorMsg">Impossible d\'envoyer des jetons. S\'il vous plaît assurez-vous que le périphérique est connecté à Internet.</string>
     <string name="downloadingTokens">Téléchargement des jetons du gateway...</string>
     <string name="downloadError">Erreur de téléchargement</string>
+    <string name="downloadTokensTimeoutMsg">Échec de reception des jetons!</string>
 	<string name="downloadTokensErrorMsg">Impossible de recevoir des jetons. S\'il vous plaît assurez-vous que le périphérique est connecté à Internet.</string>
     <string name="invalidTokens">Jetons invalides</string>
     <string name="invalidTokensMsg">Les jetons sont au format valide!</string>
@@ -63,8 +65,8 @@
     <string name="accountList">Liste des comptes</string>
     <string name="accountListTimeoutMsg">Obtenez la liste compte!</string>
     <string name="loadingAccountListError">Impossible de charger la liste des comptes!</string>
-    <string name="account">compte</string>
-    <string name="credit">crédit</string>
+    <string name="account">Compte</string>
+    <string name="credit">Crédit</string>
     <string name="accountIdEmptyMsg">S\'il vous plaît affecter un identifiant de compte sur le circuit.</string>
     <string name="invalidAccountList">Liste des comptes est invalide</string>
     <string name="invalidAccountListMsg">Liste des comptes est au format valide!</string>
@@ -75,4 +77,16 @@
     <string name="addCreditError">Erreur en ajouter de crédit!</string>
     <string name="balanceLabel">Solde:</string>
 	<string name="newBalanceLabel">Nouveau Balance:</string>
+	<!-- vendor chart -->
+	<string name="chart">Graphique</string>
+	<string name="energy">Énergie</string>
+	<string name="wh">Wh</string>
+	<string name="power">Puissance</string>
+	<string name="watt">Watt</string>
+	<string name="circuitUsageTimeoutMsg">Échec de temps de téléchargement de l\'historique d\'utilisation de circuit!</string>
+	<string name="invalidCircuitUsage">historique d\'utilisation de circuit invalide</string>
+	<string name="invalidCircuitUsageMsg">historique d\'utilisation de circuit est dans un format invalide!</string>
+	<string name="loadingCircuitUsageError">Échec dans le téléchargement de l\'historique d\'utilisation de circuit!</string>
+	<string name="today">Aujourd\'hui</string>
+	<string name="current">Courant</string>
 </resources>
