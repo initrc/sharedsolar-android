@@ -11,16 +11,15 @@
     <string name="uploadTokenUrl">http://gateway.sharedsolar.org/manage/update_tokens</string>
     <string name="requestTokenUrl">http://gateway.sharedsolar.org/manage/make_tokens</string>
     
-    <string name="timeoutValue">10000</string>
+    <string name="timeoutValue">60000</string>
     <string name="tokenStateAtVendor">3</string>
     <string name="tokenStateAtMeter">4</string>
-    <!--  mali 
-    <string-array name="denominationValues">
+    <!--  mali --> 
+    <!--  <string-array name="denominationValues">
         <item>500</item>
         <item>1000</item>
         <item>2000</item>
-    </string-array>
-    -->
+    </string-array>-->
     <!-- uganda -->
     <string-array name="denominationValues">
         <item>2000</item>

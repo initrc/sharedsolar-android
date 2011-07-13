@@ -58,8 +58,7 @@ public class Connector {
 			httpPost.setEntity(entity);
 			HttpResponse response = httpClient.execute(httpPost);
 			String status = response.getStatusLine().toString();
-			// Log.d("d", status + " from " + url);
-			if (status.equals("HTTP/1.1 200 OK")) {
+			if (status.equals("HTTP/1.1 200 OK") || status.equals("HTTP/1.0 200 OK")) {
 				return CONNECTION_SUCCESS;
 			} else {
 				return CONNECTION_FAILURE;
@@ -118,8 +117,7 @@ public class Connector {
 			httpPost.setEntity(entity);
 			HttpResponse response = httpClient.execute(httpPost);
 			String status = response.getStatusLine().toString();
-			// Log.d("d", status + " from " + url);
-			if (status.equals("HTTP/1.1 200 OK")) {
+			if (status.equals("HTTP/1.1 200 OK") || status.equals("HTTP/1.0 200 OK")) {
 				InputStream is = response.getEntity().getContent();
 				String s = new Scanner(is).useDelimiter("\\A").next();
 				return s;

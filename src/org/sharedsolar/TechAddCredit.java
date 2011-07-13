@@ -140,12 +140,17 @@ public class TechAddCredit extends ListActivity {
 	private Handler uploadHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			progressDialog.dismiss();
-			if (uploadTokenStatus != Connector.CONNECTION_SUCCESS) {
+			if (uploadTokenStatus == Connector.CONNECTION_FAILURE) {
 				MyUI.showNeutralDialog(TechAddCredit.this,
 						R.string.uploadError,
 						R.string.uploadTokensErrorMsg, R.string.ok);
 				return;
-			}
+			} else if (uploadTokenStatus == Connector.CONNECTION_TIMEOUT) {
+				MyUI.showNeutralDialog(TechAddCredit.this,
+						R.string.uploadError,
+						R.string.uploadTokensTimeoutMsg, R.string.ok);
+				return;
+			} 
 			dbAdapter.open();
 			dbAdapter.deleteTokenAtMeter();
 			dbAdapter.close();
@@ -164,6 +169,13 @@ public class TechAddCredit extends ListActivity {
 						R.string.downloadTokensErrorMsg, R.string.ok);
 				return;
 			}
+			// timeout
+			if (requestTokenJson.equals(String.valueOf(Connector.CONNECTION_TIMEOUT))) {
+				MyUI.showNeutralDialog(TechAddCredit.this,
+						R.string.downloadError, R.string.downloadTokensTimeoutMsg,
+						R.string.ok);
+				return;
+			}
 			// check device validity
 			if (requestTokenJson.equals("\"Not a valid device\"")) {
 				MyUI.showNeutralDialog(TechAddCredit.this,
@@ -171,6 +183,7 @@ public class TechAddCredit extends ListActivity {
 						R.string.ok);
 				return;
 			}
+			
 			// insert tokens to db
 			dbAdapter.open();
 			try {
