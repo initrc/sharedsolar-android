@@ -129,7 +129,8 @@ public final class R {
         public static final int availableCredit=0x7f040038;
         public static final int availableCreditLabel=0x7f040039;
         public static final int balanceLabel=0x7f040046;
-        /**  to be translated 
+        /**  vendor chart 
+ vendor chart 
          */
         public static final int chart=0x7f040048;
         public static final int circuitUsageTimeoutMsg=0x7f04004d;

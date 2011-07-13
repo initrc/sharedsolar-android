@@ -77,8 +77,7 @@
     <string name="addCreditError">Add Credit Error!</string>
     <string name="balanceLabel">Balance:</string>
 	<string name="newBalanceLabel">New Balance:</string>
-	
-	<!-- to be translated -->
+	<!-- vendor chart -->
 	<string name="chart">Chart</string>
 	<string name="energy">Energy</string>
 	<string name="wh">Wh</string>
