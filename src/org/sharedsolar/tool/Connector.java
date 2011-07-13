@@ -58,7 +58,7 @@ public class Connector {
 			httpPost.setEntity(entity);
 			HttpResponse response = httpClient.execute(httpPost);
 			String status = response.getStatusLine().toString();
-			if (status.equals("HTTP/1.1 200 OK")) {
+			if (status.equals("HTTP/1.1 200 OK") || status.equals("HTTP/1.0 200 OK")) {
 				return CONNECTION_SUCCESS;
 			} else {
 				return CONNECTION_FAILURE;
@@ -117,15 +117,12 @@ public class Connector {
 			httpPost.setEntity(entity);
 			HttpResponse response = httpClient.execute(httpPost);
 			String status = response.getStatusLine().toString();
-			// Log.d("d", status + " from " + url);
-			if (status.equals("HTTP/1.1 200 OK")) {
+			if (status.equals("HTTP/1.1 200 OK") || status.equals("HTTP/1.0 200 OK")) {
 				InputStream is = response.getEntity().getContent();
 				String s = new Scanner(is).useDelimiter("\\A").next();
 				return s;
 			} else {
-				// TODO DEBUG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				return status;
-				// return null;
+				return null;
 				// HTTP/1.1 401 Internal Server Error
 			}
 		} catch (SocketTimeoutException e) {
@@ -133,18 +130,14 @@ public class Connector {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return e.toString();
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return e.toString();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return e.toString();
-		} catch (Exception e) {
-			return e.toString();
 		}
+		return null;
 	}
 	
 	// get account list

@@ -184,10 +184,6 @@ public class TechAddCredit extends ListActivity {
 				return;
 			}
 			
-			// TODO DEBUG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
-			MyUI.showNeutralDialog(TechAddCredit.this,
-					R.string.syncWithGateway, requestTokenJson, R.string.ok);
-			
 			// insert tokens to db
 			dbAdapter.open();
 			try {
