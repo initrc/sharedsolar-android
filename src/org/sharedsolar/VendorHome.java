@@ -49,7 +49,12 @@ public class VendorHome extends Activity {
 				progressDialog = ProgressDialog.show(view.getContext(), "", getString(R.string.loading));
 				new Thread() {
         			public void run() {
-    					jsonString = new Connector(VendorHome.this).requestForString(getString(R.string.circuitUsageUrl), 
+        				/*
+        				jsonString = "[{'aid': 'a', 'watts': '" + (int)(Math.random()*10000)/100
+    						+ "', 'wh_today': '" + (int)(Math.random()*10000)/100
+    						+ "', 'cr': '" + (int)(Math.random()*10000)/100 + "'}]";
+    					*/
+        				jsonString = new Connector(VendorHome.this).requestForString(getString(R.string.circuitUsageUrl), 
         						VendorHome.this);
     					circuitUsageHandler.sendEmptyMessage(0);
         			}

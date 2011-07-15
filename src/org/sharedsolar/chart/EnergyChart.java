@@ -46,7 +46,7 @@ public class EnergyChart extends AbstractDemoChart {
 		this.values = values;
 		this.labels = labels;
 	}
-
+	
 	public Intent execute(Context context) {
 		int num = values.get(0).length;
 		double max = 0;
