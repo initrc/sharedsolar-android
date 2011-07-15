@@ -10,6 +10,12 @@ package org.sharedsolar;
 public final class R {
     public static final class array {
         /**   mali 
+ <string-array name="denominationValues">
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+    </string-array> 
+ uganda 
          */
         public static final int denominationValues=0x7f050000;
     }
@@ -30,7 +36,7 @@ public final class R {
         public static final int refresh=0x7f02000b;
     }
     public static final class id {
-        public static final int aboutMenuItem=0x7f07002c;
+        public static final int aboutMenuItem=0x7f07002d;
         public static final int accountListAid=0x7f070003;
         public static final int accountListBtn=0x7f070029;
         public static final int accountListCr=0x7f070004;
@@ -40,6 +46,7 @@ public final class R {
         public static final int availableCredit=0x7f070006;
         public static final int chartBtn=0x7f07002a;
         public static final int chartLayout=0x7f070005;
+        public static final int chartRefreshMenuItem=0x7f07002b;
         public static final int creditSummaryBtn=0x7f070028;
         public static final int creditSummaryCount=0x7f070008;
         public static final int creditSummaryDenomination=0x7f070007;
@@ -59,7 +66,7 @@ public final class R {
         public static final int techAddCreditReceiptOkBtn=0x7f070014;
         public static final int techAddCreditSubmitBtn=0x7f07000d;
         public static final int techAuthBtn=0x7f070018;
-        public static final int techLoginMenuItem=0x7f07002b;
+        public static final int techLoginMenuItem=0x7f07002c;
         public static final int techPassword=0x7f070017;
         public static final int techUsername=0x7f070016;
         public static final int vendorAddCreditAddedCount=0x7f070024;
@@ -94,7 +101,8 @@ public final class R {
         public static final int vendor_home=0x7f03000e;
     }
     public static final class menu {
-        public static final int login_menu=0x7f060000;
+        public static final int chart_menu=0x7f060000;
+        public static final int login_menu=0x7f060001;
     }
     public static final class string {
         public static final int about=0x7f040010;
@@ -165,6 +173,9 @@ public final class R {
         public static final int own=0x7f04001f;
         public static final int password=0x7f040019;
         public static final int power=0x7f04004b;
+        /**   to be translated 
+         */
+        public static final int refresh=0x7f040053;
         public static final int remain=0x7f040043;
         public static final int requestTokenUrl=0x7f040006;
         public static final int submit=0x7f040021;
