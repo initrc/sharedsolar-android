@@ -37,6 +37,8 @@ public class Chart extends TabActivity {
 	private int currentTab = 0;
 	private ProgressDialog progressDialog;
 	private String jsonString;
+	private final int AUTO_REFRESH = 1;
+	private boolean autoRefresh = true;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +49,18 @@ public class Chart extends TabActivity {
 			jsonString = extras.getString("circuitUsage");
 			initTab(buildModel());
 		}
+	}
+	
+	public void onResume() {
+		super.onResume();
+		autoRefresh = true;
+		Log.d("d", String.valueOf(autoRefresh));
+	}
+	
+	public void onPause() {
+		super.onPause();
+		autoRefresh = false;
+		Log.d("d", String.valueOf(autoRefresh));
 	}
 
 	public ArrayList<CircuitUsageModel> buildModel() {
@@ -91,6 +105,9 @@ public class Chart extends TabActivity {
 
 		// set tab content
 		setTabContent(modelList);
+		
+		// auto refresh
+		autoRefresh();
 	}
 
 	public void setTabContent(ArrayList<CircuitUsageModel> modelList) {
@@ -105,6 +122,8 @@ public class Chart extends TabActivity {
 	}
 
 	public void updateData(ArrayList<CircuitUsageModel> modelList) {
+		currentTab = tabHost.getCurrentTab();
+		
 		// dirty fix for android's stupid bug
 		tabHost.setVisibility(View.GONE);
 		tabHost.setCurrentTab(0);
@@ -161,7 +180,6 @@ public class Chart extends TabActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.chartRefreshMenuItem:
-			currentTab = tabHost.getCurrentTab();
 			progressDialog = ProgressDialog.show(this, "",
 					getString(R.string.loading));
 			new Thread() {
@@ -185,7 +203,8 @@ public class Chart extends TabActivity {
 
 	private Handler circuitUsageHandler = new Handler() {
 		public void handleMessage(Message msg) {
-			progressDialog.dismiss();
+			if (progressDialog != null)
+				progressDialog.dismiss();
 			if (jsonString != null) {
 				if (jsonString.equals(String
 						.valueOf(Connector.CONNECTION_TIMEOUT))) {
@@ -198,6 +217,9 @@ public class Chart extends TabActivity {
 				MyUI.showNeutralDialog(Chart.this, R.string.chart,
 						R.string.loadingCircuitUsageError, R.string.ok);
 			}
+			// auto refresh
+			if (msg.what == AUTO_REFRESH && autoRefresh)
+				autoRefresh();
 		}
 	};
 
@@ -205,7 +227,6 @@ public class Chart extends TabActivity {
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		Log.d("d", "screen rotation");
-		currentTab = tabHost.getCurrentTab();
 		progressDialog = ProgressDialog.show(this, "",
 				getString(R.string.loading));
 		new Thread() {
@@ -215,5 +236,19 @@ public class Chart extends TabActivity {
 				circuitUsageHandler.sendEmptyMessage(0);
 			}
 		}.start();
+	}
+
+	private Handler refreshHandler = new Handler() {
+
+	};
+
+	private void autoRefresh() {
+		refreshHandler.postDelayed(new Runnable() {
+			public void run() {
+				jsonString = new Connector(Chart.this).requestForString(
+						getString(R.string.circuitUsageUrl), Chart.this);
+				circuitUsageHandler.sendEmptyMessage(AUTO_REFRESH);
+			}
+		}, Integer.parseInt(getString(R.string.refreshInterval)));
 	}
 }

@@ -14,6 +14,11 @@
     <string name="timeoutValue">10000</string>
     <string name="tokenStateAtVendor">3</string>
     <string name="tokenStateAtMeter">4</string>
+    
+    <!-- chart -->
+    <string name="refreshInterval">5000</string>
+    
+    <!-- denomination -->
     <!--  mali --> 
     <!-- <string-array name="denominationValues">
         <item>500</item>
