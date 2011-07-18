@@ -37,7 +37,7 @@ public final class R {
         public static final int refresh=0x7f02000b;
     }
     public static final class id {
-        public static final int aboutMenuItem=0x7f07002d;
+        public static final int aboutMenuItem=0x7f07002e;
         public static final int accountListAid=0x7f070003;
         public static final int accountListBtn=0x7f070029;
         public static final int accountListCr=0x7f070004;
@@ -45,6 +45,7 @@ public final class R {
         public static final int accountRefreshImg=0x7f070001;
         public static final int accountRefreshLayout=0x7f070000;
         public static final int availableCredit=0x7f070006;
+        public static final int chartAutoRefreshMenuItem=0x7f07002c;
         public static final int chartBtn=0x7f07002a;
         public static final int chartLayout=0x7f070005;
         public static final int chartRefreshMenuItem=0x7f07002b;
@@ -67,7 +68,7 @@ public final class R {
         public static final int techAddCreditReceiptOkBtn=0x7f070014;
         public static final int techAddCreditSubmitBtn=0x7f07000d;
         public static final int techAuthBtn=0x7f070018;
-        public static final int techLoginMenuItem=0x7f07002c;
+        public static final int techLoginMenuItem=0x7f07002d;
         public static final int techPassword=0x7f070017;
         public static final int techUsername=0x7f070016;
         public static final int vendorAddCreditAddedCount=0x7f070024;
@@ -202,6 +203,8 @@ public final class R {
         public static final int tokenStateAtMeter=0x7f040009;
         public static final int tokenStateAtVendor=0x7f040008;
         public static final int total=0x7f040038;
+        public static final int turnAutoRefreshOff=0x7f040055;
+        public static final int turnAutoRefreshOn=0x7f040056;
         public static final int uploadError=0x7f04002e;
         /**  gateway url 
          */

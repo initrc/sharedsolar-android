@@ -92,4 +92,6 @@
 	
 	<!--  to be translated -->
 	<string name="refresh">Refresh</string>
+	<string name="turnAutoRefreshOff">Turn auto-refresh off</string>
+	<string name="turnAutoRefreshOn">Turn auto-refresh on</string>
 </resources>

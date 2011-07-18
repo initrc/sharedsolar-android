@@ -17,12 +17,12 @@ import org.sharedsolar.tool.MyUI;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,6 +39,7 @@ public class Chart extends TabActivity {
 	private String jsonString;
 	private final int AUTO_REFRESH = 1;
 	private boolean autoRefresh = true;
+	private boolean active;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,18 +52,24 @@ public class Chart extends TabActivity {
 		}
 	}
 	
+	@Override
 	public void onResume() {
 		super.onResume();
-		autoRefresh = true;
-		Log.d("d", String.valueOf(autoRefresh));
+		active = true;
+		SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+		autoRefresh = preferences.getBoolean("autoRefresh", true);
 	}
 	
+	@Override
 	public void onPause() {
 		super.onPause();
-		autoRefresh = false;
-		Log.d("d", String.valueOf(autoRefresh));
+		active = false;
+		SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putBoolean("autoRefresh", autoRefresh);
+		editor.commit();
 	}
-
+	
 	public ArrayList<CircuitUsageModel> buildModel() {
 		ArrayList<CircuitUsageModel> modelList = new ArrayList<CircuitUsageModel>();
 		try {
@@ -174,6 +181,11 @@ public class Chart extends TabActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.chart_menu, menu);
+		MenuItem item = menu.getItem(1);
+		if (autoRefresh)
+			item.setTitle(R.string.turnAutoRefreshOff);
+		else
+			item.setTitle(R.string.turnAutoRefreshOn);
 		return true;
 	}
 
@@ -196,6 +208,16 @@ public class Chart extends TabActivity {
 				}
 			}.start();
 			return true;
+		case R.id.chartAutoRefreshMenuItem:
+			if (autoRefresh) {
+				autoRefresh = false;
+				item.setTitle(R.string.turnAutoRefreshOn);
+			}
+			else {
+				autoRefresh = true;
+				autoRefresh();
+				item.setTitle(R.string.turnAutoRefreshOff);
+			}
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -218,7 +240,7 @@ public class Chart extends TabActivity {
 						R.string.loadingCircuitUsageError, R.string.ok);
 			}
 			// auto refresh
-			if (msg.what == AUTO_REFRESH && autoRefresh)
+			if (msg.what == AUTO_REFRESH && autoRefresh && active)
 				autoRefresh();
 		}
 	};
@@ -226,7 +248,6 @@ public class Chart extends TabActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		Log.d("d", "screen rotation");
 		progressDialog = ProgressDialog.show(this, "",
 				getString(R.string.loading));
 		new Thread() {
