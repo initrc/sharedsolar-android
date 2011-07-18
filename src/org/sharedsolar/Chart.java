@@ -38,7 +38,8 @@ public class Chart extends TabActivity {
 	private ProgressDialog progressDialog;
 	private String jsonString;
 	private final int AUTO_REFRESH = 1;
-	private boolean autoRefresh = true;
+	private final boolean AUTO_REFRESH_DEFAULT = true;
+	private boolean autoRefresh = AUTO_REFRESH_DEFAULT;
 	private boolean active;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class Chart extends TabActivity {
 		super.onResume();
 		active = true;
 		SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-		autoRefresh = preferences.getBoolean("autoRefresh", true);
+		autoRefresh = preferences.getBoolean("autoRefresh", AUTO_REFRESH_DEFAULT);
 	}
 	
 	@Override
@@ -248,7 +249,6 @@ public class Chart extends TabActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		//setContentView(R.layout.chart);
 		if (!autoRefresh) {
 			progressDialog = ProgressDialog.show(this, "",
 					getString(R.string.loading));
