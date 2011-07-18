@@ -25,7 +25,7 @@
 		<activity android:name="VendorAddCreditReceipt"	android:screenOrientation="portrait" />
 		<activity android:name="CreditSummary" android:screenOrientation="portrait" />
 		<activity android:name="AccountList" android:screenOrientation="portrait" />
-		<activity android:name="Chart" />
+		<activity android:name="Chart" android:configChanges="orientation"/>
 		<activity android:name="org.achartengine.GraphicalActivity" />
 	</application>
 
