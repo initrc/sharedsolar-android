@@ -248,15 +248,18 @@ public class Chart extends TabActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		progressDialog = ProgressDialog.show(this, "",
-				getString(R.string.loading));
-		new Thread() {
-			public void run() {
-				jsonString = new Connector(Chart.this).requestForString(
-						getString(R.string.circuitUsageUrl), Chart.this);
-				circuitUsageHandler.sendEmptyMessage(0);
-			}
-		}.start();
+		//setContentView(R.layout.chart);
+		if (!autoRefresh) {
+			progressDialog = ProgressDialog.show(this, "",
+					getString(R.string.loading));
+			new Thread() {
+				public void run() {
+					jsonString = new Connector(Chart.this).requestForString(
+							getString(R.string.circuitUsageUrl), Chart.this);
+					circuitUsageHandler.sendEmptyMessage(0);
+				}
+			}.start();
+		}
 	}
 
 	private Handler refreshHandler = new Handler() {
