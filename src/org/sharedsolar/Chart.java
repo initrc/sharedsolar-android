@@ -17,6 +17,7 @@ import org.sharedsolar.tool.MyUI;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,17 +31,17 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 public class Chart extends TabActivity {
-	
+
 	private TabHost tabHost;
 	private TabSpec energySpec, powerSpec, creditSpec;
 	private int currentTab = 0;
 	private ProgressDialog progressDialog;
 	private String jsonString;
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chart);
-		
+
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			jsonString = extras.getString("circuitUsage");
@@ -62,20 +63,19 @@ public class Chart extends TabActivity {
 				modelList.add(model);
 			}
 		} catch (JSONException e) {
-			MyUI.showNeutralDialog(this,
-					R.string.invalidCircuitUsage, R.string.invalidCircuitUsageMsg,
-					R.string.ok);
+			MyUI.showNeutralDialog(this, R.string.invalidCircuitUsage,
+					R.string.invalidCircuitUsageMsg, R.string.ok);
 		}
 		// sort by aid
 		Collections.sort(modelList, new CircuitUsageModelComparator());
 		return modelList;
-	}		
-	
+	}
+
 	public void initTab(ArrayList<CircuitUsageModel> modelList) {
 		// tab host & spec
 		tabHost = getTabHost();
 		Resources res = getResources();
-		
+
 		// energy
 		energySpec = tabHost.newTabSpec("energy");
 		energySpec.setIndicator(getString(R.string.energy),
@@ -88,35 +88,35 @@ public class Chart extends TabActivity {
 		creditSpec = tabHost.newTabSpec("credit");
 		creditSpec.setIndicator(getString(R.string.credit),
 				res.getDrawable(R.drawable.ic_tab_credit));
-		
+
 		// set tab content
 		setTabContent(modelList);
 	}
-	
+
 	public void setTabContent(ArrayList<CircuitUsageModel> modelList) {
 		energySpec.setContent(buildIntent(modelList, "energy"));
 		powerSpec.setContent(buildIntent(modelList, "power"));
 		creditSpec.setContent(buildIntent(modelList, "credit"));
-		
+
 		tabHost.addTab(energySpec);
 		tabHost.addTab(powerSpec);
 		tabHost.addTab(creditSpec);
 		tabHost.setCurrentTab(currentTab);
 	}
-	
+
 	public void updateData(ArrayList<CircuitUsageModel> modelList) {
 		// dirty fix for android's stupid bug
 		tabHost.setVisibility(View.GONE);
 		tabHost.setCurrentTab(0);
-		
+
 		tabHost.clearAllTabs();
 		setTabContent(modelList);
-		
+
 		// dirty fix for android's stupid bug
 		tabHost.setCurrentTab(currentTab);
 		tabHost.setVisibility(View.VISIBLE);
 	}
-	
+
 	public String[] getLabels(ArrayList<CircuitUsageModel> modelList) {
 		String[] labels = new String[modelList.size()];
 		for (int i = 0; i < modelList.size(); i++) {
@@ -124,8 +124,9 @@ public class Chart extends TabActivity {
 		}
 		return labels;
 	}
-	
-	public Intent buildIntent(ArrayList<CircuitUsageModel> modelList, String type) {
+
+	public Intent buildIntent(ArrayList<CircuitUsageModel> modelList,
+			String type) {
 		ArrayList<double[]> values = new ArrayList<double[]>();
 		String[] labels = getLabels(modelList);
 		double[] value = new double[modelList.size()];
@@ -136,63 +137,83 @@ public class Chart extends TabActivity {
 				value[i] = modelList.get(i).getWatts();
 			else if (type.equals("credit"))
 				value[i] = modelList.get(i).getCr();
-		}		
+		}
 		values.add(value);
 		if (type.equals("energy"))
-			return new EnergyChart(values, labels).execute(this).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			return new EnergyChart(values, labels).execute(this).addFlags(
+					Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		else if (type.equals("power"))
-			return new PowerChart(values, labels).execute(this).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			return new PowerChart(values, labels).execute(this).addFlags(
+					Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		else if (type.equals("credit"))
-			return new CreditChart(values, labels).execute(this).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			return new CreditChart(values, labels).execute(this).addFlags(
+					Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		else
 			return null;
 	}
-	
+
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.chart_menu, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.chartRefreshMenuItem:
 			currentTab = tabHost.getCurrentTab();
-			Log.d("d", "menu: current tab = " + currentTab);
-			progressDialog = ProgressDialog.show(this, "", getString(R.string.loading));
+			progressDialog = ProgressDialog.show(this, "",
+					getString(R.string.loading));
 			new Thread() {
-    			public void run() {
-    				/*
-    				jsonString = "[{'aid': 'a', 'watts': '" + (int)(Math.random()*10000)/100
-						+ "', 'wh_today': '" + (int)(Math.random()*10000)/100
-						+ "', 'cr': '" + (int)(Math.random()*10000)/100 + "'}]";
-					*/
-					jsonString = new Connector(Chart.this).requestForString(getString(R.string.circuitUsageUrl),
-							Chart.this);
+				public void run() {
+					/*
+					 * jsonString = "[{'aid': 'a', 'watts': '" +
+					 * (int)(Math.random()*10000)/100 + "', 'wh_today': '" +
+					 * (int)(Math.random()*10000)/100 + "', 'cr': '" +
+					 * (int)(Math.random()*10000)/100 + "'}]";
+					 */
+					jsonString = new Connector(Chart.this).requestForString(
+							getString(R.string.circuitUsageUrl), Chart.this);
 					circuitUsageHandler.sendEmptyMessage(0);
-    			}
-    		}.start();
+				}
+			}.start();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	private Handler circuitUsageHandler = new Handler() {
-        public void handleMessage(Message msg) {
-        	progressDialog.dismiss();
-        	if (jsonString != null) {
-        		if (jsonString.equals(String.valueOf(Connector.CONNECTION_TIMEOUT))) {
-                    MyUI.showNeutralDialog(Chart.this, R.string.chart,
-                    		R.string.circuitUsageTimeoutMsg, R.string.ok);
-        		} else {
-        			updateData(buildModel());
-        		}
-        	}
-        	else {
-                MyUI.showNeutralDialog(Chart.this, R.string.chart,
-                		R.string.loadingCircuitUsageError, R.string.ok);
-        	}
-        }
-    };
+		public void handleMessage(Message msg) {
+			progressDialog.dismiss();
+			if (jsonString != null) {
+				if (jsonString.equals(String
+						.valueOf(Connector.CONNECTION_TIMEOUT))) {
+					MyUI.showNeutralDialog(Chart.this, R.string.chart,
+							R.string.circuitUsageTimeoutMsg, R.string.ok);
+				} else {
+					updateData(buildModel());
+				}
+			} else {
+				MyUI.showNeutralDialog(Chart.this, R.string.chart,
+						R.string.loadingCircuitUsageError, R.string.ok);
+			}
+		}
+	};
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		Log.d("d", "screen rotation");
+		currentTab = tabHost.getCurrentTab();
+		progressDialog = ProgressDialog.show(this, "",
+				getString(R.string.loading));
+		new Thread() {
+			public void run() {
+				jsonString = new Connector(Chart.this).requestForString(
+						getString(R.string.circuitUsageUrl), Chart.this);
+				circuitUsageHandler.sendEmptyMessage(0);
+			}
+		}.start();
+	}
 }
