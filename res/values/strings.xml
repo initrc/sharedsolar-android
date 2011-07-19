@@ -89,8 +89,6 @@
 	<string name="loadingCircuitUsageError">Failed to load circuit usage!</string>
 	<string name="today">Today</string>
 	<string name="current">Current</string>
-	
-	<!--  to be translated -->
 	<string name="refresh">Refresh</string>
 	<string name="turnAutoRefreshOff">Turn Auto Refresh Off</string>
 	<string name="turnAutoRefreshOn">Turn Auto Refresh On</string>

@@ -175,8 +175,6 @@ public final class R {
         public static final int own=0x7f040020;
         public static final int password=0x7f04001a;
         public static final int power=0x7f04004c;
-        /**   to be translated 
-         */
         public static final int refresh=0x7f040054;
         /**  chart 
          */
