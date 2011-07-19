@@ -89,4 +89,7 @@
 	<string name="loadingCircuitUsageError">Échec dans le téléchargement de l\'historique d\'utilisation de circuit!</string>
 	<string name="today">Aujourd\'hui</string>
 	<string name="current">Courant</string>
+	<string name="refresh">L\'actualisation</string>
+	<string name="turnAutoRefreshOff">Eteindre l\'actualisation automatique</string>
+	<string name="turnAutoRefreshOn">Allumez l\'actualisation automatique</string>
 </resources>
