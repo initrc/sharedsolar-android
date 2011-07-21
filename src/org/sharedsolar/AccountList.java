@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -61,6 +62,7 @@ public class AccountList extends ListActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			String jsonString = extras.getString("accountList");
+			Log.d("d", "AccountList: " + jsonString);
 			try {
 				JSONArray jsonArray = new JSONArray(jsonString);
 				for (int i = 0; i < jsonArray.length(); i++) {
@@ -68,7 +70,8 @@ public class AccountList extends ListActivity {
 					AccountModel model = new AccountModel(
 							jsonObject.getString("aid"),
 							jsonObject.getString("cid"),
-							(int) (jsonObject.getDouble("cr") * 100));
+							(int) (jsonObject.getDouble("cr") * 100),
+							jsonObject.getBoolean("status"));
 					modelList.add(model);
 				}
 			} catch (JSONException e) {

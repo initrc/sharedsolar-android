@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class AccountListAdapter extends ArrayAdapter<AccountModel> {
 
@@ -41,7 +42,7 @@ public class AccountListAdapter extends ArrayAdapter<AccountModel> {
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.account_list_item, null);
 			holder = new ViewHolder();
-			holder.idText = (TextView)convertView.findViewById(R.id.accountListNo);
+			holder.statusBtn = (ToggleButton)convertView.findViewById(R.id.accountStatus);
 			holder.aidText = (TextView)convertView.findViewById(R.id.accountListAid);
 			holder.crText = (TextView)convertView.findViewById(R.id.accountListCr);
 			convertView.setTag(holder);
@@ -51,7 +52,7 @@ public class AccountListAdapter extends ArrayAdapter<AccountModel> {
 		
 		AccountModel model = modelList.get(position);
 		if (model != null) {
-			holder.idText.setText(String.valueOf(position + 1));
+			holder.statusBtn.setChecked(model.getStatus());
 			holder.aidText.setText(model.getAid());
 			DecimalFormat df = new DecimalFormat("#0.00");
 			holder.crText.setText(df.format(model.getCr()/100.00));
@@ -61,7 +62,7 @@ public class AccountListAdapter extends ArrayAdapter<AccountModel> {
 	}
 	
 	static class ViewHolder {
-		TextView idText;
+		ToggleButton statusBtn;
 		TextView aidText;
 		TextView crText;
 	}
