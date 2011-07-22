@@ -4,6 +4,7 @@
 	<string name="syncUrl">http://192.168.1.101:9191/fieldtech/device/sync</string>
     <string name="validateUrl">http://192.168.1.101:9191/vendor/validate</string>
     <string name="accountListUrl">http://192.168.1.101:9191/vendor/accounts/list</string>
+    <string name="toggleStatusUrl">http://192.168.1.101:9191/vendor/account/toggle</string>
     <string name="addCreditUrl">http://192.168.1.101:9191/vendor/account/credit/add</string>
 	<string name="circuitUsageUrl">http://192.168.1.101:9191/admin/circuits/use</string>
     

@@ -107,132 +107,133 @@ public final class R {
         public static final int login_menu=0x7f060001;
     }
     public static final class string {
-        public static final int about=0x7f040011;
-        public static final int account=0x7f04003e;
-        public static final int accountIdEmptyMsg=0x7f040040;
+        public static final int about=0x7f040012;
+        public static final int account=0x7f04003f;
+        public static final int accountIdEmptyMsg=0x7f040041;
         /**  vendor add credit 
  vendor add credit 
          */
-        public static final int accountLabel=0x7f040043;
+        public static final int accountLabel=0x7f040044;
         /**  vendor account list 
  vendor account list 
          */
-        public static final int accountList=0x7f04003b;
-        public static final int accountListTimeoutMsg=0x7f04003c;
+        public static final int accountList=0x7f04003c;
+        public static final int accountListTimeoutMsg=0x7f04003d;
         public static final int accountListUrl=0x7f040002;
         /**  tech add credit 
  tech add credit 
          */
-        public static final int addCredit=0x7f04001d;
-        public static final int addCreditConfirm=0x7f040023;
-        public static final int addCreditError=0x7f040046;
-        public static final int addCreditTimeout=0x7f040045;
-        public static final int addCreditUrl=0x7f040003;
-        public static final int added=0x7f04001f;
-        public static final int app_name=0x7f04000b;
-        public static final int availableCredit=0x7f040039;
-        public static final int availableCreditLabel=0x7f04003a;
-        public static final int balanceLabel=0x7f040047;
+        public static final int addCredit=0x7f04001e;
+        public static final int addCreditConfirm=0x7f040024;
+        public static final int addCreditError=0x7f040047;
+        public static final int addCreditTimeout=0x7f040046;
+        public static final int addCreditUrl=0x7f040004;
+        public static final int added=0x7f040020;
+        public static final int app_name=0x7f04000c;
+        public static final int availableCredit=0x7f04003a;
+        public static final int availableCreditLabel=0x7f04003b;
+        public static final int balanceLabel=0x7f040048;
         /**  vendor chart 
  vendor chart 
          */
-        public static final int chart=0x7f040049;
-        public static final int circuitUsageTimeoutMsg=0x7f04004e;
-        public static final int circuitUsageUrl=0x7f040004;
-        public static final int credit=0x7f04003f;
-        public static final int creditAddedLabel=0x7f040021;
+        public static final int chart=0x7f04004a;
+        public static final int circuitUsageTimeoutMsg=0x7f04004f;
+        public static final int circuitUsageUrl=0x7f040005;
+        public static final int credit=0x7f040040;
+        public static final int creditAddedLabel=0x7f040022;
         /**  vendor 
  vendor credit summary 
  vendor 
  vendor credit summary 
          */
-        public static final int creditSummary=0x7f040037;
-        public static final int current=0x7f040053;
-        public static final int denomination=0x7f04001e;
-        public static final int deviceLabel=0x7f040013;
-        public static final int downloadError=0x7f040032;
-        public static final int downloadTokensErrorMsg=0x7f040034;
-        public static final int downloadTokensTimeoutMsg=0x7f040033;
-        public static final int downloadingTokens=0x7f040031;
-        public static final int energy=0x7f04004a;
-        public static final int invalidAccountList=0x7f040041;
-        public static final int invalidAccountListMsg=0x7f040042;
-        public static final int invalidCircuitUsage=0x7f04004f;
-        public static final int invalidCircuitUsageMsg=0x7f040050;
-        public static final int invalidDevice=0x7f040024;
-        public static final int invalidDeviceMsg=0x7f040025;
-        public static final int invalidTokens=0x7f040035;
-        public static final int invalidTokensMsg=0x7f040036;
-        public static final int loading=0x7f040014;
-        public static final int loadingAccountListError=0x7f04003d;
-        public static final int loadingCircuitUsageError=0x7f040051;
-        public static final int login=0x7f04001b;
-        public static final int loginError=0x7f040015;
-        public static final int logout=0x7f040018;
-        public static final int newBalanceLabel=0x7f040048;
-        public static final int no=0x7f04000d;
-        public static final int ok=0x7f04000e;
-        public static final int own=0x7f040020;
-        public static final int password=0x7f04001a;
-        public static final int power=0x7f04004c;
-        public static final int refresh=0x7f040054;
+        public static final int creditSummary=0x7f040038;
+        public static final int current=0x7f040054;
+        public static final int denomination=0x7f04001f;
+        public static final int deviceLabel=0x7f040014;
+        public static final int downloadError=0x7f040033;
+        public static final int downloadTokensErrorMsg=0x7f040035;
+        public static final int downloadTokensTimeoutMsg=0x7f040034;
+        public static final int downloadingTokens=0x7f040032;
+        public static final int energy=0x7f04004b;
+        public static final int invalidAccountList=0x7f040042;
+        public static final int invalidAccountListMsg=0x7f040043;
+        public static final int invalidCircuitUsage=0x7f040050;
+        public static final int invalidCircuitUsageMsg=0x7f040051;
+        public static final int invalidDevice=0x7f040025;
+        public static final int invalidDeviceMsg=0x7f040026;
+        public static final int invalidTokens=0x7f040036;
+        public static final int invalidTokensMsg=0x7f040037;
+        public static final int loading=0x7f040015;
+        public static final int loadingAccountListError=0x7f04003e;
+        public static final int loadingCircuitUsageError=0x7f040052;
+        public static final int login=0x7f04001c;
+        public static final int loginError=0x7f040016;
+        public static final int logout=0x7f040019;
+        public static final int newBalanceLabel=0x7f040049;
+        public static final int no=0x7f04000e;
+        public static final int ok=0x7f04000f;
+        public static final int own=0x7f040021;
+        public static final int password=0x7f04001b;
+        public static final int power=0x7f04004d;
+        public static final int refresh=0x7f040055;
         /**  chart 
          */
-        public static final int refreshInterval=0x7f04000a;
-        public static final int remain=0x7f040044;
-        public static final int requestTokenUrl=0x7f040006;
-        public static final int submit=0x7f040022;
+        public static final int refreshInterval=0x7f04000b;
+        public static final int remain=0x7f040045;
+        public static final int requestTokenUrl=0x7f040007;
+        public static final int submit=0x7f040023;
         /**  tech sync device 
  tech sync device 
          */
-        public static final int sync=0x7f040026;
-        public static final int syncCompleted=0x7f04002a;
-        public static final int syncError=0x7f04002c;
-        public static final int syncTimeout=0x7f04002b;
+        public static final int sync=0x7f040027;
+        public static final int syncCompleted=0x7f04002b;
+        public static final int syncError=0x7f04002d;
+        public static final int syncTimeout=0x7f04002c;
         /**  meter url 
          */
         public static final int syncUrl=0x7f040000;
-        public static final int syncWithGateway=0x7f040028;
-        public static final int syncWithMeter=0x7f040027;
-        public static final int synchronizing=0x7f040029;
-        public static final int techLogin=0x7f040010;
-        public static final int timeoutValue=0x7f040007;
-        public static final int today=0x7f040052;
-        public static final int tokenStateAtMeter=0x7f040009;
-        public static final int tokenStateAtVendor=0x7f040008;
-        public static final int total=0x7f040038;
-        public static final int turnAutoRefreshOff=0x7f040055;
-        public static final int turnAutoRefreshOn=0x7f040056;
-        public static final int uploadError=0x7f04002e;
+        public static final int syncWithGateway=0x7f040029;
+        public static final int syncWithMeter=0x7f040028;
+        public static final int synchronizing=0x7f04002a;
+        public static final int techLogin=0x7f040011;
+        public static final int timeoutValue=0x7f040008;
+        public static final int today=0x7f040053;
+        public static final int toggleStatusUrl=0x7f040003;
+        public static final int tokenStateAtMeter=0x7f04000a;
+        public static final int tokenStateAtVendor=0x7f040009;
+        public static final int total=0x7f040039;
+        public static final int turnAutoRefreshOff=0x7f040056;
+        public static final int turnAutoRefreshOn=0x7f040057;
+        public static final int uploadError=0x7f04002f;
         /**  gateway url 
          */
-        public static final int uploadTokenUrl=0x7f040005;
-        public static final int uploadTokensErrorMsg=0x7f040030;
-        public static final int uploadTokensTimeoutMsg=0x7f04002f;
+        public static final int uploadTokenUrl=0x7f040006;
+        public static final int uploadTokensErrorMsg=0x7f040031;
+        public static final int uploadTokensTimeoutMsg=0x7f040030;
         /**  tech token 
  tech token 
          */
-        public static final int uploadingTokens=0x7f04002d;
+        public static final int uploadingTokens=0x7f04002e;
         /**  tech 
  tech auth 
  tech 
  tech auth 
          */
-        public static final int username=0x7f040019;
+        public static final int username=0x7f04001a;
         public static final int validateUrl=0x7f040001;
         /**  home 
  home 
          */
-        public static final int vendorLogin=0x7f04000f;
-        public static final int vendorLoginErrorMsg=0x7f040017;
-        public static final int vendorLoginTimeoutMsg=0x7f040016;
-        public static final int versionLabel=0x7f040012;
-        public static final int watt=0x7f04004d;
-        public static final int wh=0x7f04004b;
-        public static final int wrongPassword=0x7f04001c;
+        public static final int vendorLogin=0x7f040010;
+        public static final int vendorLoginErrorMsg=0x7f040018;
+        public static final int vendorLoginTimeoutMsg=0x7f040017;
+        public static final int versionLabel=0x7f040013;
+        public static final int watt=0x7f04004e;
+        public static final int wh=0x7f04004c;
+        public static final int wrongPassword=0x7f04001d;
         /**  common words 
  common words 
          */
-        public static final int yes=0x7f04000c;
+        public static final int yes=0x7f04000d;
     }
 }
