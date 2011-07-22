@@ -25,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ToggleButton;
 
 public class AccountList extends ListActivity {
 
@@ -50,7 +51,7 @@ public class AccountList extends ListActivity {
 										.requestForString(
 												getString(R.string.accountListUrl),
 												AccountList.this);
-								handler.sendEmptyMessage(0);
+								accountListHandler.sendEmptyMessage(0);
 							}
 						}.start();
 					}
@@ -83,7 +84,7 @@ public class AccountList extends ListActivity {
 			// sort by aid
 			Collections.sort(modelList, new AccountModelComparator());
 			accountListAdapter = new AccountListAdapter(this,
-					R.layout.account_list_item, modelList);
+					R.layout.account_list_item, modelList, statusToggleHandler);
 			setListAdapter(accountListAdapter);
 			getListView().setOnItemClickListener(itemClickListener);
 		}
@@ -109,7 +110,7 @@ public class AccountList extends ListActivity {
 		}
 	};
 
-	private Handler handler = new Handler() {
+	private Handler accountListHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			progressDialog.dismiss();
 			if (jsonString != null) {
@@ -127,4 +128,23 @@ public class AccountList extends ListActivity {
 			}
 		}
 	};
+	
+	private Handler statusToggleHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			boolean checked = msg.what % 2 != 0;
+			int index = msg.what / 2;
+			AccountModel accountModel = modelList.get(index);
+			ToggleButton btn = (ToggleButton) msg.obj;
+			Log.d("d", "checked: " + btn.isChecked());
+			
+			// dialog
+			
+			Connector connector = new Connector(AccountList.this);
+			int status = connector.vendorToggleStatus(
+					getString(R.string.toggleStatusUrl), AccountList.this,
+					accountModel.getAid(), checked);
+			Log.d("d", "conn: " + status);
+		}
+	};
+	
 }

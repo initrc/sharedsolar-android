@@ -7,22 +7,27 @@ import org.sharedsolar.model.AccountModel;
 import org.sharedsolar.R;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class AccountListAdapter extends ArrayAdapter<AccountModel> {
+public class AccountListAdapter extends ArrayAdapter<AccountModel> implements OnClickListener{
 
 	private LayoutInflater mInflater;
 	private ArrayList<AccountModel> modelList;
+	private Handler statusToggleHandler;
 	
-	public AccountListAdapter(Context context, int textViewResourceId, ArrayList<AccountModel> modelList) {
+	public AccountListAdapter(Context context, int textViewResourceId, ArrayList<AccountModel> modelList, Handler statusToggleHandler) {
 		super(context, textViewResourceId);
 		mInflater = LayoutInflater.from(context);
 		this.modelList = modelList;
+		this.statusToggleHandler = statusToggleHandler;
 	}
 	
 	public int getCount() {
@@ -49,6 +54,8 @@ public class AccountListAdapter extends ArrayAdapter<AccountModel> {
 		} else {
 			holder = (ViewHolder)convertView.getTag();
 		}
+		holder.statusBtn.setTag(position);
+		holder.statusBtn.setOnClickListener(this);
 		
 		AccountModel model = modelList.get(position);
 		if (model != null) {
@@ -61,8 +68,18 @@ public class AccountListAdapter extends ArrayAdapter<AccountModel> {
 		return convertView;
 	}
 	
-	static class ViewHolder {
-		ToggleButton statusBtn;
+	public void onClick(View view) {
+		ToggleButton btn = (ToggleButton) view;
+		int msgWhat = (Integer) btn.getTag() * 2;
+		msgWhat += btn.isChecked() ? 1 : 0;
+		Message msg = new Message();
+		msg.obj = btn;
+		msg.what = msgWhat;
+		statusToggleHandler.sendMessage(msg);
+	}
+	
+	public static class ViewHolder {
+		public ToggleButton statusBtn;
 		TextView aidText;
 		TextView crText;
 	}
