@@ -100,8 +100,29 @@ public class Connector {
 		return null;
 	}
 	
+	public HttpEntity getAccountEntity(Context context, String aid, boolean status) {
+		DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+		dbAdapter.open();
+		nameValuePairs.add(Device.getIdPair(context));
+		nameValuePairs.add(new BasicNameValuePair("aid", aid));
+		nameValuePairs.add(new BasicNameValuePair("status", status ? "1" : "0"));
+		dbAdapter.close();
+		try {
+			return new UrlEncodedFormEntity(nameValuePairs);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public int vendorAddCredit(String url, Context context, String aid, String cid, int cr) {
 		return connect(url, getAccountEntity(context, aid, cid, cr));
+	}
+	
+	public int vendorToggleStatus(String url, Context context, String aid, boolean status) {
+		return connect(url, getAccountEntity(context, aid, status));
 	}
 	
 	// http connection, return json string
