@@ -92,4 +92,13 @@
 	<string name="refresh">Refresh</string>
 	<string name="turnAutoRefreshOff">Turn Auto Refresh Off</string>
 	<string name="turnAutoRefreshOn">Turn Auto Refresh On</string>
+	
+	<!-- to be translated -->
+	<string name="circuitSwitch">Circuit Switch</string>
+	<string name="switchConfirm">Are you sure you want to switch account</string>
+	<string name="switchingCircuit">Switching Circuit ...</string>
+	<string name="switchCircuitTimeout">Switch Circuit Timeout!</string>
+	<string name="switchCircuitError">Switch Circuit Error!</string>
+	<string name="on">ON</string>
+	<string name="off">OFF</string>
 </resources>
