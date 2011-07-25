@@ -6,6 +6,8 @@
     <string name="yes">Oui</string>
     <string name="no">Aucun</string>
     <string name="ok">OK</string>
+    <string name="on">ON</string>
+	<string name="off">OFF</string>
     
     <!-- home -->
     <string name="vendorLogin">Identifiant vendeur</string>
@@ -44,11 +46,11 @@
     <string name="syncTimeout">Timeout de synchronisation!</string>
     <string name="syncError">Error de Synchronisation!</string>
     <!-- tech token -->
-    <string name="uploadingTokens">Envoi des tokens vers gateway...</string>
+    <string name="uploadingTokens">Envoi des tokens vers gateway ...</string>
     <string name="uploadError">Error d\'envoi</string>
 	<string name="uploadTokensTimeoutMsg">Échec d\'envoi des jetons!</string>
 	<string name="uploadTokensErrorMsg">Impossible d\'envoyer des jetons. S\'il vous plaît assurez-vous que le périphérique est connecté à Internet.</string>
-    <string name="downloadingTokens">Téléchargement des jetons du gateway...</string>
+    <string name="downloadingTokens">Téléchargement des jetons du gateway ...</string>
     <string name="downloadError">Erreur de téléchargement</string>
     <string name="downloadTokensTimeoutMsg">Échec de reception des jetons!</string>
 	<string name="downloadTokensErrorMsg">Impossible de recevoir des jetons. S\'il vous plaît assurez-vous que le périphérique est connecté à Internet.</string>
@@ -92,4 +94,10 @@
 	<string name="refresh">L\'actualisation</string>
 	<string name="turnAutoRefreshOff">Eteindre l\'actualisation automatique</string>
 	<string name="turnAutoRefreshOn">Allumez l\'actualisation automatique</string>
+	<!-- vendor switch circuit -->
+	<string name="circuitSwitch">Interrupteur de circuit</string>
+	<string name="switchConfirm">Etes-vous sûr de vouloir le interrupteur de la compte</string>
+	<string name="switchingCircuit">En course d\'interruption de circuit ...</string>
+	<string name="switchCircuitTimeout">Erreur de  temporisation!</string>
+	<string name="switchCircuitError">Erreur dans l\'interruption de circuit!</string>
 </resources>
