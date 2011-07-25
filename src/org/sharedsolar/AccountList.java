@@ -180,9 +180,9 @@ public class AccountList extends ListActivity {
 				toggleBtn.setChecked(!toggleBtn.isChecked());
 			} else {
 				if (status == Connector.CONNECTION_TIMEOUT) {
-					message = R.string.addCreditTimeout;
+					message = R.string.switchCircuitTimeout;
 				} else {
-					message = R.string.addCreditError;
+					message = R.string.switchCircuitError;
 				}
 				MyUI.showNeutralDialog(AccountList.this, R.string.circuitSwitch,
 						message, R.string.ok);

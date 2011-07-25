@@ -6,14 +6,16 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok">OK</string>
-    
+    <string name="on">ON</string>
+	<string name="off">OFF</string>
+	
     <!-- home -->
     <string name="vendorLogin">Vendor Login</string>
     <string name="techLogin">Tech Login</string>
     <string name="about">About</string>
     <string name="versionLabel">Version:</string>
 	<string name="deviceLabel">Device:</string>    
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading ...</string>
     <string name="loginError">Login Error</string>
     <string name="vendorLoginTimeoutMsg">Login timeout! Please check wifi connection.</string>
     <string name="vendorLoginErrorMsg">Device needs to be synchronized by a field tech!</string>
@@ -39,16 +41,16 @@
     <string name="sync">Sync</string>
     <string name="syncWithMeter">Sync with Meter</string>
 	<string name="syncWithGateway">Sync with Gateway</string>
-    <string name="synchronizing">Synchronizing...</string>
+    <string name="synchronizing">Synchronizing ...</string>
     <string name="syncCompleted">Sync Completed!</string>
     <string name="syncTimeout">Sync Timeout!</string>
     <string name="syncError">Sync Error!</string>
     <!-- tech token -->
-    <string name="uploadingTokens">Uploading tokens to gateway...</string>
+    <string name="uploadingTokens">Uploading tokens to gateway ...</string>
     <string name="uploadError">Upload Error</string>
     <string name="uploadTokensTimeoutMsg">Uploading tokens timeout!</string>
 	<string name="uploadTokensErrorMsg">Failed to upload tokens. Please make sure the device is connected to the Internet.</string>
-    <string name="downloadingTokens">Downloading tokens from gateway...</string>
+    <string name="downloadingTokens">Downloading tokens from gateway ...</string>
     <string name="downloadError">Download Error</string>
     <string name="downloadTokensTimeoutMsg">Downloading tokens timeout!</string>
 	<string name="downloadTokensErrorMsg">Failed to download tokens. Please make sure the device is connected to the Internet.</string>
@@ -92,13 +94,10 @@
 	<string name="refresh">Refresh</string>
 	<string name="turnAutoRefreshOff">Turn Auto Refresh Off</string>
 	<string name="turnAutoRefreshOn">Turn Auto Refresh On</string>
-	
-	<!-- to be translated -->
+	<!-- vendor switch circuit -->
 	<string name="circuitSwitch">Circuit Switch</string>
 	<string name="switchConfirm">Are you sure you want to switch account</string>
 	<string name="switchingCircuit">Switching Circuit ...</string>
 	<string name="switchCircuitTimeout">Switch Circuit Timeout!</string>
-	<string name="switchCircuitError">Switch Circuit Error!</string>
-	<string name="on">ON</string>
-	<string name="off">OFF</string>
+	<string name="switchCircuitError">Switch Circuit Error!</string>	
 </resources>
