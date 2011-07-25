@@ -15,6 +15,7 @@ import org.sharedsolar.tool.MyUI;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +34,9 @@ public class AccountList extends ListActivity {
 	private AccountListAdapter accountListAdapter;
 	private ProgressDialog progressDialog;
 	private String jsonString;
+	private String aidToSwitch;
+	private boolean aidSwitchStatus;
+	private ToggleButton toggleBtn;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,15 +80,14 @@ public class AccountList extends ListActivity {
 					modelList.add(model);
 				}
 			} catch (JSONException e) {
-				MyUI.showNeutralDialog(this,
-						R.string.invalidAccountList, R.string.invalidAccountListMsg,
-						R.string.ok);
+				MyUI.showNeutralDialog(this, R.string.invalidAccountList,
+						R.string.invalidAccountListMsg, R.string.ok);
 				return;
 			}
 			// sort by aid
 			Collections.sort(modelList, new AccountModelComparator());
 			accountListAdapter = new AccountListAdapter(this,
-					R.layout.account_list_item, modelList, statusToggleHandler);
+					R.layout.account_list_item, modelList, circuitSwitchHandler);
 			setListAdapter(accountListAdapter);
 			getListView().setOnItemClickListener(itemClickListener);
 		}
@@ -96,9 +99,11 @@ public class AccountList extends ListActivity {
 			AccountModel model = (AccountModel) (getListView()
 					.getItemAtPosition(position));
 			if (model.getAid().equals("")) {
-				MyUI.showNeutralDialog(view.getContext(), R.string.accountList,
-						getString(R.string.accountIdEmptyMsg) + " "	+ model.getCid(), 
-						R.string.ok);
+				MyUI.showNeutralDialog(
+						view.getContext(),
+						R.string.accountList,
+						getString(R.string.accountIdEmptyMsg) + " "
+								+ model.getCid(), R.string.ok);
 			} else {
 				Intent intent = new Intent(view.getContext(),
 						VendorAddCredit.class);
@@ -116,7 +121,8 @@ public class AccountList extends ListActivity {
 			if (jsonString != null) {
 				if (jsonString.equals(String
 						.valueOf(Connector.CONNECTION_TIMEOUT))) {
-					MyUI.showNeutralDialog(AccountList.this, R.string.accountList,
+					MyUI.showNeutralDialog(AccountList.this,
+							R.string.accountList,
 							R.string.accountListTimeoutMsg, R.string.ok);
 				} else {
 					getIntent().putExtra("accountList", jsonString);
@@ -128,23 +134,59 @@ public class AccountList extends ListActivity {
 			}
 		}
 	};
-	
-	private Handler statusToggleHandler = new Handler() {
+
+	private Handler circuitSwitchHandler = new Handler() {
 		public void handleMessage(Message msg) {
-			boolean checked = msg.what % 2 != 0;
 			int index = msg.what / 2;
 			AccountModel accountModel = modelList.get(index);
-			ToggleButton btn = (ToggleButton) msg.obj;
-			Log.d("d", "checked: " + btn.isChecked());
-			
-			// dialog
-			
-			Connector connector = new Connector(AccountList.this);
-			int status = connector.vendorToggleStatus(
-					getString(R.string.toggleStatusUrl), AccountList.this,
-					accountModel.getAid(), checked);
-			Log.d("d", "conn: " + status);
+			aidSwitchStatus = msg.what % 2 != 0;
+			aidToSwitch = accountModel.getAid();
+			toggleBtn = (ToggleButton) msg.obj;
+
+			String message = getString(R.string.switchConfirm) + " "
+					+ accountModel.getAid() + " "
+					+ getString(aidSwitchStatus ? R.string.on : R.string.off) + "?";
+			MyUI.showlDialog(AccountList.this, R.string.circuitSwitch, message,
+					R.string.yes, R.string.no,
+					switchDialoguePositiveClickListener);
 		}
 	};
-	
+
+	DialogInterface.OnClickListener switchDialoguePositiveClickListener = new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int id) {
+			dialog.cancel();
+
+			progressDialog = ProgressDialog.show(AccountList.this, "",
+					getString(R.string.switchingCircuit));
+			new Thread() {
+				public void run() {
+					Connector connector = new Connector(AccountList.this);
+					int status = connector.vendorToggleStatus(
+							getString(R.string.toggleStatusUrl),
+							AccountList.this, aidToSwitch, aidSwitchStatus);
+					circuitSwitchDoneHandler.sendEmptyMessage(status);
+				}
+			}.start();
+		}
+	};
+
+	private Handler circuitSwitchDoneHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			progressDialog.dismiss();
+
+			int status = msg.what;
+			int message;
+			if (status == Connector.CONNECTION_SUCCESS) {
+				toggleBtn.setChecked(!toggleBtn.isChecked());
+			} else {
+				if (status == Connector.CONNECTION_TIMEOUT) {
+					message = R.string.addCreditTimeout;
+				} else {
+					message = R.string.addCreditError;
+				}
+				MyUI.showNeutralDialog(AccountList.this, R.string.circuitSwitch,
+						message, R.string.ok);
+			}
+		}
+	};
 }

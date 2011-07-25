@@ -137,6 +137,9 @@ public final class R {
  vendor chart 
          */
         public static final int chart=0x7f04004a;
+        /**  to be translated 
+         */
+        public static final int circuitSwitch=0x7f040058;
         public static final int circuitUsageTimeoutMsg=0x7f04004f;
         public static final int circuitUsageUrl=0x7f040005;
         public static final int credit=0x7f040040;
@@ -171,7 +174,9 @@ public final class R {
         public static final int logout=0x7f040019;
         public static final int newBalanceLabel=0x7f040049;
         public static final int no=0x7f04000e;
+        public static final int off=0x7f04005e;
         public static final int ok=0x7f04000f;
+        public static final int on=0x7f04005d;
         public static final int own=0x7f040021;
         public static final int password=0x7f04001b;
         public static final int power=0x7f04004d;
@@ -182,6 +187,10 @@ public final class R {
         public static final int remain=0x7f040045;
         public static final int requestTokenUrl=0x7f040007;
         public static final int submit=0x7f040023;
+        public static final int switchCircuitError=0x7f04005c;
+        public static final int switchCircuitTimeout=0x7f04005b;
+        public static final int switchConfirm=0x7f040059;
+        public static final int switchingCircuit=0x7f04005a;
         /**  tech sync device 
  tech sync device 
          */
