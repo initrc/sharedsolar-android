@@ -75,6 +75,8 @@ public class AccountListAdapter extends ArrayAdapter<AccountModel> implements On
 		Message msg = new Message();
 		msg.obj = btn;
 		msg.what = msgWhat;
+		// set checked after the confirm dialog
+		btn.setChecked(!btn.isChecked());
 		statusToggleHandler.sendMessage(msg);
 	}
 	
