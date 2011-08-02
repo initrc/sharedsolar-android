@@ -90,6 +90,7 @@ public class Login extends Activity {
 					+ getString(R.string.deviceLabel) + " "
 					+ Device.getId(this);
 			MyUI.showNeutralDialog(this, R.string.about, message, R.string.ok);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
