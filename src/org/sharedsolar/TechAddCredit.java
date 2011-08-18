@@ -152,7 +152,7 @@ public class TechAddCredit extends ListActivity {
 				return;
 			} 
 			dbAdapter.open();
-			dbAdapter.deleteTokenAtMeter();
+			dbAdapter.expireTokenAtMeter();
 			dbAdapter.close();
 			MyUI.showNeutralDialog(TechAddCredit.this,
 					R.string.syncWithGateway,

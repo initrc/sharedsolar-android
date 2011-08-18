@@ -15,6 +15,7 @@
     <string name="timeoutValue">10000</string>
     <string name="tokenStateAtVendor">3</string>
     <string name="tokenStateAtMeter">4</string>
+    <string name="tokenStateExpired">-1</string>
     
     <!-- chart -->
     <string name="refreshInterval">5000</string>
