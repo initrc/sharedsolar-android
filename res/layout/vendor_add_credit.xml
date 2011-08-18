@@ -14,7 +14,7 @@
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content">
 		<TextView android:text="@string/denomination"
-			android:layout_width="180dip" android:layout_height="wrap_content"
+			android:layout_width="190dip" android:layout_height="wrap_content"
 			android:paddingLeft="90dip" />
 		<TextView android:text="@string/added" android:layout_width="60dip"
 			android:layout_height="wrap_content" android:gravity="right" />
