@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -67,7 +66,6 @@ public class AccountList extends ListActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			String jsonString = extras.getString("accountList");
-			Log.d("d", "AccountList: " + jsonString);
 			try {
 				JSONArray jsonArray = new JSONArray(jsonString);
 				for (int i = 0; i < jsonArray.length(); i++) {
@@ -139,6 +137,14 @@ public class AccountList extends ListActivity {
 		public void handleMessage(Message msg) {
 			int index = msg.what / 2;
 			AccountModel accountModel = modelList.get(index);
+			
+			// check if credit = 0
+			if (accountModel.getCr() == 0) {
+				MyUI.showNeutralDialog(AccountList.this, R.string.insufficientCredit, 
+						R.string.insufficientCreditMsg, R.string.ok);
+				return;
+			}
+			
 			aidSwitchStatus = msg.what % 2 != 0;
 			aidToSwitch = accountModel.getAid();
 			toggleBtn = (ToggleButton) msg.obj;

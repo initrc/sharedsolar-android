@@ -99,5 +99,8 @@
 	<string name="switchConfirm">Are you sure you want to switch account</string>
 	<string name="switchingCircuit">Switching Circuit ...</string>
 	<string name="switchCircuitTimeout">Switch Circuit Timeout!</string>
-	<string name="switchCircuitError">Switch Circuit Error!</string>	
+	<string name="switchCircuitError">Switch Circuit Error!</string>
+	<!-- to be translated -->
+	<string name="insufficientCredit">Insufficient Credit</string>
+	<string name="insufficientCreditMsg">The credit for this account is 0. Please refill before switching it on.</string>	
 </resources>

@@ -166,6 +166,10 @@ public final class R {
         public static final int downloadTokensTimeoutMsg=0x7f040036;
         public static final int downloadingTokens=0x7f040034;
         public static final int energy=0x7f04004d;
+        /**  to be translated 
+         */
+        public static final int insufficientCredit=0x7f04005f;
+        public static final int insufficientCreditMsg=0x7f040060;
         public static final int invalidAccountList=0x7f040044;
         public static final int invalidAccountListMsg=0x7f040045;
         public static final int invalidCircuitUsage=0x7f040052;
