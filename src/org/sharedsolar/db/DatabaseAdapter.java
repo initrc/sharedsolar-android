@@ -26,11 +26,13 @@ public class DatabaseAdapter {
 	
 	private final int TOKEN_STATE_AT_VENDOR;
 	private final int TOKEN_STATE_AT_METER;
+	private final int TOKEN_STATE_EXPIRED;
 	
 	public DatabaseAdapter(Context context) {
 		this.context = context;
 		TOKEN_STATE_AT_VENDOR = Integer.parseInt(context.getString(R.string.tokenStateAtVendor).toString());
 		TOKEN_STATE_AT_METER = Integer.parseInt(context.getString(R.string.tokenStateAtMeter).toString());
+		TOKEN_STATE_EXPIRED = Integer.parseInt(context.getString(R.string.tokenStateExpired).toString());
 	}
 	
 	public DatabaseAdapter open() throws SQLException {
@@ -174,8 +176,9 @@ public class DatabaseAdapter {
 	}
 
 	// delete token at meter
-	public void deleteTokenAtMeter() { 
-		database.execSQL("delete from " + TOKEN_TABLE
+	public void expireTokenAtMeter() { 
+		database.execSQL("update " + TOKEN_TABLE
+				+ " set state = " + TOKEN_STATE_EXPIRED
 				+ " where state = " + TOKEN_STATE_AT_METER); 
 	}
 }
