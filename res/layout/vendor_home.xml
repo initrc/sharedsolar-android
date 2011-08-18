@@ -7,13 +7,13 @@
 		android:drawableLeft="@drawable/ic_tab_credit_selected"></Button>
 	<Button android:text="@string/accountList" android:id="@+id/accountListBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"
-		android:drawableLeft="@drawable/ic_tab_list_selected"></Button>
+		android:drawableLeft="@drawable/ic_tab_list"></Button>
 	<Button android:text="@string/chart" android:id="@+id/chartBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"
-		android:drawableLeft="@drawable/ic_tab_chart_selected"></Button>
+		android:drawableLeft="@drawable/ic_tab_chart"></Button>
 	<Button android:text="@string/logout" android:id="@+id/logoutBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"
 		android:layout_marginTop="100dip"
-		android:drawableLeft="@drawable/ic_tab_logout_selected"></Button>
+		android:drawableLeft="@drawable/ic_tab_logout"></Button>
 </LinearLayout>
 

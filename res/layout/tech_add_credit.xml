@@ -34,7 +34,8 @@
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_marginTop="20dip" android:gravity="center">
 		<Button android:text="@string/submit" android:id="@+id/techAddCreditSubmitBtn"
-			android:layout_width="150dip" android:layout_height="wrap_content" />
+			android:layout_width="150dip" android:layout_height="wrap_content"
+			android:drawableLeft="@drawable/ic_tab_yes" />
 	</LinearLayout>
 </LinearLayout>
 

@@ -23,5 +23,6 @@
 	<Button android:text="@string/login" android:id="@+id/techAuthBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"
 		android:gravity="center_horizontal|center_vertical"
-		android:layout_marginTop="50dip"></Button>
+		android:layout_marginTop="50dip"
+		android:drawableLeft="@drawable/ic_tab_login"></Button>
 </LinearLayout>
