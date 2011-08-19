@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class CreditSummaryAdapter extends ArrayAdapter<CreditSummaryModel> {
+public class CreditRepoAdapter extends ArrayAdapter<CreditSummaryModel> {
 
 	private LayoutInflater mInflater;
 	private ArrayList<CreditSummaryModel> modelList;
 	
-	public CreditSummaryAdapter(Context context, int textViewResourceId, ArrayList<CreditSummaryModel> modelList) {
+	public CreditRepoAdapter(Context context, int textViewResourceId, ArrayList<CreditSummaryModel> modelList) {
 		super(context, textViewResourceId);
 		mInflater = LayoutInflater.from(context);
 		this.modelList = modelList;
@@ -38,7 +38,7 @@ public class CreditSummaryAdapter extends ArrayAdapter<CreditSummaryModel> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.credit_summary_item, null);
+			convertView = mInflater.inflate(R.layout.credit_repo_item, null);
 			holder = new ViewHolder();
 			holder.denominationText = (TextView)convertView.findViewById(R.id.creditSummaryDenomination);
 			holder.countText = (TextView)convertView.findViewById(R.id.creditSummaryCount);
