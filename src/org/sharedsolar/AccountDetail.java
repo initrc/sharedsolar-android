@@ -22,7 +22,7 @@ public class AccountDetail extends TabActivity {
 		intent = new Intent().setClass(this, VendorAddCredit.class);
 		intent.putExtra("aid", extras.getString("aid"));
 		intent.putExtra("cid", extras.getString("cid"));
-		intent.putExtra("cr", extras.getString("cr"));
+		intent.putExtra("cr", extras.getInt("cr"));
 		spec = tabHost
 				.newTabSpec("credit")
 				.setIndicator(getString(R.string.addCredit),
