@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.sharedsolar.R;
 import org.sharedsolar.model.CreditSummaryModel;
+import org.sharedsolar.model.TokenModel;
 import org.sharedsolar.tool.Device;
 
 import android.content.ContentValues;
@@ -173,6 +174,24 @@ public class DatabaseAdapter {
 			e.printStackTrace();
 		}
 		return json;
+	}
+	
+	// get sold tokens
+	public ArrayList<TokenModel> getSoldTokens() {
+		TokenModel model;
+		ArrayList<TokenModel> modelList = new ArrayList<TokenModel>();
+		Cursor cursor = database.query(TOKEN_TABLE, 
+				new String[]{"timestamp", "account_id", "denomination"}, 
+				"state = " + TOKEN_STATE_AT_METER + " or state = " + TOKEN_STATE_EXPIRED,
+				null, null, null, null);
+		if (cursor == null) return modelList;		
+		
+		while (cursor.moveToNext()) {
+			model = new TokenModel(cursor.getString(0),
+					cursor.getString(1), cursor.getInt(2));
+			modelList.add(model);
+		}
+		return modelList;
 	}
 
 	// delete token at meter
