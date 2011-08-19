@@ -3,7 +3,7 @@ package org.sharedsolar;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import org.sharedsolar.adapter.TokenListAdapter;
+import org.sharedsolar.adapter.AccountTokenListAdapter;
 import org.sharedsolar.db.DatabaseAdapter;
 import org.sharedsolar.model.TokenModel;
 import org.sharedsolar.model.TokenModelComparator;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class AccountTokenHistory extends ListActivity {
 
 	private ArrayList<TokenModel> modelList;
-	private TokenListAdapter tokenListAdapter;
+	private AccountTokenListAdapter accountTokenListAdapter;
 	private DatabaseAdapter dbAdapter;
 	private String aid;
 
@@ -35,8 +35,8 @@ public class AccountTokenHistory extends ListActivity {
 		modelList = dbAdapter.getSoldTokensByAccount(aid);
 		
 		Collections.sort(modelList, new TokenModelComparator());
-		tokenListAdapter = new TokenListAdapter(this,
+		accountTokenListAdapter = new AccountTokenListAdapter(this,
 				R.layout.account_token_history_list_item, modelList);
-		setListAdapter(tokenListAdapter);
+		setListAdapter(accountTokenListAdapter);
 	}
 }
