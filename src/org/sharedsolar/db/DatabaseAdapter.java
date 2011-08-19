@@ -193,6 +193,25 @@ public class DatabaseAdapter {
 		}
 		return modelList;
 	}
+	
+	// get sold tokens
+	public ArrayList<TokenModel> getSoldTokensByAccount(String aid) {
+		TokenModel model;
+		ArrayList<TokenModel> modelList = new ArrayList<TokenModel>();
+		Cursor cursor = database.query(TOKEN_TABLE, 
+				new String[]{"timestamp", "account_id", "denomination"}, 
+				"account_id = '" + aid + "' and (" +
+				"state = " + TOKEN_STATE_AT_METER + " or state = " + TOKEN_STATE_EXPIRED + ")",
+				null, null, null, null);
+		if (cursor == null) return modelList;		
+		
+		while (cursor.moveToNext()) {
+			model = new TokenModel(cursor.getString(0),
+					cursor.getString(1), cursor.getInt(2));
+			modelList.add(model);
+		}
+		return modelList;
+	}
 
 	// delete token at meter
 	public void expireTokenAtMeter() { 

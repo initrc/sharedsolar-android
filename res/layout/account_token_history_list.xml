@@ -5,11 +5,18 @@
 	android:layout_height="fill_parent">
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:gravity="right" >
+		<TextView android:text="@string/accountLabel" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_marginRight="10dip" />
+		<TextView android:id="@+id/accountTokenHistoryListAid" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
+	
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:gravity="center_vertical">
 		<TextView android:text="@string/date"
 			android:layout_width="140dip" android:layout_height="wrap_content" />
-		<TextView android:text="@string/account"
-			android:layout_width="60dip" android:layout_height="wrap_content" />
 		<TextView android:text="@string/denomination"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:gravity="right" />

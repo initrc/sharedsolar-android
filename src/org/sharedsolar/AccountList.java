@@ -104,7 +104,7 @@ public class AccountList extends ListActivity {
 								+ model.getCid(), R.string.ok);
 			} else {
 				Intent intent = new Intent(view.getContext(),
-						VendorAddCredit.class);
+						AccountDetail.class);
 				intent.putExtra("aid", model.getAid());
 				intent.putExtra("cid", model.getCid());
 				intent.putExtra("cr", model.getCr());

@@ -16,18 +16,20 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name="TechAuth" android:screenOrientation="portrait" />
-		<activity android:name="TechHome" android:screenOrientation="portrait" />
-		<activity android:name="TechAddCredit" android:screenOrientation="portrait" />
-		<activity android:name="TechAddCreditReceipt" android:screenOrientation="portrait" />
-		<activity android:name="VendorHome" android:screenOrientation="portrait" />
-		<activity android:name="VendorAddCredit" android:screenOrientation="portrait" />
-		<activity android:name="VendorAddCreditReceipt"	android:screenOrientation="portrait" />
-		<activity android:name="CreditSummary" android:screenOrientation="portrait" />
-		<activity android:name="CreditRepo" android:screenOrientation="portrait" />
+		<activity android:name=".TechAuth" android:screenOrientation="portrait" />
+		<activity android:name=".TechHome" android:screenOrientation="portrait" />
+		<activity android:name=".TechAddCredit" android:screenOrientation="portrait" />
+		<activity android:name=".TechAddCreditReceipt" android:screenOrientation="portrait" />
+		<activity android:name=".VendorHome" android:screenOrientation="portrait" />
+		<activity android:name=".AccountDetail" android:screenOrientation="portrait" />
+		<activity android:name=".AccountTokenHistory" android:screenOrientation="portrait" />
+		<activity android:name=".VendorAddCredit" android:screenOrientation="portrait" />
+		<activity android:name=".VendorAddCreditReceipt"	android:screenOrientation="portrait" />
+		<activity android:name=".CreditSummary" android:screenOrientation="portrait" />
+		<activity android:name=".CreditRepo" android:screenOrientation="portrait" />
 		<activity android:name=".TokenHistory" android:screenOrientation="portrait" />
-		<activity android:name="AccountList" android:screenOrientation="portrait" />
-		<activity android:name="Chart" android:configChanges="orientation"/>
+		<activity android:name=".AccountList" android:screenOrientation="portrait" />
+		<activity android:name=".Chart" android:configChanges="orientation"/>
 		<activity android:name="org.achartengine.GraphicalActivity" />
 	</application>
 
