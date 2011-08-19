@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="wrap_content" android:paddingRight="10dip">
+	<TextView android:id="@+id/tokenListTimestamp"
+		android:layout_width="140dip" android:layout_height="50dip"
+		android:gravity="center_vertical" />
+	<TextView android:id="@+id/tokenListAid"
+		android:layout_width="60dip" android:layout_height="50dip"
+		android:gravity="center_vertical" />
+	<TextView android:id="@+id/tokenListDenomination"
+		android:layout_width="fill_parent" android:layout_height="50dip"
+		android:gravity="center_vertical|right" />
+</LinearLayout>

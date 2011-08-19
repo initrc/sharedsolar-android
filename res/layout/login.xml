@@ -8,8 +8,4 @@
 	<Button android:text="@string/vendorLogin" android:id="@+id/vendorLoginBtn"
 		android:layout_height="wrap_content" android:layout_width="150dip"
 		android:drawableLeft="@drawable/ic_tab_login"></Button>
-
-	<ListView android:id="@+id/listView1" android:layout_height="wrap_content"
-		android:layout_width="fill_parent">
-	</ListView>
 </LinearLayout>

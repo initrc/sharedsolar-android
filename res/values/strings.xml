@@ -102,5 +102,8 @@
 	<string name="switchCircuitError">Switch Circuit Error!</string>
 	<!-- to be translated -->
 	<string name="insufficientCredit">Insufficient Credit</string>
-	<string name="insufficientCreditMsg">The credit for this account is 0. Please refill before switching it on.</string>	
+	<string name="insufficientCreditMsg">The credit for this account is 0. Please refill before switching it on.</string>
+	<string name="repository">Repository</string>
+	<string name="history">History</string>
+	<string name="date">Date</string>	
 </resources>

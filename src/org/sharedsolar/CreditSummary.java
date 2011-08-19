@@ -1,41 +1,37 @@
 package org.sharedsolar;
 
-import java.util.ArrayList;
-
-import org.sharedsolar.R;
-import org.sharedsolar.adapter.CreditSummaryAdapter;
-import org.sharedsolar.db.DatabaseAdapter;
-import org.sharedsolar.model.CreditSummaryModel;
-
-import android.app.ListActivity;
+import android.app.TabActivity;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.TabHost;
 
-public class CreditSummary extends ListActivity {
-	
-	private ArrayList<CreditSummaryModel> modelList;
-	private CreditSummaryAdapter creditSummaryAdapter;
-	private DatabaseAdapter dbAdapter;
-	
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.credit_summary);
-        
-        // get model list from db
-        dbAdapter = new DatabaseAdapter(this);
-        dbAdapter.open();
-        modelList = dbAdapter.getCreditSummaryModelList();
-        dbAdapter.close();
-        
-        // list adapter
-      	creditSummaryAdapter = new CreditSummaryAdapter(this, R.layout.credit_summary_item, modelList);			
-		setListAdapter(creditSummaryAdapter);
-		
-		// calculate sum
-		int sum=0;
-		for (CreditSummaryModel model : modelList) {
-			sum += model.getDenomination() * model.getCount();
-		}
-		((TextView)findViewById(R.id.availableCredit)).setText(String.valueOf(sum));
-    }
+public class CreditSummary extends TabActivity {
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.credit_summary);
+
+		Resources res = getResources();
+		TabHost tabHost = getTabHost();
+		TabHost.TabSpec spec;
+		Intent intent;
+
+		// repo tab
+		intent = new Intent().setClass(this, CreditRepo.class);
+		spec = tabHost
+				.newTabSpec("repository")
+				.setIndicator(getString(R.string.repository),
+						res.getDrawable(R.drawable.ic_tab_credit))
+				.setContent(intent);
+		tabHost.addTab(spec);
+
+		// history tab
+		intent = new Intent().setClass(this, TokenHistory.class);
+		spec = tabHost
+				.newTabSpec("history")
+				.setIndicator(getString(R.string.history),
+						res.getDrawable(R.drawable.ic_tab_list))
+				.setContent(intent);
+		tabHost.addTab(spec);
+	}
 }
