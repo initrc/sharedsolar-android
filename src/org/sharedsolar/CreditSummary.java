@@ -26,7 +26,7 @@ public class CreditSummary extends TabActivity {
 		tabHost.addTab(spec);
 
 		// history tab
-		intent = new Intent().setClass(this, TokenHistory.class);
+		intent = new Intent().setClass(this, CreditHistory.class);
 		spec = tabHost
 				.newTabSpec("history")
 				.setIndicator(getString(R.string.history),

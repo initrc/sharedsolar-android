@@ -22,15 +22,15 @@
     
     <!-- denomination -->
     <!--  mali --> 
-    <!-- <string-array name="denominationValues">
+    <string-array name="denominationValues">
         <item>500</item>
         <item>1000</item>
         <item>2000</item>
-    </string-array> -->
-    <!-- uganda -->
+    </string-array>
+    <!-- uganda
     <string-array name="denominationValues">
         <item>2000</item>
         <item>5000</item>
         <item>10000</item>
-    </string-array>
+    </string-array>-->
 </resources>

@@ -11,7 +11,7 @@ import org.sharedsolar.model.TokenModelComparator;
 import android.app.ListActivity;
 import android.os.Bundle;
 
-public class TokenHistory extends ListActivity {
+public class CreditHistory extends ListActivity {
 
 	private ArrayList<TokenModel> modelList;
 	private TokenListAdapter tokenListAdapter;
