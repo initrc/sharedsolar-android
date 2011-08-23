@@ -58,11 +58,14 @@
     <string name="invalidTokensMsg">Tokens are in invalid format!</string>
     
     <!-- vendor -->
-    <!-- vendor credit summary -->
+    <!-- vendor credit summary and history -->
     <string name="creditSummary">Credit Summary</string>
     <string name="total">Total</string>
     <string name="availableCredit">Available Credit</string>
     <string name="availableCreditLabel">Available Credit:</string>
+    <string name="repository">Repository</string>
+	<string name="history">History</string>
+	<string name="date">Date</string>
     <!-- vendor account list -->
     <string name="accountList">Account List</string>
     <string name="accountListTimeoutMsg">Loading account list timeout!</string>
@@ -100,10 +103,9 @@
 	<string name="switchingCircuit">Switching Circuit ...</string>
 	<string name="switchCircuitTimeout">Switch Circuit Timeout!</string>
 	<string name="switchCircuitError">Switch Circuit Error!</string>
-	<!-- to be translated -->
 	<string name="insufficientCredit">Insufficient Credit</string>
 	<string name="insufficientCreditMsg">The credit for this account is 0. Please refill before switching it on.</string>
-	<string name="repository">Repository</string>
-	<string name="history">History</string>
-	<string name="date">Date</string>	
+	<!-- to be translated -->
+	
+	
 </resources>

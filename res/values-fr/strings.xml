@@ -58,11 +58,14 @@
     <string name="invalidTokensMsg">Les jetons sont au format valide!</string>
     
     <!-- vendor -->
-    <!-- vendor credit summary -->
+    <!-- vendor credit summary and history-->
     <string name="creditSummary">Sommaire de crédit</string>
     <string name="total">Total</string>
     <string name="availableCredit">Crédit disponible</string>
     <string name="availableCreditLabel">Crédit disponible:</string>
+    <string name="repository">Référentiel</string>
+	<string name="history">Histoire</string>
+	<string name="date">Date</string>
     <!-- vendor account list -->
     <string name="accountList">Liste des comptes</string>
     <string name="accountListTimeoutMsg">Obtenez la liste compte!</string>
@@ -100,4 +103,6 @@
 	<string name="switchingCircuit">En course d\'interruption de circuit ...</string>
 	<string name="switchCircuitTimeout">Erreur de  temporisation!</string>
 	<string name="switchCircuitError">Erreur dans l\'interruption de circuit!</string>
+	<string name="insufficientCredit">Crédit insuffisant</string>
+	<string name="insufficientCreditMsg">Le crédit de ce compte est à 0. S\'il vous plaît recharger avant de l\'allumer.</string>
 </resources>

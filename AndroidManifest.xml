@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="org.sharedsolar" android:versionName="4.0"
-	android:versionCode="11">
+	package="org.sharedsolar" android:versionName="5.0"
+	android:versionCode="12">
 	<uses-sdk android:minSdkVersion="7" />
 
 	<uses-permission android:name="android.permission.INTERNET" />
