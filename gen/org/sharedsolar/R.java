@@ -11,12 +11,6 @@ public final class R {
     public static final class array {
         /**  denomination 
   mali 
- <string-array name="denominationValues">
-        <item>500</item>
-        <item>1000</item>
-        <item>2000</item>
-    </string-array> 
- uganda 
          */
         public static final int denominationValues=0x7f050000;
     }
@@ -164,9 +158,9 @@ public final class R {
         public static final int credit=0x7f040046;
         public static final int creditAddedLabel=0x7f040025;
         /**  vendor 
- vendor credit summary and history 
+ vendor credit summary 
  vendor 
- vendor credit summary and history
+ vendor credit summary 
          */
         public static final int creditSummary=0x7f04003b;
         public static final int current=0x7f04005a;

@@ -58,7 +58,7 @@
     <string name="invalidTokensMsg">Les jetons sont au format valide!</string>
     
     <!-- vendor -->
-    <!-- vendor credit summary and history-->
+    <!-- vendor credit summary -->
     <string name="creditSummary">Sommaire de crédit</string>
     <string name="total">Total</string>
     <string name="availableCredit">Crédit disponible</string>
