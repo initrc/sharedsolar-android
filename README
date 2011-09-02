@@ -5,5 +5,20 @@ http://sharedsolar.org
 https://market.android.com/details?id=org.sharedsolar
 sharedsolar@gmail.com
 
-Description:
-An Android app for SharedSolar field tech and vendor
+-----------
+Description
+-----------
+An Android app for SharedSolar field tech and vendor 
+to control circuits, sell credits and manage user accounts.
+
+-----------
+Development
+-----------
+To change the version name,
+edit android:versionName in AndroidManifest.xml.
+
+To switch denomination settings between Mali and Uganda,
+edit res/values/config.xml.
+
+For a release version,
+edit org.sharedsolar.db.DatabaseAdapter init() to set a password.
